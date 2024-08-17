@@ -8,6 +8,7 @@
     max-width: 400px;
     margin: 0 auto;
     padding: 30px;
+    border-radius: 10px;
 }
 
 .todo-input-button>input,
