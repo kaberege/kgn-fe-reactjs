@@ -7,6 +7,7 @@ export default function Input({ todos }) {
     function handleChange(e) {
         setName(e.target.value);
     }
+
     function addItems() {
         if (name === "") {
             alert("Please! Add an item.");
@@ -16,10 +17,11 @@ export default function Input({ todos }) {
             setName("");
         }
     }
+
     return (
         <div className="todo-input-button">
             <input
-            maxLength={13}
+                maxLength={13}
                 type="text"
                 placeholder="Type here..."
                 value={name}
