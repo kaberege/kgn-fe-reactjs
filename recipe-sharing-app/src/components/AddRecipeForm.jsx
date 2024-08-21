@@ -8,9 +8,14 @@ const AddRecipeForm = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    addRecipe({ id: Date.now(), title, description });
-    setTitle('');
-    setDescription('');
+    if (title === "" || description === "") {
+      alert("Please! Fill all fields.")
+    } else {
+      addRecipe({ id: Date.now(), title, description });
+      setTitle('');
+      setDescription('');
+    }
+
   };
 
   return (

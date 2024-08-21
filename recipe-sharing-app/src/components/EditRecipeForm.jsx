@@ -9,6 +9,8 @@ const EditRecipeForm = ({ recipe }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     updateRecipe({ ...recipe, title, description });
+    setTitle('');
+    setDescription('');
   };
 
   return (
