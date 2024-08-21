@@ -7,7 +7,9 @@ import { Route, Router, Routes } from "react-router-dom";
 export default function App() {
   function myRoute() {
     const path = "Route, Router, Routes";
-    return path;
+    const element = "RecipeDetails"
+    const RecipeDetails = "RecipeDetails"
+    return path + element + RecipeDetails;
   }
   console.log(myRoute())
   return (
