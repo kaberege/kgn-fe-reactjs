@@ -29,8 +29,8 @@ console.log(recipe)
       <EditRecipeForm recipe={recipe} />
       <div className='actions'>
       <DeleteRecipeButton recipeId={recipe.id} />
-        <button onClick={() => addMyFavorite(recipe.id)}>Add to favorarites</button>
-        <button onClick={() => removeMyFavorite(recipe.id)}>Remove from favorites</button>
+        <button onClick={() => addMyFavorite(recipe.id)}>Add to favorarites!</button>
+        <button onClick={() => removeMyFavorite(recipe.id)}>Remove from favorites!</button>
       </div>
       <span className='back-icon'>&#9664; </span><Link to="/">Back to Home</Link>
     </div>
