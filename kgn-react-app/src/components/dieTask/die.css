@@ -1,4 +1,5 @@
 .main {
+    position: relative;
     background-color: rgba(150, 150, 150, 1);
     height: 400px;
     max-width: 800px;
@@ -107,8 +108,46 @@
     margin: 0 auto;
 }
 
-.die-six-container{
+.die-six-container {
     display: grid;
     grid-template-columns: auto auto auto;
     gap: 5px;
+}
+
+.time-roll {
+    position: absolute;
+    left: 10px;
+    bottom: 20px;
+}
+
+.time-roll>p {
+    font-size: 12px;
+    font-weight: bold;
+    color: rgb(110, 10, 240);
+}
+
+.nav-bar-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding-left: 30px;
+    margin-bottom: 50px;
+    background-color: aqua;
+    height: 60px;
+}
+
+.nav-bar-header>a {
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.nav-bar-header>a:hover{
+    color: #e90752 ;
+}
+.active {
+    color: #e90752;
+}
+
+.pending {
+    color: rgba(90, 90, 90, 1);
 }

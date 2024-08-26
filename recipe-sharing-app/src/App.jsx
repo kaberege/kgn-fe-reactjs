@@ -16,8 +16,8 @@ export default function App() {
   console.log(myRoute())
   return (
     <div className="app">
+       <SearchBar/>
       <AddRecipeForm />
-      <SearchBar/>
       <RecipeList />
     </div>
   );

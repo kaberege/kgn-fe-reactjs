@@ -14,7 +14,9 @@ const EditRecipeForm = ({ recipe }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}
+    className='add-recipe-form'
+    >
       <input
         type="text"
         value={title}

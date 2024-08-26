@@ -11,7 +11,7 @@ const AddRecipeForm = () => {
     if (title === "" || description === "") {
       alert("Please! Fill all fields.")
     } else {
-      addRecipe({ id: Date.now(), title, description });
+      addRecipe({ id: Date.now(), title, description, isChecked: false });
       setTitle('');
       setDescription('');
     }
@@ -19,7 +19,9 @@ const AddRecipeForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}
+      className='add-recipe-form'
+    >
       <input
         type="text"
         value={title}

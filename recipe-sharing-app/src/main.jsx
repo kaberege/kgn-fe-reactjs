@@ -5,6 +5,7 @@ import RecipeDetails from './components/RecipeDetails';
 import Layout from './components/Layout.jsx';
 import FavoritesList from './components/FavoritesList.jsx';
 import RecommendationsList from './components/RecommendationsList.jsx';
+import ErrorPage from './components/ErrorPage.jsx';
 //import App from './App.jsx';
 import './index.css';
 import { createBrowserRouter, RouterProvider, createRoutesFromElements, Route } from 'react-router-dom';
@@ -16,6 +17,7 @@ const router = createBrowserRouter(
       <Route path='recipes/:id' element={<RecipeDetails />} />
       <Route path='favorite' element={<FavoritesList/>}/>
       <Route path='recomandation' element={<RecommendationsList/>}/>
+      <Route path='*' element={<ErrorPage/>}/>
     </Route>
   )
 );

@@ -5,6 +5,7 @@ import AppDie from "./components/dieTask/AppDie.jsx"
 import ToDo from './components/todoTask/ToDo.jsx';
 import Home from "./components/home/Home.jsx";
 import App from './App.jsx';
+import ErrorPage from './components/ErrorPage.jsx';
 import './index.css';
 
 const router = createBrowserRouter(
@@ -13,6 +14,7 @@ const router = createBrowserRouter(
       <Route path="" element={<Home />} />
       <Route path="todo" element={<ToDo />} />
       <Route path="die" element={<AppDie />} />
+      <Route path="*" element={<ErrorPage />} />
     </Route>
   )
 )

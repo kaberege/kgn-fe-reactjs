@@ -16,12 +16,14 @@ const SearchBar = () => {
     }, [search]);
 
     return (
-        <input
-            type="text"
-            value={search}
-            placeholder="Search recipes..."
-            onChange={(e) => setSearch(e.target.value)}
-        />
+        <div className='search-bar'>
+            <input
+                type="text"
+                value={search}
+                placeholder="Search recipes..."
+                onChange={(e) => setSearch(e.target.value)}
+            />
+        </div>
     );
 };
 
