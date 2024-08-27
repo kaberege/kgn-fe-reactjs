@@ -2,14 +2,13 @@
 
 import React, { useState } from 'react';
 
+
 const RegistrationForm = () => {
     const [formData, setFormData] = useState({
         username: '',
         email: '',
         password: ''
     });
-
-    const [errors, setErrors] = useState({});
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -19,11 +18,17 @@ const RegistrationForm = () => {
         });
     };
 
+    const username = formData.username
+    const email = formData.email
+    const password = formData.password
+
+    const [errors, setErrors] = useState({});
+
     const validate = () => {
         let tempErrors = {};
-        if (!formData.username) tempErrors.username = 'Username is required';
-        if (!formData.email) tempErrors.email = 'Email is required';
-        if (!formData.password) tempErrors.password = 'Password is required';
+        if (!formData.username) tempErrors.usernames = 'Username is required';
+        if (!formData.email) tempErrors.emails = 'Email is required';
+        if (!formData.password) tempErrors.passwords = 'Password is required';
         return tempErrors;
     };
 
@@ -46,30 +51,30 @@ const RegistrationForm = () => {
                 <input
                     type="text"
                     name="username"
-                    value={formData.username}
+                    value={username}
                     onChange={handleChange}
                 />
-                {errors.username && <p>{errors.username}</p>}
+                {errors.usernames && <p>{errors.usernames}</p>}
             </div>
             <div>
                 <label htmlFor="email">Email:</label>
                 <input
                     type="email"
                     name="email"
-                    value={formData.email}
+                    value={email}
                     onChange={handleChange}
                 />
-                {errors.email && <p>{errors.email}</p>}
+                {errors.emails && <p>{errors.emails}</p>}
             </div>
             <div>
                 <label htmlFor="password">Password:</label>
                 <input
                     type="password"
                     name="password"
-                    value={formData.password}
+                    value={password}
                     onChange={handleChange}
                 />
-                {errors.password && <p>{errors.password}</p>}
+                {errors.passwords && <p>{errors.passwords}</p>}
             </div>
             <button type="submit">Register</button>
         </form>
