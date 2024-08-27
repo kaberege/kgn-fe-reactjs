@@ -26,9 +26,9 @@ const RegistrationForm = () => {
 
     const validate = () => {
         let tempErrors = {};
-        if (!formData.username) tempErrors.usernames = 'Username is required';
-        if (!formData.email) tempErrors.emails = 'Email is required';
-        if (!formData.password) tempErrors.passwords = 'Password is required';
+        if (!username) tempErrors.usernames = 'Username is required';
+        if (!email) tempErrors.emails = 'Email is required';
+        if (!password) tempErrors.passwords = 'Password is required';
         return tempErrors;
     };
 
