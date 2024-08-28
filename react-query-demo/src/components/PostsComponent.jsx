@@ -19,7 +19,7 @@ export default function PostsComponent() {
     });
 
     if (isLoading) return <div>Loading...</div>;
-    if (error) return <div>Error: {error.message}</div>;
+    if (error) return <div>Error#: {error.message}</div>;
     if (isError) {
         return <div>Error&: {error.message}</div>; // Display an error message if an error occurs
     }
@@ -37,6 +37,7 @@ export default function PostsComponent() {
                     </li>
                 ))}
             </ul>
+            <button onClick={() => refetch()}>Refetch Posts</button>
             {isPreviousData && <p>Loading new data...</p>} {/* Display a message while keeping previous data */}
         </div>
     );
