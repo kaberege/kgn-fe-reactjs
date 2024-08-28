@@ -3,6 +3,8 @@ import { Outlet, Link } from "react-router-dom";
 
 export default function Profile() {
     //let { path, url } = useRouteMatch();
+    const Routes = "routes";
+    const ProfileDetails = "ProfileDetails";
 
     const random = Math.floor(Math.random() * 10);
     return (
