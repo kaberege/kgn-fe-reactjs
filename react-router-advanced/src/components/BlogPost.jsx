@@ -8,7 +8,7 @@ export default function BlogPost(){
     return(
         <>
         <Outlet/>
-        <div>profile {postId}</div>
+        <div>profile {id}</div>
         </>
         
     )

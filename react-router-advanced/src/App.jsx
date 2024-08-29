@@ -8,7 +8,6 @@ import BlogPost from './components/BlogPost';
 import ProtectedRoute from './components/ProtectedRoute';
 import Login from './components/Login';
 
-
 function App() {
 
   return (
