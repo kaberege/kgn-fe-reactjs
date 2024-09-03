@@ -4,20 +4,20 @@ import { Link } from 'react-router-dom';
 
 const RecipeList = () => {
   const recipes = useRecipeStore(state => state.filteredRecipes);
-  const  setRecipes = useRecipeStore(state => state. setRecipes)
-  const addFavorite = useRecipeStore(state => state.addFavorite);
-  const removeFavorite = useRecipeStore(state => state.removeFavorite);
+  const setRecipes = useRecipeStore(state => state.setRecipes)
+  // const addFavorite = useRecipeStore(state => state.addFavorite);
+  // const removeFavorite = useRecipeStore(state => state.removeFavorite);
   const generateRecommendations = useRecipeStore(state => state.generateRecommendations);
+  const toggleFavorites = useRecipeStore(state => state.toggleFavorite);
+ // const filterRecipes = useRecipeStore(state => state.filterRecipes);
 
   function addMyFavorite(id) {
-    setRecipes(id)
-    addFavorite(id);
+    //filterRecipes();
+    setRecipes(id);
+    // addFavorite(id);
+    toggleFavorites();
     generateRecommendations();
-  }
-
-  function removeMyFavorite(id) {
-    removeFavorite(id);
-    generateRecommendations();
+   
   }
 
   return (
@@ -28,8 +28,9 @@ const RecipeList = () => {
           <p>{recipe.description}</p>
           <Link to={`/recipes/${recipe.id}`}>View Details</Link>
           <div className='actions '>
-            <button onClick={() => addMyFavorite(recipe.id)}>Add to favorarites</button>
-            <button onClick={() => removeMyFavorite(recipe.id)}>Remove from favorites</button>
+            <button onClick={() => addMyFavorite(recipe.id)}>
+              {recipe.isChecked ? "Remove from favorites!" : "Add to favorarites!"}
+            </button>
           </div>
         </div>
       ))}
