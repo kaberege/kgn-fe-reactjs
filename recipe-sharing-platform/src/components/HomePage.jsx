@@ -14,7 +14,7 @@ const HomePage = () => {
     return (
         <div className="p-4">
             <h1 className="text-4xl font-bold mb-8 text-center">Recipe Sharing Platform</h1>
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
             {data.map(recipe => (
                     <div
                      key={recipe.id} 
