@@ -29,6 +29,7 @@ const AddRecipeForm = () => {
 
 
     function handleChange(e) {
+        const myvalue = e.target.value;
         const { value, name } = e.target;
 
         setRecipe(prevRecipe => (
