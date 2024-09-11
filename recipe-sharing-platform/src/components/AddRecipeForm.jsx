@@ -84,7 +84,7 @@ const AddRecipeForm = () => {
                         Recipe added successfully!
                     </div>
                 )}
-                <form onSubmit={handleSubmit} className="space-y-4">
+                <form onSubmit={handleSubmit} className="space-y-4 shadow-xl hover:shadow-2xl">
                     <div>
                         <label htmlFor="title" className="block text-sm font-medium text-gray-700">Recipe Title</label>
                         <input
