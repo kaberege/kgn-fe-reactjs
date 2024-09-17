@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import '../index.css';
-import data from "../data.json"
+import data from "../data.json";
 import { Link } from 'react-router-dom';
 
 const HomePage = () => {
@@ -23,7 +23,7 @@ const HomePage = () => {
                         >
                             <Link to={`recipe/${recipe.id}`} >
                                 <img src={recipe.image} alt={recipe.title} className="w-full h-32 object-cover" />
-                                <div className="p-4">
+                                <div className="p-4 h-32">
                                     <h2 className="text-xl font-semibold mb-2">{recipe.title}</h2>
                                     <p className="text-gray-600">{recipe.summary}</p>
                                 </div>

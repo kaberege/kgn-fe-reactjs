@@ -59,7 +59,6 @@ const AddRecipeForm = () => {
             const recipeId = data.length + 1;
             data.push({ ...recipe, id: recipeId });
             // Handle successful submission (e.g., post data to an API)
-            console.log(recipe);
             setErrors({});
             setIsSubmitted(true);
             setRecipe({
@@ -84,7 +83,7 @@ const AddRecipeForm = () => {
                         Recipe added successfully!
                     </div>
                 )}
-                <form onSubmit={handleSubmit} className="space-y-4 shadow-xl hover:shadow-2xl">
+                <form onSubmit={handleSubmit} className="space-y-4 shadow-xl hover:shadow-2xl p-2">
                     <div>
                         <label htmlFor="title" className="block text-sm font-medium text-gray-700">Recipe Title</label>
                         <input
