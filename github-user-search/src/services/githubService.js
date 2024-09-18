@@ -7,7 +7,7 @@ export const fetchUserData = async (username) => {
 };
 */
 
-const GITHUB_API_URL = 'https://api.github.com/search/users';
+const GITHUB_API_URL = 'https://api.github.com/search/users?q=';
 
 export const fetchUserData = async (username, location, minRepos) => {
     const query = [];
@@ -15,7 +15,7 @@ export const fetchUserData = async (username, location, minRepos) => {
     if (location) query.push(`location:${location}`);
     if (minRepos) query.push(`repos:>=${minRepos}`);
 
-    const response = await axios.get(`${GITHUB_API_URL}?q=${query.join('+')}`);
+    const response = await axios.get(`${GITHUB_API_URL}${query.join('+')}`);
     console.log(response.data)
     console.log(response.data.items)
     return response.data.items;
