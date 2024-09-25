@@ -1,5 +1,11 @@
 import axios from 'axios';
 /*
+export const AxiosSearch = async (username) => {
+    const datas = await fetch(`https://api.github.com/users/${username}`);
+    const response = await datas.json();
+    return response;
+} 
+    
 export const fetchUserData = async (username) => {
   const response = await axios.get(`https://api.github.com/users/${username}`);
   console.log(response)
