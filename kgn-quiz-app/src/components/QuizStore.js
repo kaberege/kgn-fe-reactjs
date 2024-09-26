@@ -1,8 +1,10 @@
-import {create} from "zustand";
+import { create } from "zustand";
 
 const useQuizStore = create(set => ({
-    quiz:[],
-    setQuiz: (newquiz)=> set(state => ({quiz: [...state.quiz, newquiz]}))
+    quizState: "start",
+    setQuizState: (newState) => set({ quizState: newState }),
+    quizChoices: {},
+    setQuizChoices: (choice) => set(({quizChoices: choice}))
 
 }));
 

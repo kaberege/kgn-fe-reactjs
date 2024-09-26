@@ -1,21 +1,17 @@
 import axios from "axios"
 
-export const quizCategory = async () => {
+export const fetchCategory = async () => {
     const category = await axios.get("https://opentdb.com/api_category.php");
-    //console.log(reponse.data);
+    //console.log(category.data)
     return category.data.trivia_categories;
 }
 
-export const hardQuiz = async () => {
-    const hard = await axios.get("https://opentdb.com/api.php?amount=5&difficulty=hard&type=multiple");
-   // console.log(hard.data);
-    return hard.data;
+export const fetchQuestions = async (amount, category, difficulty) => {
+    //console.log(`amount is: ${amount}`)
+    //console.log(`category is: ${category}`)
+    //console.log(`difficulty is : ${difficulty}`)
+    //const response = await axios.get("https://opentdb.com/api.php?amount=10&category=9&difficulty=medium&type=multiple");
+    const response = await axios.get(`https://opentdb.com/api.php?amount=${amount}&category=${category}&difficulty=${difficulty}&type=multiple`);
+    //console.log(response.data.results);
+    return response.data.results;
 }
-
-export const mediumQuiz = async () => {
-    const medium = await axios.get("https://opentdb.com/api.php?amount=10&category=9&difficulty=medium&type=multiple");
-    //console.log(reponse.data);
-    return medium.data;
-}
-
-//export {quizData}

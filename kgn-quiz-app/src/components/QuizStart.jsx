@@ -1,44 +1,41 @@
 import React, { useEffect, useState } from "react";
-import { quizCategory, hardQuiz, mediumQuiz } from "../services/quizSercice";
+import { fetchCategory } from "../services/quizSercice";
 import "../index.css";
+import useQuizStore from "./QuizStore";
 
 export default function QuizStart() {
-    const [questions, setQuestions] = useState([]);
-    const [hard, setHard] = useState([]);
+    const setQuizState = useQuizStore(state => state.setQuizState);
+    const setQuizChoices = useQuizStore(state => state.setQuizChoices);
+    const [quizCategories, setQuizCategories] = useState([]);
+    const [error, setError] = useState({});
+    const [loading, setLoading] = useState(false);
+    const [loadError, setLoadError] = useState("");
     const [choice, setChoice] = useState({
-        difficulty: "",
-        category: "",
-        number: ""
+        difficulty: "medium",
+        category: "9",
+        number: "",
     })
-
 
     useEffect(() => {
         handleRequest();
     }, []);
 
     const handleRequest = async () => {
+        setLoading(true);
         try {
-            const responsei = await quizCategory();
-            //const hard = await hardQuiz();
-            setHard(hard.results)
-           // const medium = await mediumQuiz();
-            console.log(responsei);
-            //console.log(medium);
-            setQuestions(responsei);
+            const categories = await fetchCategory();
+            setQuizCategories(categories);
+
         } catch (error) {
-            if (error.response && error.response.status === 429) {
-                console.error('Too many requests. Please try again later.');
-                // Optionally, implement a retry mechanism or user feedback
-            } else {
-                console.error('An error occurred:', error);
-            }
+            setLoadError("Failed to fetch quiz form! Please reload the page.")
+        } finally {
+            setLoading(false);
         }
 
     }
 
 
     function handleChange(e) {
-        console.log(e.target)
         const { value, name } = e.target;
         setChoice(prev => ({
             ...prev,
@@ -46,52 +43,79 @@ export default function QuizStart() {
         }))
     }
 
+    function handleSubmit(e) {
+        e.preventDefault();
+        const errors = {};
+        if (!choice.difficulty) errors.difficulty = "Difficulty is required";
+        if (!choice.category) errors.category = "Category is required";
+        if (!choice.number) errors.number = "Number of questions is required";
+        if (Object.keys(errors).length > 0) {
+            setError(errors);
+        } else {
+            setQuizState("quiz");
+            setQuizChoices(choice);
+            setError({});
+        }
+
+    }
+
     return (
         <div>
             <div>Quiz start</div>
-            {/*p>{hard[0].category}</p> */}
-            <form>
-                <div>
-                    <label htmlFor="category">Select quiz category</label>
-                    <select
-                        id="category"
-                        value={choice.category}
-                        name="category"
-                        onChange={handleChange}
-                        className="border"
-                    >
-                        {questions.map(item => (
-                            <option value={item.name} key={item.id}>{item.name}</option>
-                        ))}
-                    </select>
-                </div>
-                <div>
-                    <label htmlFor="difficulty">Select quiz difficulty</label>
-                    <select
-                        id="difficulty"
-                        value={choice.difficulty}
-                        name="difficulty"
-                        onChange={handleChange}
-                        className="border"
-                    >
-                        <option value="Easy">Easy</option>
-                        <option value="Medium">Medium</option>
-                        <option value="Hard">Hard</option>
-                    </select>
-                </div>
-                <div>
-                    <label htmlFor="number">Select number of Questions</label>
-                    <input
-                        id="number"
-                        type="text"
-                        value={choice.number}
-                        name="number"
-                        onChange={handleChange}
-                        className="border"
-                    />
-                </div>
+            {loading && <p>Loading....</p>}
+            {loadError && <p className="mt-4 text-red-500">{loadError}</p>}
+            {quizCategories.length > 0 &&
+                <form onSubmit={handleSubmit}>
+                    <div>
+                        <label htmlFor="category">Select quiz category</label>
+                        <select
+                            id="category"
+                            value={choice.category}
+                            name="category"
+                            onChange={handleChange}
+                            className={`border ${error.category && "border-red-600"}`}
+                        >
+                            {quizCategories.map(item => (
+                                <option value={item.id} key={item.id}>{item.name}</option>
+                            ))}
+                        </select>
+                        {error.category && <p className={`${error.category && "text-red-600"}`}>{error.category}</p>}
+                    </div>
+                    <div>
+                        <label htmlFor="difficulty">Select quiz difficulty</label>
+                        <select
+                            id="difficulty"
+                            value={choice.difficulty}
+                            name="difficulty"
+                            onChange={handleChange}
+                            className={`border ${error.difficulty && "border-red-600"}`}
+                        >
+                            <option value="easy">Easy</option>
+                            <option value="medium">Medium</option>
+                            <option value="hard">Hard</option>
+                        </select>
+                        {error.difficulty && <p className={`${error.difficulty && "text-red-600"}`}>{error.difficulty}</p>}
+                    </div>
+                    <div>
+                        <label htmlFor="number">Select number of Questions</label>
+                        <input
+                            id="number"
+                            type="number"
+                            value={choice.number}
+                            name="number"
+                            onChange={handleChange}
+                            placeholder="Number of questions"
+                            className={`border ${error.number && "border-red-600"}`}
+                        />
+                        {error.number && <p className={`${error.number && "text-red-600"}`}>{error.number}</p>}
+                    </div>
+                    <button
+                        type="submit"
+                        className="border bg-slate-600 rounded-lg p-3"
+                    >Start quiz</button>
 
-            </form>
+                </form>
+            }
         </div>
     );
 }

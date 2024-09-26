@@ -1,14 +1,15 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { RouterProvider, Route, createBrowserRouter, createRoutesFromElements } from "react-router-dom"
-import App from './App.jsx'
+import QuizLayout from './components/QuizLayout.jsx'
 import ErrorPage from './components/ErrorPage.jsx'
-import QuizStart from './components/QuizStart.jsx'
+import App from "./App.jsx"
+
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path='/' element={<App />}>
-      <Route path="" element={<QuizStart/>}/>
+    <Route path='/' element={<App/>}>
+      <Route path="" element={<QuizLayout/>}/>
       <Route path="*" element={<ErrorPage />} />
     </Route>
   )
