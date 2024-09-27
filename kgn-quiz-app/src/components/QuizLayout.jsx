@@ -1,6 +1,7 @@
 import React from "react";
 import QuizStart from "./QuizStart";
 import QuestionCard from "./QuestionCard";
+import ScoreSummary from "./ScoreSummary";
 import useQuizStore from "./QuizStore";
 
 const QuizLayout = () => {
@@ -11,6 +12,7 @@ const QuizLayout = () => {
             <div>Quiz Layout</div>
             {currentState === "start" && <QuizStart />}
             {currentState === "quiz" && <QuestionCard />}
+            {currentState === "score" && <ScoreSummary />}
         </div>
     )
 }
