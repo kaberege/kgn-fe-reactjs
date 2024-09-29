@@ -2,6 +2,7 @@ import React from "react";
 import useQuizStore from "./QuizStore";
 import HandleTime from "./HandleTime";
 import "../index.css";
+import { Link } from "react-router-dom";
 
 export default function ScoreSummary() {
 
@@ -10,7 +11,6 @@ export default function ScoreSummary() {
     const setQuizState = useQuizStore(state => state.setQuizState);
     const setTime = useQuizStore(state => state.setTime);
     const setQuizLoader = useQuizStore(state => state.setQuizLoader);
-   // const setMyQuiz = useQuizStore(state => state.setMyQuiz);
     const result = parseInt((quizScore / myQuiz.length) * 100);
     const failed = myQuiz.length - quizScore;
     const total = myQuiz.length;
@@ -23,6 +23,9 @@ export default function ScoreSummary() {
     return (
         <div>
             <h2>Quiz results</h2>
+            <div>
+                <Link to="history">Go to history</Link>
+            </div>
             <div>
                 <p>Number of questions: {total}</p>
                 <p>Correct answers: {quizScore}</p>

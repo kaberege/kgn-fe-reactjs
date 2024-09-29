@@ -9,7 +9,9 @@ const QuizLayout = () => {
 
     return (
         <div>
-            <div>Quiz Layout</div>
+            <div>
+              My Quiz
+            </div>
             {currentState === "start" && <QuizStart />}
             {currentState === "quiz" && <QuestionCard />}
             {currentState === "score" && <ScoreSummary />}

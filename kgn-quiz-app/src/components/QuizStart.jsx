@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { fetchCategory } from "../services/quizSercice";
 import "../index.css";
 import useQuizStore from "./QuizStore";
+import { Link } from "react-router-dom";
 
 export default function QuizStart() {
     const setQuizState = useQuizStore(state => state.setQuizState);
@@ -61,6 +62,7 @@ export default function QuizStart() {
             setQuizChoices(choice);
             setQuizState("quiz");
             setError({});
+            setQuizCategories([]);
         }
 
     }
@@ -71,56 +73,59 @@ export default function QuizStart() {
             {loading && <p>Loading....</p>}
             {loadError && <p className="mt-4 text-red-500">{loadError}</p>}
             {quizCategories.length > 0 &&
-                <form onSubmit={handleSubmit}>
-                    <div>
-                        <label htmlFor="category">Select quiz category</label>
-                        <select
-                            id="category"
-                            value={choice.category}
-                            name="category"
-                            onChange={handleChange}
-                            className={`border ${error.category && "border-red-600"}`}
-                        >
-                            {quizCategories.map(item => (
-                                <option value={item.id} key={item.id}>{item.name}</option>
-                            ))}
-                        </select>
-                        {error.category && <p className={`${error.category && "text-red-600"}`}>{error.category}</p>}
-                    </div>
-                    <div>
-                        <label htmlFor="difficulty">Select quiz difficulty</label>
-                        <select
-                            id="difficulty"
-                            value={choice.difficulty}
-                            name="difficulty"
-                            onChange={handleChange}
-                            className={`border ${error.difficulty && "border-red-600"}`}
-                        >
-                            <option value="easy">Easy</option>
-                            <option value="medium">Medium</option>
-                            <option value="hard">Hard</option>
-                        </select>
-                        {error.difficulty && <p className={`${error.difficulty && "text-red-600"}`}>{error.difficulty}</p>}
-                    </div>
-                    <div>
-                        <label htmlFor="number">Select number of Questions</label>
-                        <input
-                            id="number"
-                            type="number"
-                            value={choice.number}
-                            name="number"
-                            onChange={handleChange}
-                            placeholder="Number of questions"
-                            className={`border ${error.number && "border-red-600"}`}
-                        />
-                        {error.number && <p className={`${error.number && "text-red-600"}`}>{error.number}</p>}
-                    </div>
-                    <button
-                        type="submit"
-                        className="border bg-slate-600 rounded-lg p-3"
-                    >Start quiz</button>
+                <div>
+                    <Link to="history">Go to history</Link>
+                    <form onSubmit={handleSubmit}>
+                        <div>
+                            <label htmlFor="category">Select quiz category</label>
+                            <select
+                                id="category"
+                                value={choice.category}
+                                name="category"
+                                onChange={handleChange}
+                                className={`border ${error.category && "border-red-600"}`}
+                            >
+                                {quizCategories.map(item => (
+                                    <option value={item.id} key={item.id}>{item.name}</option>
+                                ))}
+                            </select>
+                            {error.category && <p className={`${error.category && "text-red-600"}`}>{error.category}</p>}
+                        </div>
+                        <div>
+                            <label htmlFor="difficulty">Select quiz difficulty</label>
+                            <select
+                                id="difficulty"
+                                value={choice.difficulty}
+                                name="difficulty"
+                                onChange={handleChange}
+                                className={`border ${error.difficulty && "border-red-600"}`}
+                            >
+                                <option value="easy">Easy</option>
+                                <option value="medium">Medium</option>
+                                <option value="hard">Hard</option>
+                            </select>
+                            {error.difficulty && <p className={`${error.difficulty && "text-red-600"}`}>{error.difficulty}</p>}
+                        </div>
+                        <div>
+                            <label htmlFor="number">Select number of Questions</label>
+                            <input
+                                id="number"
+                                type="number"
+                                value={choice.number}
+                                name="number"
+                                onChange={handleChange}
+                                placeholder="Number of questions"
+                                className={`border ${error.number && "border-red-600"}`}
+                            />
+                            {error.number && <p className={`${error.number && "text-red-600"}`}>{error.number}</p>}
+                        </div>
+                        <button
+                            type="submit"
+                            className="border bg-slate-600 rounded-lg p-3"
+                        >Start quiz</button>
 
-                </form>
+                    </form>
+                </div>
             }
         </div>
     );

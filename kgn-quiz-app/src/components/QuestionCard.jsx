@@ -14,6 +14,7 @@ export default function QuestionCard() {
     const setTime = useQuizStore(state => state.setTime);
     const quizLoader = useQuizStore(state => state.quizLoader);
     const [currentQuestion, setCurrentQuestion] = useState({});
+    const [answerOptions, setAnswerOptions] = useState([]);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [currentAnswer, setCurrentAnswer] = useState("");
     const [score, setScore] = useState(0);
@@ -49,6 +50,17 @@ export default function QuestionCard() {
         }
     }, [myQuiz, currentQuestionIndex]);
 
+    useEffect(() => {
+        if (Object.keys(currentQuestion).length > 0) {
+            const randomAnswer = currentQuestion.correct_answer;
+            const currentChoices = [...currentQuestion.incorrect_answers];
+            const randomPosition = Math.floor(Math.random() * (currentChoices.length + 1));
+            currentChoices.splice(randomPosition, 0, randomAnswer);
+            setAnswerOptions(currentChoices);
+        }
+
+    }, [currentQuestion]);
+
     const handleFetch = async () => {
         setLoading(true);
         const amount = fetchChoices.number;
@@ -81,7 +93,6 @@ export default function QuestionCard() {
         }
     }
 
-
     return (
         <div>
             {loading && <p>Loading questions...</p>}
@@ -93,7 +104,7 @@ export default function QuestionCard() {
                     onSubmit={handleSubmit}
                     className="flex flex-col"
                 >
-                    {currentQuestion.incorrect_answers.concat(currentQuestion.correct_answer).map(answer =>
+                    {answerOptions.map(answer =>
                         <div
                             key={answer}
                         >

@@ -4,12 +4,13 @@ import { RouterProvider, Route, createBrowserRouter, createRoutesFromElements } 
 import QuizLayout from './components/QuizLayout.jsx'
 import ErrorPage from './components/ErrorPage.jsx'
 import App from "./App.jsx"
-
+import History from './components/History.jsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path='/' element={<App/>}>
-      <Route path="" element={<QuizLayout/>}/>
+    <Route path='/' element={<App />}>
+      <Route path="" element={<QuizLayout />} />
+      <Route path="history" element={<History />} />
       <Route path="*" element={<ErrorPage />} />
     </Route>
   )
