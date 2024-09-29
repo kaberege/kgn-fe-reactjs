@@ -8,19 +8,22 @@ export default function QuestionCard() {
     const fetchChoices = useQuizStore(state => state.quizChoices);
     const setQuizState = useQuizStore(state => state.setQuizState);
     const setQuizScore = useQuizStore(state => state.setQuizScore);
-    const { myQuiz, setMyQuiz } = useQuizStore(state => state);
-    const { time, setTime } = useQuizStore(state => state);
-    // const [myQuiz, setMyQuiz] = useState([]);
-    const [currentQuestion, setCurrentQuestion] = useState({})
+    const myQuiz = useQuizStore(state => state.myQuiz);
+    const setMyQuiz = useQuizStore(state => state.setMyQuiz);
+    const time = useQuizStore(state => state.time);
+    const setTime = useQuizStore(state => state.setTime);
+    const quizLoader = useQuizStore(state => state.quizLoader);
+    const [currentQuestion, setCurrentQuestion] = useState({});
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [currentAnswer, setCurrentAnswer] = useState("");
     const [score, setScore] = useState(0);
     const [loading, setLoading] = useState(false);
     const [loadError, setLoadError] = useState("");
-    //const [time, setTime] = useState(0);
 
     useEffect(() => {
-        handleFetch();
+        if (quizLoader) {
+            handleFetch();
+        }
     }, []);
 
     useEffect(() => {
@@ -56,7 +59,7 @@ export default function QuestionCard() {
             setMyQuiz(results);
         } catch (error) {
             setLoadError("Failed to fetch questions.");
-            console.log(err);
+            console.log(error);
         } finally {
             setLoading(false);
         }

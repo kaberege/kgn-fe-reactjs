@@ -11,6 +11,8 @@ const useQuizStore = create(set => ({
     setMyQuiz: (newquiz) => set({ myQuiz: newquiz }),
     time: 0,
     setTime: (newtime) => set({ time: newtime + 1 }),
+    quizLoader: true,
+    setQuizLoader: (value)=> set({quizLoader: value}),
 
 }));
 

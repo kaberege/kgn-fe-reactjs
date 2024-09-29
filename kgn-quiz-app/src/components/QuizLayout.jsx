@@ -5,7 +5,7 @@ import ScoreSummary from "./ScoreSummary";
 import useQuizStore from "./QuizStore";
 
 const QuizLayout = () => {
-    const currentState = useQuizStore(state => state.quizState)
+    const currentState = useQuizStore(state => state.quizState);
 
     return (
         <div>
