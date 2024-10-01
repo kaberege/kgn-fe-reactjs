@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import useQuizStore from "./QuizStore";
 import { fetchQuestions } from "../services/quizSercice";
-import HandleTime from "./HandleTime";
 import "../index.css";
 
 export default function QuestionCard() {
@@ -10,13 +9,13 @@ export default function QuestionCard() {
     const setQuizScore = useQuizStore(state => state.setQuizScore);
     const myQuiz = useQuizStore(state => state.myQuiz);
     const setMyQuiz = useQuizStore(state => state.setMyQuiz);
-    const time = useQuizStore(state => state.time);
-    const setTime = useQuizStore(state => state.setTime);
     const quizLoader = useQuizStore(state => state.quizLoader);
     const [currentQuestion, setCurrentQuestion] = useState({});
     const [answerOptions, setAnswerOptions] = useState([]);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [currentAnswer, setCurrentAnswer] = useState("");
+    const [countTime, setCountTime] = useState(0);
+    const [time, setTime] = useState({});
     const [score, setScore] = useState(0);
     const [loading, setLoading] = useState(false);
     const [loadError, setLoadError] = useState("");
@@ -29,17 +28,18 @@ export default function QuestionCard() {
 
     useEffect(() => {
         if (myQuiz.length > 0 && currentQuestionIndex < myQuiz.length) {
+            handleTime(countTime);
             let timer = setTimeout(() => {
-                setTime(time);
+                setCountTime(countTime + 1);
             }, 1000);
             return () => clearTimeout(timer);
         }
 
-    }, [myQuiz, time])
+    }, [myQuiz, countTime]);
 
     useEffect(() => {
         if (myQuiz.length > 0 && currentQuestionIndex === myQuiz.length) {
-            setQuizScore(score);
+            myHistory();
             setQuizState("score");
         }
     }, [currentQuestionIndex]);
@@ -80,6 +80,41 @@ export default function QuestionCard() {
     function handleAnswer(answer) {
         setCurrentAnswer(answer);
 
+    }
+
+    function myHistory() {
+        const topicCategory = currentQuestion.category;
+        const topicLevel = currentQuestion.difficulty;
+        const topicId = Date.now();
+        const correctResponses = score;
+        const totalQuestions = myQuiz.length
+        const topicScore = parseInt((correctResponses / totalQuestions) * 100);
+        const topicResults = {
+            id: topicId,
+            topic: topicCategory,
+            level: topicLevel,
+            correct: correctResponses,
+            expected: totalQuestions,
+            scored: topicScore,
+            spent: time
+        };
+        setQuizScore(topicResults);
+    }
+
+    function handleTime(currenttime) {
+        let s = currenttime % 60;
+        let m = parseInt(currenttime / 60) % 60;
+        let h = parseInt(currenttime / 3600);
+        const sec = s < 10 ? `0${s}` : s;
+        const min = m < 10 ? `0${m}` : m;
+        const hr = h < 10 ? `0${h}` : h;
+        const timeValue = {
+            hours: hr,
+            minutes: min,
+            seconds: sec
+        };
+
+        setTime(timeValue);
     }
 
     function handleSubmit(e) {
@@ -128,8 +163,7 @@ export default function QuestionCard() {
                     <button>Next</button>
                 </form>
                 <div>
-                    <p>Time:</p>
-                    <HandleTime />
+                    <p>Time: <span>{`${time.hours}:${time.minutes}:${time.seconds}`}</span></p>
                 </div>
             </div>
             }

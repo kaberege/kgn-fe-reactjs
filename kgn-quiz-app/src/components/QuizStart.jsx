@@ -9,7 +9,6 @@ export default function QuizStart() {
     const setQuizChoices = useQuizStore(state => state.setQuizChoices);
     const setQuizLoader = useQuizStore(state => state.setQuizLoader);
     const setMyQuiz = useQuizStore(state => state.setMyQuiz);
-    const setTime = useQuizStore(state => state.setTime);
     const [quizCategories, setQuizCategories] = useState([]);
     const [error, setError] = useState({});
     const [loading, setLoading] = useState(false);
@@ -58,7 +57,6 @@ export default function QuizStart() {
         } else {
             setMyQuiz([]);
             setQuizLoader(true);
-            setTime(0);
             setQuizChoices(choice);
             setQuizState("quiz");
             setError({});

@@ -5,14 +5,14 @@ const useQuizStore = create(set => ({
     setQuizState: (newstate) => set({ quizState: newstate }),
     quizChoices: {},
     setQuizChoices: (choice) => set({ quizChoices: choice }),
-    quizScore: 0,
+    quizScore: {},
     setQuizScore: (score) => set({ quizScore: score }),
     myQuiz: [],
     setMyQuiz: (newquiz) => set({ myQuiz: newquiz }),
-    time: 0,
-    setTime: (newtime) => set({ time: newtime + 1 }),
     quizLoader: true,
     setQuizLoader: (value)=> set({quizLoader: value}),
+    quizHistory: [],
+    setQuizHistory: ()=> set(state=>({quizHistory:[...state.quizHistory, state.quizScore]})),
 
 }));
 
