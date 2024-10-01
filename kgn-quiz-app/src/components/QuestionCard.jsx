@@ -9,6 +9,7 @@ export default function QuestionCard() {
     const setQuizScore = useQuizStore(state => state.setQuizScore);
     const myQuiz = useQuizStore(state => state.myQuiz);
     const setMyQuiz = useQuizStore(state => state.setMyQuiz);
+    const setQuizHistory = useQuizStore(state => state.setQuizHistory);
     const quizLoader = useQuizStore(state => state.quizLoader);
     const [currentQuestion, setCurrentQuestion] = useState({});
     const [answerOptions, setAnswerOptions] = useState([]);
@@ -40,6 +41,7 @@ export default function QuestionCard() {
     useEffect(() => {
         if (myQuiz.length > 0 && currentQuestionIndex === myQuiz.length) {
             myHistory();
+            setQuizHistory();
             setQuizState("score");
         }
     }, [currentQuestionIndex]);
@@ -85,18 +87,22 @@ export default function QuestionCard() {
     function myHistory() {
         const topicCategory = currentQuestion.category;
         const topicLevel = currentQuestion.difficulty;
+        const str = topicLevel.charAt(0).toUpperCase() + topicLevel.slice(1).toLowerCase();
         const topicId = Date.now();
+        const d = new Date(topicId);
+        const stringDate = d.toString();
         const correctResponses = score;
         const totalQuestions = myQuiz.length
         const topicScore = parseInt((correctResponses / totalQuestions) * 100);
         const topicResults = {
             id: topicId,
             topic: topicCategory,
-            level: topicLevel,
+            level: str,
             correct: correctResponses,
-            expected: totalQuestions,
+            questions: totalQuestions,
             scored: topicScore,
-            spent: time
+            spent: time,
+            date: stringDate,
         };
         setQuizScore(topicResults);
     }

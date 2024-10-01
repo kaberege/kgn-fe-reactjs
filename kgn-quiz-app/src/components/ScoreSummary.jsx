@@ -22,9 +22,9 @@ export default function ScoreSummary() {
                 <Link to="history">Go to history</Link>
             </div>
             <div>
-                <p>Number of questions: {quizScore.expected}</p>
+                <p>Number of questions: {quizScore.questions}</p>
                 <p>Correct answers: {quizScore.correct}</p>
-                <p>Failed: {quizScore.expected - quizScore.correct}</p>
+                <p>Failed: {quizScore.questions - quizScore.correct}</p>
                 <p>Your average score is: {quizScore.scored}%</p>
             </div>
             <div>
