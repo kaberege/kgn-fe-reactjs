@@ -1,14 +1,15 @@
 import { create } from "zustand";
 
+// Zustand store for managing quiz-related state
 const useQuizStore = create(set => ({
-    quizState: "start",
-    setQuizState: (newstate) => set({ quizState: newstate }),
+    quizState: "start", // Tracks the current state of the quiz
+    setQuizState: (newState) => set({ quizState: newState }),
     quizChoices: {},
     setQuizChoices: (choice) => set({ quizChoices: choice }),
     quizScore: {},
     setQuizScore: (score) => set({ quizScore: score }),
     myQuiz: [],
-    setMyQuiz: (newquiz) => set({ myQuiz: newquiz }),
+    setMyQuiz: (newQuiz) => set({ myQuiz: newQuiz }),
     quizLoader: true,
     setQuizLoader: (value) => set({ quizLoader: value }),
     quizHistory: [],
@@ -20,10 +21,9 @@ const useQuizStore = create(set => ({
         const filtered = state.quizHistory.filter(quiz =>
             quiz.topic.toLowerCase().includes(state.searchTerm.toLowerCase()));
         return {
-           filterHistory: filtered.length > 0? filtered: [{topic: "No mathces found"}]  // default value if no matches
+            filterHistory: filtered.length > 0 ? filtered : [{ topic: "No matches found" }] // Default message
         };
     }),
-
 }));
 
 export default useQuizStore;

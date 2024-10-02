@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { fetchCategory } from "../services/quizSercice";
-import "../index.css";
 import useQuizStore from "./QuizStore";
 import { Link } from "react-router-dom";
 
+// Component for starting the quiz by selecting options
 export default function QuizStart() {
     const setQuizState = useQuizStore(state => state.setQuizState);
     const setQuizChoices = useQuizStore(state => state.setQuizChoices);
@@ -17,8 +17,9 @@ export default function QuizStart() {
         difficulty: "medium",
         category: "9",
         number: "",
-    })
+    });
 
+    // Fetch quiz categories on component mount
     useEffect(() => {
         handleRequest();
     }, []);
@@ -29,25 +30,22 @@ export default function QuizStart() {
         try {
             const categories = await fetchCategory();
             setQuizCategories(categories);
-
         } catch (error) {
-            setLoadError("Failed to fetch.")
+            setLoadError("Failed to fetch categories.");
         } finally {
             setLoading(false);
         }
+    };
 
-    }
-
-
-    function handleChange(e) {
+    const handleChange = (e) => {
         const { value, name } = e.target;
         setChoice(prev => ({
             ...prev,
             [name]: value
-        }))
-    }
+        }));
+    };
 
-    function handleSubmit(e) {
+    const handleSubmit = (e) => {
         e.preventDefault();
         const errors = {};
         if (!choice.difficulty) errors.difficulty = "Difficulty is required";
@@ -63,60 +61,54 @@ export default function QuizStart() {
             setError({});
             setQuizCategories([]);
         }
-
-    }
+    };
 
     return (
-        <div>
-            <div>Quiz start</div>
-            {loading && <p>Loading....</p>}
+        <div className="max-sm:p-0 p-5">
+            <h2 className="text-2xl font-semibold mb-4">Start Your Quiz</h2>
+            {loading && <p>Loading categories...</p>}
             <div>
-                {loadError && <p className="mt-4 text-red-500">{loadError}</p>}
-                {loadError &&
-                    <button
-                    onClick={handleRequest}
-                        className="mt-4 text-red-500"
-                    >
-                        Retry
-                    </button>
-                }
+                {loadError && <p className="text-red-500">{loadError}</p>}
+                {loadError && (
+                    <button onClick={handleRequest} className="text-blue-500 underline">Retry</button>
+                )}
             </div>
-            {quizCategories.length > 0 &&
+            {quizCategories.length > 0 && (
                 <div>
-                    <Link to="history">Go to history</Link>
-                    <form onSubmit={handleSubmit}>
+                    <Link to="/history" className="text-blue-500 underline">Go to history</Link>
+                    <form onSubmit={handleSubmit} className="mt-4">
                         <div>
-                            <label htmlFor="category">Select quiz category</label>
+                            <label htmlFor="category" className="block mb-1">Select Quiz Category</label>
                             <select
                                 id="category"
                                 value={choice.category}
                                 name="category"
                                 onChange={handleChange}
-                                className={`border ${error.category && "border-red-600"}`}
+                                className={`border max-sm:max-w-48 rounded p-1 ${error.category && "border-red-600"}`}
                             >
                                 {quizCategories.map(item => (
                                     <option value={item.id} key={item.id}>{item.name}</option>
                                 ))}
                             </select>
-                            {error.category && <p className={`${error.category && "text-red-600"}`}>{error.category}</p>}
+                            {error.category && <p className="text-red-600">{error.category}</p>}
                         </div>
-                        <div>
-                            <label htmlFor="difficulty">Select quiz difficulty</label>
+                        <div className="mt-4">
+                            <label htmlFor="difficulty" className="block mb-1">Select Quiz Difficulty</label>
                             <select
                                 id="difficulty"
                                 value={choice.difficulty}
                                 name="difficulty"
                                 onChange={handleChange}
-                                className={`border ${error.difficulty && "border-red-600"}`}
+                                className={`border rounded p-1 ${error.difficulty && "border-red-600"}`}
                             >
                                 <option value="easy">Easy</option>
                                 <option value="medium">Medium</option>
                                 <option value="hard">Hard</option>
                             </select>
-                            {error.difficulty && <p className={`${error.difficulty && "text-red-600"}`}>{error.difficulty}</p>}
+                            {error.difficulty && <p className="text-red-600">{error.difficulty}</p>}
                         </div>
-                        <div>
-                            <label htmlFor="number">Select number of Questions</label>
+                        <div className="mt-4">
+                            <label htmlFor="number" className="block mb-1">Select Number of Questions</label>
                             <input
                                 id="number"
                                 type="number"
@@ -124,18 +116,14 @@ export default function QuizStart() {
                                 name="number"
                                 onChange={handleChange}
                                 placeholder="Number of questions"
-                                className={`border ${error.number && "border-red-600"}`}
+                                className={`border max-sm:max-w-48 rounded p-1 ${error.number && "border-red-600"}`}
                             />
-                            {error.number && <p className={`${error.number && "text-red-600"}`}>{error.number}</p>}
+                            {error.number && <p className="text-red-600">{error.number}</p>}
                         </div>
-                        <button
-                            type="submit"
-                            className="border bg-slate-600 rounded-lg p-3"
-                        >Start quiz</button>
-
+                        <button type="submit" className="mt-4 bg-blue-500 text-white p-1 w-28 rounded transition hover:bg-blue-600">Start Quiz</button>
                     </form>
                 </div>
-            }
+            )}
         </div>
     );
 }
