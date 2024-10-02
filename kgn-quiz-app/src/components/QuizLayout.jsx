@@ -10,7 +10,7 @@ const QuizLayout = () => {
     return (
         <div>
             <div>
-              My Quiz
+             
             </div>
             {currentState === "start" && <QuizStart />}
             {currentState === "quiz" && <QuestionCard />}

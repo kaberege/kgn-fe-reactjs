@@ -16,11 +16,13 @@ const useQuizStore = create(set => ({
     searchTerm: "",
     setSearchTerm: (term) => set({ searchTerm: term }),
     filterHistory: [],
-    setFilterHistory: () => set(state => ({
-        filterHistory: state.quizHistory.filter(quiz =>
-            quiz.topic.toLowerCase().includes(state.searchTerm.toLowerCase())
-        )
-    })),
+    setFilterHistory: () => set(state => {
+        const filtered = state.quizHistory.filter(quiz =>
+            quiz.topic.toLowerCase().includes(state.searchTerm.toLowerCase()));
+        return {
+           filterHistory: filtered.length > 0? filtered: [{topic: "No mathces found"}]  // default value if no matches
+        };
+    }),
 
 }));
 

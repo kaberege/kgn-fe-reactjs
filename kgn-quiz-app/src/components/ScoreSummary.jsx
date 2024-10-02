@@ -9,7 +9,6 @@ export default function ScoreSummary() {
     const setQuizState = useQuizStore(state => state.setQuizState);
     const setQuizLoader = useQuizStore(state => state.setQuizLoader);
 
-    console.log(quizScore);
     function retakeQuiz() {
         setQuizLoader(false);
         setQuizState("quiz");

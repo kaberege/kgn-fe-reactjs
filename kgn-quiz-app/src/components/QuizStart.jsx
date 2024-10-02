@@ -24,13 +24,14 @@ export default function QuizStart() {
     }, []);
 
     const handleRequest = async () => {
+        setLoadError("");
         setLoading(true);
         try {
             const categories = await fetchCategory();
             setQuizCategories(categories);
 
         } catch (error) {
-            setLoadError("Failed to fetch quiz form! Please reload the page.")
+            setLoadError("Failed to fetch.")
         } finally {
             setLoading(false);
         }
@@ -69,7 +70,17 @@ export default function QuizStart() {
         <div>
             <div>Quiz start</div>
             {loading && <p>Loading....</p>}
-            {loadError && <p className="mt-4 text-red-500">{loadError}</p>}
+            <div>
+                {loadError && <p className="mt-4 text-red-500">{loadError}</p>}
+                {loadError &&
+                    <button
+                    onClick={handleRequest}
+                        className="mt-4 text-red-500"
+                    >
+                        Retry
+                    </button>
+                }
+            </div>
             {quizCategories.length > 0 &&
                 <div>
                     <Link to="history">Go to history</Link>

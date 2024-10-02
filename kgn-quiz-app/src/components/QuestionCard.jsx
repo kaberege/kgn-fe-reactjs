@@ -64,6 +64,7 @@ export default function QuestionCard() {
     }, [currentQuestion]);
 
     const handleFetch = async () => {
+        setLoadError("");
         setLoading(true);
         const amount = fetchChoices.number;
         const difficulty = fetchChoices.difficulty;
@@ -72,8 +73,7 @@ export default function QuestionCard() {
             const results = await fetchQuestions(amount, category, difficulty);
             setMyQuiz(results);
         } catch (error) {
-            setLoadError("Failed to fetch questions.");
-            console.log(error);
+            setLoadError("Failed to fetch quiz questions.");
         } finally {
             setLoading(false);
         }
@@ -137,7 +137,12 @@ export default function QuestionCard() {
     return (
         <div>
             {loading && <p>Loading questions...</p>}
-            {loadError && !Object.keys(currentQuestion).length > 0 && <p>{loadError}</p>}
+            <div>
+                {loadError && !Object.keys(currentQuestion).length > 0 && <p>{loadError}</p>}
+                {loadError && !Object.keys(currentQuestion).length > 0 &&
+                    <button onClick={handleFetch}>Retry</button>
+                }
+            </div>
             {Object.keys(currentQuestion).length > 0 && <div>
                 <h2>Quetsion: {myQuiz.indexOf(currentQuestion) + 1}/{myQuiz.length} </h2>
                 <h3>{currentQuestion.question}</h3>
