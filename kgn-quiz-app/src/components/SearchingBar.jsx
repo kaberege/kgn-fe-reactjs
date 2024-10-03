@@ -8,20 +8,20 @@ export default function SearchingBar() {
     const [search, setSearch] = useState("");
 
     useEffect(() => {
-        if (search !== "") {
+       if (search !== "") {
             setSearchTerm(search);
             setFilterHistory();
         }
     }, [search]);
 
     return (
-        <div className="mb-4 mt-4">
+        <div className="mb-4 mt-4 max-w-96 mx-auto">
             <input
                 type="search"
                 value={search}
                 placeholder="Search topic..."
                 onChange={(e) => setSearch(e.target.value)}
-                className="border rounded-xl p-2 w-full"
+                className="border border-lime-200 outline-lime-700 rounded-xl p-2 w-full shadow-lg"
             />
         </div>
     );

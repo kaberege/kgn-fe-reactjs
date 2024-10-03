@@ -24,6 +24,7 @@ export default function QuizStart() {
         handleRequest();
     }, []);
 
+          //Actual fetch function
     const handleRequest = async () => {
         setLoadError("");
         setLoading(true);
@@ -31,12 +32,13 @@ export default function QuizStart() {
             const categories = await fetchCategory();
             setQuizCategories(categories);
         } catch (error) {
-            setLoadError("Failed to fetch categories.");
+            setLoadError("Failed to fetch quiz categories.");
         } finally {
             setLoading(false);
         }
     };
-
+        
+         //Function that update user selected quiz parameters
     const handleChange = (e) => {
         const { value, name } = e.target;
         setChoice(prev => ({
@@ -44,7 +46,8 @@ export default function QuizStart() {
             [name]: value
         }));
     };
-
+      
+          //Function for triggering quiz fetch action
     const handleSubmit = (e) => {
         e.preventDefault();
         const errors = {};
@@ -64,13 +67,13 @@ export default function QuizStart() {
     };
 
     return (
-        <div className="max-sm:p-0 p-5">
-            <h2 className="text-2xl font-semibold mb-4">Start Your Quiz</h2>
-            {loading && <p>Loading categories...</p>}
+        <div className="max-sm:p-0 p-5 text-center">
+            <h2 className="max-md:text-xl text-2xl font-semibold mb-4">Start Your Quiz</h2>
+            {loading && <p>Loading categories<span className="animate-ping">...</span></p>}
             <div>
-                {loadError && <p className="text-red-500">{loadError}</p>}
+                {loadError && <p className="text-red-500 mt-10">{loadError}</p>}
                 {loadError && (
-                    <button onClick={handleRequest} className="text-blue-500 underline">Retry</button>
+                    <button onClick={handleRequest} className="text-blue-500 mt-3 transition hover:text-blue-400 underline">Retry</button>
                 )}
             </div>
             {quizCategories.length > 0 && (

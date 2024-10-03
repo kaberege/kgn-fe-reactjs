@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import useQuizStore from "./QuizStore";
 import { fetchQuestions } from "../services/quizSercice";
 
+
+       //Component for taking quiz
 export default function QuestionCard() {
     const fetchChoices = useQuizStore(state => state.quizChoices);
     const setQuizState = useQuizStore(state => state.setQuizState);
@@ -65,6 +67,7 @@ export default function QuestionCard() {
         }
     }, [currentQuestion]);
 
+      //Fetching quiz questions frunction
     const handleFetch = async () => {
         setLoadError("");
         setLoading(true);
@@ -80,10 +83,12 @@ export default function QuestionCard() {
         }
     };
 
+        //Keeping track of user selected answer
     const handleAnswer = (answer) => {
         setCurrentAnswer(answer);
     };
-
+        
+          //Setting history details on each quiz
     const myHistory = () => {
         const { category: topicCategory, difficulty: topicLevel } = currentQuestion;
         const topicId = Date.now();
@@ -102,7 +107,8 @@ export default function QuestionCard() {
         };
         setQuizScore(topicResults);
     };
-
+ 
+         //Function keep track on time
     const handleTime = (currentTime) => {
         let s = currentTime % 60;
         let m = Math.floor(currentTime / 60) % 60;
@@ -115,6 +121,7 @@ export default function QuestionCard() {
         setTime(timeValue);
     };
 
+          //Function for navigating to the next question
     const handleSubmit = (e) => {
         e.preventDefault();
         if (currentQuestionIndex < myQuiz.length) {
@@ -128,11 +135,11 @@ export default function QuestionCard() {
 
     return (
         <div className="max-sm:p-0 p-5">
-            {loading && <p className="text-lg">Loading questions...</p>}
+            {loading && <p className="text-lg text-center">Loading questions<span className="animate-ping">...</span></p>}
             {loadError && !Object.keys(currentQuestion).length > 0 && (
-                <div className="text-red-500">
+                <div className="text-red-500 text-center">
                     <p>{loadError}</p>
-                    <button onClick={handleFetch} className="text-blue-500 underline">Retry</button>
+                    <button onClick={handleFetch} className="text-blue-500 transition hover:text-blue-800 underline mt-3">Retry</button>
                 </div>
             )}
             {Object.keys(currentQuestion).length > 0 && (
