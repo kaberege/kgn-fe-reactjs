@@ -14,17 +14,17 @@ export default function QuizStart() {
     const [loading, setLoading] = useState(false);
     const [loadError, setLoadError] = useState("");
     const [choice, setChoice] = useState({
-        difficulty: "medium",
-        category: "9",
+        difficulty: "choose",
+        category: "choose",
         number: "",
     });
-
+  
     // Fetch quiz categories on component mount
     useEffect(() => {
         handleRequest();
     }, []);
 
-          //Actual fetch function
+    //Actual fetch function
     const handleRequest = async () => {
         setLoadError("");
         setLoading(true);
@@ -37,8 +37,8 @@ export default function QuizStart() {
             setLoading(false);
         }
     };
-        
-         //Function that update user selected quiz parameters
+
+    //Function that update user selected quiz parameters
     const handleChange = (e) => {
         const { value, name } = e.target;
         setChoice(prev => ({
@@ -46,13 +46,14 @@ export default function QuizStart() {
             [name]: value
         }));
     };
-      
-          //Function for triggering quiz fetch action
+
+    //Function for triggering quiz fetch action
     const handleSubmit = (e) => {
         e.preventDefault();
+        setError({});
         const errors = {};
-        if (!choice.difficulty) errors.difficulty = "Difficulty is required";
-        if (!choice.category) errors.category = "Category is required";
+        if (choice.difficulty === "choose") errors.difficulty = "Difficulty is required";
+        if (choice.category === "choose") errors.category = "Category is required";
         if (!choice.number) errors.number = "Number of questions is required";
         if (Object.keys(errors).length > 0) {
             setError(errors);
@@ -78,7 +79,7 @@ export default function QuizStart() {
             </div>
             {quizCategories.length > 0 && (
                 <div>
-                    <Link to="/history" className="text-blue-500 underline">Go to history</Link>
+                    <Link to="/history" className="text-blue-500 transition hover:text-blue-300 underline">Go to history</Link>
                     <form onSubmit={handleSubmit} className="mt-4">
                         <div>
                             <label htmlFor="category" className="block mb-1">Select Quiz Category</label>
@@ -87,8 +88,9 @@ export default function QuizStart() {
                                 value={choice.category}
                                 name="category"
                                 onChange={handleChange}
-                                className={`border max-sm:max-w-48 rounded p-1 ${error.category && "border-red-600"}`}
+                                className={`border-2 max-sm:max-w-48 rounded p-1 ${error.category ? "border-red-600" : "border-stone-500"}`}
                             >
+                                <option value="choose" className="text-center">Choose category...</option>
                                 {quizCategories.map(item => (
                                     <option value={item.id} key={item.id}>{item.name}</option>
                                 ))}
@@ -102,8 +104,9 @@ export default function QuizStart() {
                                 value={choice.difficulty}
                                 name="difficulty"
                                 onChange={handleChange}
-                                className={`border rounded p-1 ${error.difficulty && "border-red-600"}`}
+                                className={`border-2  rounded p-1 ${error.difficulty ? "border-red-600" : "border-stone-500"}`}
                             >
+                                <option value="choose">Choose...</option>
                                 <option value="easy">Easy</option>
                                 <option value="medium">Medium</option>
                                 <option value="hard">Hard</option>
@@ -119,7 +122,8 @@ export default function QuizStart() {
                                 name="number"
                                 onChange={handleChange}
                                 placeholder="Number of questions"
-                                className={`border max-sm:max-w-48 rounded p-1 ${error.number && "border-red-600"}`}
+                                min={1}
+                                className={`border-2  max-sm:max-w-48 rounded p-1 ${error.number ? "border-red-600" : "border-stone-500"}`}
                             />
                             {error.number && <p className="text-red-600">{error.number}</p>}
                         </div>
