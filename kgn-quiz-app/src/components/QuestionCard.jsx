@@ -3,7 +3,7 @@ import useQuizStore from "./QuizStore";
 import { fetchQuestions } from "../services/quizSercice";
 
 
-       //Component for taking quiz
+//Component for taking quiz
 export default function QuestionCard() {
     const fetchChoices = useQuizStore(state => state.quizChoices);
     const setQuizState = useQuizStore(state => state.setQuizState);
@@ -67,14 +67,14 @@ export default function QuestionCard() {
         }
     }, [currentQuestion]);
 
-      //Fetching quiz questions frunction
+    //Fetching quiz questions frunction
     const handleFetch = async () => {
         setLoadError("");
         setLoading(true);
-        const { number: amount, difficulty, category } = fetchChoices;
+        const { number, difficulty, category } = fetchChoices;
 
         try {
-            const results = await fetchQuestions(amount, category, difficulty);
+            const results = await fetchQuestions(number, category, difficulty);
             setMyQuiz(results);
         } catch (error) {
             setLoadError("Failed to fetch quiz questions.");
@@ -83,12 +83,12 @@ export default function QuestionCard() {
         }
     };
 
-        //Keeping track of user selected answer
+    //Keeping track of user selected answer
     const handleAnswer = (answer) => {
         setCurrentAnswer(answer);
     };
-        
-          //Setting history details on each quiz
+
+    //Setting history details on each quiz
     const myHistory = () => {
         const { category: topicCategory, difficulty: topicLevel } = currentQuestion;
         const topicId = Date.now();
@@ -107,8 +107,8 @@ export default function QuestionCard() {
         };
         setQuizScore(topicResults);
     };
- 
-         //Function keep track on time
+
+    //Function keep track on time
     const handleTime = (currentTime) => {
         let s = currentTime % 60;
         let m = Math.floor(currentTime / 60) % 60;
@@ -121,7 +121,7 @@ export default function QuestionCard() {
         setTime(timeValue);
     };
 
-          //Function for navigating to the next question
+    //Function for navigating to the next question
     const handleSubmit = (e) => {
         e.preventDefault();
         if (currentQuestionIndex < myQuiz.length) {
