@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { FaRedo } from "react-icons/fa";
 import { fetchCategory } from "../services/quizSercice";
-import useQuizStore from "./QuizStore";
+import useQuizStore from "../stateStore/QuizStore";
 import { Link } from "react-router-dom";
 
 // Component for starting the quiz by selecting options
@@ -18,7 +19,7 @@ export default function QuizStart() {
         category: "choose",
         number: "",
     });
-  
+
     // Fetch quiz categories on component mount
     useEffect(() => {
         handleRequest();
@@ -74,12 +75,14 @@ export default function QuizStart() {
             <div>
                 {loadError && <p className="text-red-500 mt-10">{loadError}</p>}
                 {loadError && (
-                    <button onClick={handleRequest} className="text-blue-500 mt-3 transition hover:text-blue-400 underline">Retry</button>
+                    <button onClick={handleRequest} className="flex items-center mx-auto underline mt-3 text-blue-500 transition hover:text-blue-300">
+                        <FaRedo className="text-sm mr-1" />
+                        Retry
+                    </button>
                 )}
             </div>
             {quizCategories.length > 0 && (
                 <div>
-                    <Link to="/history" className="text-blue-500 transition hover:text-blue-300 underline">Go to history</Link>
                     <form onSubmit={handleSubmit} className="mt-4">
                         <div>
                             <label htmlFor="category" className="block mb-1">Select Quiz Category</label>

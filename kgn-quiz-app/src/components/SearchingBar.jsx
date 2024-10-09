@@ -1,18 +1,24 @@
 import React, { useEffect, useState } from "react";
-import useQuizStore from "./QuizStore";
+import useQuizStore from "../stateStore/QuizStore";
 
 // Search bar for filtering quiz history
 export default function SearchingBar() {
+    const filterHistory = useQuizStore(state => state.filterHistory);
     const setFilterHistory = useQuizStore(state => state.setFilterHistory);
     const setSearchTerm = useQuizStore(state => state.setSearchTerm);
+    const setDisplayHistory = useQuizStore(state => state.setDisplayHistory);
     const [search, setSearch] = useState("");
 
     useEffect(() => {
-       if (search !== "") {
+        if (search !== "") {
             setSearchTerm(search);
             setFilterHistory();
         }
     }, [search]);
+
+    useEffect(() => { 
+        setDisplayHistory(filterHistory);
+    }, [filterHistory])
 
     return (
         <div className="mb-4 mt-4 max-w-96 mx-auto">

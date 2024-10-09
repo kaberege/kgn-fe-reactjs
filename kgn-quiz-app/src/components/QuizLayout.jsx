@@ -2,7 +2,7 @@ import React from "react";
 import QuizStart from "./QuizStart";
 import QuestionCard from "./QuestionCard";
 import ScoreSummary from "./ScoreSummary";
-import useQuizStore from "./QuizStore";
+import useQuizStore from "../stateStore/QuizStore";
 
 // Main layout component that renders different quiz states
 const QuizLayout = () => {

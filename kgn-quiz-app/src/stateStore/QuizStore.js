@@ -13,7 +13,7 @@ const useQuizStore = create(set => ({
     quizLoader: true,
     setQuizLoader: (value) => set({ quizLoader: value }),
     quizHistory: [],
-    setQuizHistory: () => set(state => ({ quizHistory: [...state.quizHistory, state.quizScore] })),
+    setQuizHistory: (history) => set({ quizHistory: [...history] }),
     searchTerm: "",
     setSearchTerm: (term) => set({ searchTerm: term }),
     filterHistory: [],
@@ -24,6 +24,8 @@ const useQuizStore = create(set => ({
             filterHistory: filtered.length > 0 ? filtered : [{ topic: "No matches found" }] // Default message
         };
     }),
+    displayHistory: [],
+    setDisplayHistory: (history) => set({ displayHistory: [...history] }),
 }));
 
 export default useQuizStore;

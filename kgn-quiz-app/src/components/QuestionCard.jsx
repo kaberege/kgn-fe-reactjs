@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from "react";
-import useQuizStore from "./QuizStore";
+import { FaRedo } from "react-icons/fa";
+import useQuizStore from "../stateStore/QuizStore";
 import { fetchQuestions } from "../services/quizSercice";
 
 
 //Component for taking quiz
 export default function QuestionCard() {
+
     const fetchChoices = useQuizStore(state => state.quizChoices);
     const setQuizState = useQuizStore(state => state.setQuizState);
     const setQuizScore = useQuizStore(state => state.setQuizScore);
     const myQuiz = useQuizStore(state => state.myQuiz);
     const setMyQuiz = useQuizStore(state => state.setMyQuiz);
-    const setQuizHistory = useQuizStore(state => state.setQuizHistory);
     const quizLoader = useQuizStore(state => state.quizLoader);
     const [currentQuestion, setCurrentQuestion] = useState({});
     const [answerOptions, setAnswerOptions] = useState([]);
@@ -44,7 +45,6 @@ export default function QuestionCard() {
     useEffect(() => {
         if (myQuiz.length > 0 && currentQuestionIndex === myQuiz.length) {
             myHistory();
-            setQuizHistory();
             setQuizState("score");
         }
     }, [currentQuestionIndex]);
@@ -90,21 +90,24 @@ export default function QuestionCard() {
 
     //Setting history details on each quiz
     const myHistory = () => {
-        const { category: topicCategory, difficulty: topicLevel } = currentQuestion;
+        const { category, difficulty } = currentQuestion;
         const topicId = Date.now();
         const d = new Date(topicId);
         const stringDate = d.toString();
         const topicScore = Math.round((score / myQuiz.length) * 100);
         const topicResults = {
             id: topicId,
-            topic: topicCategory,
-            level: topicLevel.charAt(0).toUpperCase() + topicLevel.slice(1).toLowerCase(),
+            topic: category,
+            level: difficulty.charAt(0).toUpperCase() + difficulty.slice(1).toLowerCase(),
             correct: score,
             questions: myQuiz.length,
             scored: topicScore,
             spent: time,
             date: stringDate,
         };
+        const localArr = JSON.parse(localStorage.getItem("history")) || [];
+        localArr.push(topicResults)
+        localStorage.setItem("history", JSON.stringify(localArr)); // Storing quiz results to the local storage
         setQuizScore(topicResults);
     };
 
@@ -137,9 +140,12 @@ export default function QuestionCard() {
         <div className="max-sm:p-0 p-5">
             {loading && <p className="text-lg text-center">Loading questions<span className="animate-ping">...</span></p>}
             {loadError && !Object.keys(currentQuestion).length > 0 && (
-                <div className="text-red-500 text-center">
-                    <p>{loadError}</p>
-                    <button onClick={handleFetch} className="text-blue-500 transition hover:text-blue-800 underline mt-3">Retry</button>
+                <div className="text-center">
+                    <p className="text-red-500">{loadError}</p>
+                    <button onClick={handleFetch} className="flex items-center mx-auto underline mt-3 text-blue-500 transition hover:text-blue-300">
+                        <FaRedo className="text-sm mr-1" />
+                        Retry
+                    </button>   
                 </div>
             )}
             {Object.keys(currentQuestion).length > 0 && (
