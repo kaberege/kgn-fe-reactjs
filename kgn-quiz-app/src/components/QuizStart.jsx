@@ -70,8 +70,8 @@ export default function QuizStart() {
 
     return (
         <div className="max-sm:p-0 p-5 text-center">
-            <h2 className="max-md:text-xl text-2xl font-semibold mb-4">Start Your Quiz</h2>
-            {loading && <p>Loading categories<span className="animate-ping">...</span></p>}
+            <h2 className="max-md:text-xl text-2xl font-semibold mb-4 dark:text-white">Start Your Quiz</h2>
+            {loading && <p className="dark:text-slate-300">Loading categories<span className="animate-ping">...</span></p>}
             <div>
                 {loadError && <p className="text-red-500 mt-10">{loadError}</p>}
                 {loadError && (
@@ -85,7 +85,7 @@ export default function QuizStart() {
                 <div>
                     <form onSubmit={handleSubmit} className="mt-4">
                         <div>
-                            <label htmlFor="category" className="block mb-1">Select Quiz Category</label>
+                            <label htmlFor="category" className="block mb-1 dark:text-slate-300">Select Quiz Category</label>
                             <select
                                 id="category"
                                 value={choice.category}
@@ -101,7 +101,7 @@ export default function QuizStart() {
                             {error.category && <p className="text-red-600">{error.category}</p>}
                         </div>
                         <div className="mt-4">
-                            <label htmlFor="difficulty" className="block mb-1">Select Quiz Difficulty</label>
+                            <label htmlFor="difficulty" className="block mb-1 dark:text-slate-300">Select Quiz Difficulty</label>
                             <select
                                 id="difficulty"
                                 value={choice.difficulty}
@@ -117,7 +117,7 @@ export default function QuizStart() {
                             {error.difficulty && <p className="text-red-600">{error.difficulty}</p>}
                         </div>
                         <div className="mt-4">
-                            <label htmlFor="number" className="block mb-1">Select Number of Questions</label>
+                            <label htmlFor="number" className="block mb-1 dark:text-slate-300">Select Number of Questions</label>
                             <input
                                 id="number"
                                 type="number"

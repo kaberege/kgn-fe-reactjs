@@ -138,7 +138,7 @@ export default function QuestionCard() {
 
     return (
         <div className="max-sm:p-0 p-5">
-            {loading && <p className="text-lg text-center">Loading questions<span className="animate-ping">...</span></p>}
+            {loading && <p className="text-lg text-center dark:text-slate-300">Loading questions<span className="animate-ping">...</span></p>}
             {loadError && !Object.keys(currentQuestion).length > 0 && (
                 <div className="text-center">
                     <p className="text-red-500">{loadError}</p>
@@ -149,12 +149,12 @@ export default function QuestionCard() {
                 </div>
             )}
             {Object.keys(currentQuestion).length > 0 && (
-                <div className="shadow rounded max-sm:p-0 p-5">
+                <div className="shadow rounded max-sm:p-0 p-5 dark:bg-stone-700 transition duration-300">
                     <div className="text-right">
-                        <p>Time: <span className="font-semibold text-red-500">{`${time.hours}:${time.minutes}:${time.seconds}`}</span></p>
+                        <p className="dark:text-slate-300">Time: <span className="font-semibold text-red-500">{`${time.hours}:${time.minutes}:${time.seconds}`}</span></p>
                     </div>
-                    <h2 className="text-xl text-center font-semibold">Question: {currentQuestionIndex + 1}/{myQuiz.length}</h2>
-                    <h3 className="mt-2 text-lg">{currentQuestion.question}</h3>
+                    <h2 className="text-xl text-center font-semibold dark:text-slate-300">Question: {currentQuestionIndex + 1}/{myQuiz.length}</h2>
+                    <h3 className="mt-2 text-lg dark:text-slate-300">{currentQuestion.question}</h3>
                     <form onSubmit={handleSubmit} className="flex flex-col">
                         {answerOptions.map(answer => (
                             <div key={answer} className="flex items-center mt-2">
