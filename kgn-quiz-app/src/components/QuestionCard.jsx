@@ -22,6 +22,7 @@ export default function QuestionCard() {
     const [score, setScore] = useState(0);
     const [loading, setLoading] = useState(false);
     const [loadError, setLoadError] = useState("");
+    const [progress, setProgress] = useState(0);
 
     // Fetch quiz questions if the loader is true
     useEffect(() => {
@@ -52,6 +53,8 @@ export default function QuestionCard() {
     // Set the current question based on the current index
     useEffect(() => {
         if (myQuiz.length > 0 && currentQuestionIndex < myQuiz.length) {
+            const myProgress = ((currentQuestionIndex + 1) / myQuiz.length) * 100;
+            setProgress(myProgress);
             setCurrentQuestion(myQuiz[currentQuestionIndex]);
         }
     }, [myQuiz, currentQuestionIndex]);
@@ -145,15 +148,23 @@ export default function QuestionCard() {
                     <button onClick={handleFetch} className="flex items-center mx-auto underline mt-3 text-blue-500 transition hover:text-blue-300">
                         <FaRedo className="text-sm mr-1" />
                         Retry
-                    </button>   
+                    </button>
                 </div>
             )}
             {Object.keys(currentQuestion).length > 0 && (
-                <div className="shadow rounded max-sm:p-0 p-5 dark:bg-stone-700 transition duration-300">
+                <div className="shadow rounded max-sm:p-1 p-5 dark:bg-stone-700 transition duration-300">
                     <div className="text-right">
                         <p className="dark:text-slate-300">Time: <span className="font-semibold text-red-500">{`${time.hours}:${time.minutes}:${time.seconds}`}</span></p>
                     </div>
-                    <h2 className="text-xl text-center font-semibold dark:text-slate-300">Question: {currentQuestionIndex + 1}/{myQuiz.length}</h2>
+                    <div className="w-full bg-gray-300 rounded-full h-4 shadow-sm cursor-pointer mt-6" title="Progress bar">
+                        <div
+                            style={{ width: `${progress}%` }}
+                            className="text-white font-semibold text-sm flex items-center justify-center bg-blue-500 h-4 rounded-full transition-all duration-300 animate-pulse"
+                        >
+                            {parseInt(progress)}%
+                        </div>
+                    </div>
+                    <h2 className="text-xl text-center font-semibold dark:text-slate-50 mt-6">Question: {currentQuestionIndex + 1}/{myQuiz.length}</h2>
                     <h3 className="mt-2 text-lg dark:text-slate-300">{currentQuestion.question}</h3>
                     <form onSubmit={handleSubmit} className="flex flex-col">
                         {answerOptions.map(answer => (
