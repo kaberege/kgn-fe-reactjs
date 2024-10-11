@@ -19,7 +19,7 @@ export default function App() {
 
     <div className={`${mode && "dark"}`}>
       <div className="min-h-screen bg-gray-100 flex dark:bg-slate-900 flex-col transition-colors duration-300">
-        <header className="fixed left-0 top-0 right-0 z-10 bg-blue-600 dark:bg-slate-600 shadow-2xl transition-colors duration-300">
+        <header className="sticky top-0 z-10 bg-blue-600 dark:bg-slate-600 shadow-2xl transition-colors duration-300">
           <div className='max-w-7xl mx-auto flex flex-row items-center text-white max-sm:p-2 p-1 text-center'>
             <div className='flex flex-row flex-grow items-center gap-2'>
               <img src={logo} alt="logo" className="w-10 h-10 md:w-12 md:h-12 rounded-full animate-image cursor-pointer" title='kgn logo' />

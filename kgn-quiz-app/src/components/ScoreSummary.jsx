@@ -15,7 +15,7 @@ export default function ScoreSummary() {
     };
 
     return (
-        <div className="text-center max-sm:p-2 p-5 bg-slate-50 dark:bg-stone-700 rounded shadow transition duration-300 hover:scale-105">
+        <div className="text-center max-sm:p-2 p-5 bg-slate-50 dark:bg-stone-700 rounded shadow cursor-pointer transition duration-300 hover:scale-105">
             <h2 className="max-md:text-xl text-2xl font-semibold mb-4 dark:text-white">Quiz Results</h2>
             <div className="mt-4 dark:text-slate-300">
                 <p>Topic: <span className="font-bold">{quizScore.topic}</span></p>

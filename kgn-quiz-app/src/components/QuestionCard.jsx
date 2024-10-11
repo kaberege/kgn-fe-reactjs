@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import he from "he";
 import { FaRedo } from "react-icons/fa";
 import useQuizStore from "../stateStore/QuizStore";
 import { fetchQuestions } from "../services/quizSercice";
@@ -165,7 +166,7 @@ export default function QuestionCard() {
                         </div>
                     </div>
                     <h2 className="text-xl text-center font-semibold dark:text-slate-50 mt-6">Question: {currentQuestionIndex + 1}/{myQuiz.length}</h2>
-                    <h3 className="mt-2 text-lg dark:text-slate-300">{currentQuestion.question}</h3>
+                    <h3 className="mt-2 text-lg dark:text-slate-300">{he.decode(currentQuestion.question)}</h3>
                     <form onSubmit={handleSubmit} className="flex flex-col">
                         {answerOptions.map(answer => (
                             <div key={answer} className="flex items-center mt-2">
@@ -179,7 +180,7 @@ export default function QuestionCard() {
                                     className="mr-2"
                                 />
                                 <label htmlFor={answer} className="border rounded p-1 bg-slate-500 text-white cursor-pointer">
-                                    {answer}
+                                    {he.decode(answer)}
                                 </label>
                             </div>
                         ))}
