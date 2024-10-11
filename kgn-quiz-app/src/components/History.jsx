@@ -21,7 +21,7 @@ export default function History() {
     }, [quizHistory]);
 
     return (
-        <div className="max-sm:p-0 p-5">
+        <div className="max-sm:p-0 p-5 mt-16">
             <h2 className="max-md:text-xl text-2xl text-center font-semibold mb-4 dark:text-white">Quiz History</h2>
             {displayHistory.length > 0 && displayHistory[0].topic === "No matches found" &&
                 <button
@@ -38,7 +38,7 @@ export default function History() {
                 {displayHistory.length > 0 && displayHistory[0].topic === "No matches found" &&
                     <p className="text-red-500 text-center dark:text-slate-300">{displayHistory[0].topic}</p>
                 }
-                <div className="grid gap-2 md:grid-cols-2 xl:grid-cols-3 max-w-7xl mx-auto ">
+                <div className="grid gap-2 md:grid-cols-2 xl:grid-cols-3 max-w-7xl mx-auto mt-12 ">
                     {displayHistory.length > 0 && displayHistory[0].topic !== "No matches found" &&
                         displayHistory.map(item => (
                             <div key={item.id} className="border w-full rounded p-4 mb-4 bg-gray-200 shadow cursor-pointer transition duration-300 hover:scale-105 dark:bg-stone-700  dark:text-slate-300">

@@ -21,7 +21,7 @@ export default function SearchingBar() {
     }, [filterHistory])
 
     return (
-        <div className="mb-4 mt-4 max-w-96 mx-auto">
+        <div className="mb-4 mt-10 max-w-96 mx-auto">
             <input
                 type="search"
                 value={search}

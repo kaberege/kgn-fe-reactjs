@@ -18,9 +18,9 @@ export default function App() {
   return (
 
     <div className={`${mode && "dark"}`}>
-      <div className="min-h-screen bg-gray-100 flex dark:bg-slate-900 flex-col transition duration-300">
-        <header className="bg-blue-600 dark:bg-slate-600 shadow-md transition duration-300">
-          <div className='max-w-7xl mx-auto flex flex-row items-center text-white p-1 text-center'>
+      <div className="min-h-screen bg-gray-100 flex dark:bg-slate-900 flex-col transition-colors duration-300">
+        <header className="fixed left-0 top-0 right-0 z-10 bg-blue-600 dark:bg-slate-600 shadow-2xl transition-colors duration-300">
+          <div className='max-w-7xl mx-auto flex flex-row items-center text-white max-sm:p-2 p-1 text-center'>
             <div className='flex flex-row flex-grow items-center gap-2'>
               <img src={logo} alt="logo" className="w-10 h-10 md:w-12 md:h-12 rounded-full animate-image cursor-pointer" title='kgn logo' />
               <h1 className="max-md:text-2xl text-3xl font-bold">Quiz App</h1>
@@ -31,7 +31,8 @@ export default function App() {
               <FaBars />
             </div>
             <nav
-              className={`shadow-lg ${hideNav && "max-sm:hidden"} max-sm:h-full max-sm:w-1/3 max-sm:fixed max-sm:top-0 max-sm:right-0 max-sm:p-2 max-sm:bg-blue-400 max-sm:dark:bg-slate-600 transition-transform duration-1000`}>
+              style={{ transition: "right 0.8s linear" }}
+              className={`shadow-lg ${hideNav ? "max-sm:-right-1/2 max-sm:overflow-hidden" : "max-sm:right-0 max-sm:w-1/2"} max-sm:h-full max-sm:fixed max-sm:top-0  max-sm:p-2 max-sm:bg-blue-600 max-sm:dark:bg-slate-600 transition-colors duration-300`}>
               <div
                 onClick={() => setHideNav(true)}
                 className=' flex text-2xl items-center justify-center float-end sm:hidden font-bold flex-row w-9 h-9 hover:bg-slate-400 rounded-full cursor-pointer' >
@@ -65,7 +66,7 @@ export default function App() {
         <main className="flex-grow p-5">
           <Outlet />
         </main>
-        <footer className="bg-gray-800 text-white p-4 text-center dark:text-slate-300 transition duration-300">
+        <footer className="bg-gray-800 text-white p-4 text-center dark:text-slate-300 transition-colors duration-300">
           <p className='text-sm'>Copyright &copy; {year} <a href='https://kaberege.github.io/kgn.github.io/' target='_blank' className='text-blue-500 transition hover:text-blue-700' title='Visit kgn website'>KGN</a>. All rights reserved.</p>
         </footer>
       </div>
