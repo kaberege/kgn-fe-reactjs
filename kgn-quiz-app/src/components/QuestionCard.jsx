@@ -97,7 +97,17 @@ export default function QuestionCard() {
         const { category, difficulty } = currentQuestion;
         const topicId = Date.now();
         const d = new Date(topicId);
-        const stringDate = d.toString();
+        const options = {
+            weekday: 'short', // Full name of the day
+            year: 'numeric', // Numeric year
+            month: 'short',   // Full name of the month
+            day: 'numeric',  // Numeric day
+            hour: '2-digit', // 2-digit hour
+            minute: '2-digit', // 2-digit minute
+            second: '2-digit', //2-digit second
+            hour12: true     // 12-hour format
+        };
+        const formattedDate = d.toLocaleString('en-US', options);
         const topicScore = Math.round((score / myQuiz.length) * 100);
         const topicResults = {
             id: topicId,
@@ -107,7 +117,7 @@ export default function QuestionCard() {
             questions: myQuiz.length,
             scored: topicScore,
             spent: time,
-            date: stringDate,
+            date: formattedDate,
         };
         const localArr = JSON.parse(localStorage.getItem("history")) || [];
         localArr.push(topicResults)
