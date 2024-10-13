@@ -23,32 +23,38 @@ export default function History() {
 
     //Function for downloading individual quiz history
     const downloadIndividualResult = (item) => {
-        const element = document.createElement("div");
-        element.style.width = "320px";
-        element.style.height = "200px";
-        element.style.padding = "20px";
-        element.style.border = "1px solid #ccc";
-        element.style.borderRadius = "8px";
-        element.style.backgroundColor = "#f9f9f9";
-        element.style.fontFamily = "Arial, sans-serif";
-        element.style.color = "#333";
-        element.innerHTML = `
+        try {
+            const element = document.createElement("div");
+            element.style.width = "320px";
+            element.style.height = "200px";
+            element.style.padding = "20px";
+            element.style.border = "1px solid #ccc";
+            element.style.borderRadius = "8px";
+            element.style.backgroundColor = "#f9f9f9";
+            element.style.fontFamily = "Arial, sans-serif";
+            element.style.color = "#333";
+            element.style.position = "fixed";
+            element.style.left = "-50%";
+            element.innerHTML = `
             <h2>Topic: <strong>${item.topic}</strong></h2>
             <h3>Difficulty: ${item.level}</h3>
             <p>Score: ${item.scored}%</p>
             <p>Time taken: ${item.spent.hours}:${item.spent.minutes}:${item.spent.seconds}</p>
             <p>Date: ${item.date}</p>
         `;
-        document.body.appendChild(element);
-        html2canvas(element).then(canvas => {
-            const link = document.createElement("a");
-            link.href = canvas.toDataURL("image/png");
-            link.download = `${item.topic}_result.png`;
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            document.body.removeChild(element);
-        });
+            document.body.appendChild(element);
+            html2canvas(element).then(canvas => {
+                const link = document.createElement("a");
+                link.href = canvas.toDataURL("image/png");
+                link.download = `${item.topic}_result.png`;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                document.body.removeChild(element);
+            });
+        } catch (error) {
+            alert(error);
+        }
     }
 
     //Function to share the results to social media platforms
@@ -60,6 +66,8 @@ export default function History() {
         element.style.backgroundColor = "#f9f9f9";
         element.style.fontFamily = "Arial, sans-serif";
         element.style.color = "#333";
+        element.style.position = "fixed";
+        element.style.left = "-50%";
 
         element.innerHTML = `
             <h2>Topic: <strong>${item.topic}</strong></h2>
@@ -85,9 +93,10 @@ export default function History() {
                     new File([await fetch(imageDataUrl).then(res => res.blob())], `${item.topic}_result.png`, { type: 'image/png' })
                 ],
             });
-            console.log('Result shared successfully!');
-        } catch (err) {
-            console.error('Error sharing:', err);
+            alert('Result shared successfully!');
+        } catch (error) {
+            console.error('Error sharing:', error);
+            alert('Error sharing:', error);
         }
     };
 
