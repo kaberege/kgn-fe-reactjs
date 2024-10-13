@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import { FaAngleDoubleLeft, FaDownload, FaShare } from "react-icons/fa";
-import html2canvas from "html2canvas";
+import { FaAngleDoubleLeft } from "react-icons/fa";
+import DownloadShare from "./DownloadShare";
 import useQuizStore from "../stateStore/QuizStore";
 import SearchingBar from "./SearchingBar";
 
@@ -20,85 +20,6 @@ export default function History() {
     useEffect(() => {
         setDisplayHistory(quizHistory);     //Update displayed history
     }, [quizHistory]);
-
-    //Function for downloading individual quiz history
-    const downloadIndividualResult = (item) => {
-        try {
-            const element = document.createElement("div");
-            element.style.width = "320px";
-            element.style.height = "200px";
-            element.style.padding = "20px";
-            element.style.border = "1px solid #ccc";
-            element.style.borderRadius = "8px";
-            element.style.backgroundColor = "#f9f9f9";
-            element.style.fontFamily = "Arial, sans-serif";
-            element.style.color = "#333";
-            element.style.position = "fixed";
-            element.style.left = "-50%";
-            element.innerHTML = `
-            <h2>Topic: <strong>${item.topic}</strong></h2>
-            <h3>Difficulty: ${item.level}</h3>
-            <p>Score: ${item.scored}%</p>
-            <p>Time taken: ${item.spent.hours}:${item.spent.minutes}:${item.spent.seconds}</p>
-            <p>Date: ${item.date}</p>
-        `;
-            document.body.appendChild(element);
-            html2canvas(element).then(canvas => {
-                const link = document.createElement("a");
-                link.href = canvas.toDataURL("image/png");
-                link.download = `${item.topic}_result.png`;
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-                document.body.removeChild(element);
-            });
-        } catch (error) {
-            alert(error);
-        }
-    }
-
-    //Function to share the results to social media platforms
-    const generateCanvasAndShare = async (item) => {
-        const element = document.createElement('div');
-        element.style.padding = "20px";
-        element.style.border = "1px solid #ccc";
-        element.style.borderRadius = "8px";
-        element.style.backgroundColor = "#f9f9f9";
-        element.style.fontFamily = "Arial, sans-serif";
-        element.style.color = "#333";
-        element.style.position = "fixed";
-        element.style.left = "-50%";
-
-        element.innerHTML = `
-            <h2>Topic: <strong>${item.topic}</strong></h2>
-            <h3>Difficulty: ${item.level}</h3>
-            <p>Score: ${item.scored}%</p>
-            <p>Time taken: ${item.spent.hours}:${item.spent.minutes}:${item.spent.seconds}</p>
-            <p>Date: ${item.date}</p>
-        `;
-
-        document.body.appendChild(element);
-
-        const canvas = await html2canvas(element);
-        const imageDataUrl = canvas.toDataURL('image/png');
-
-        document.body.removeChild(element); // Clean up
-
-        // Share the image
-        try {
-            await navigator.share({
-                title: `Quiz Result: ${item.topic}`,
-                text: `Check out my quiz result!`,
-                files: [
-                    new File([await fetch(imageDataUrl).then(res => res.blob())], `${item.topic}_result.png`, { type: 'image/png' })
-                ],
-            });
-            alert('Result shared successfully!');
-        } catch (error) {
-            console.error('Error sharing:', error);
-            alert('Error sharing:', error);
-        }
-    };
 
     return (
         <div className="max-sm:p-0 p-5 mt-16">
@@ -127,14 +48,7 @@ export default function History() {
                                 <p>Score: {item.scored}%</p>
                                 <p>Time taken: {`${item.spent.hours}:${item.spent.minutes}:${item.spent.seconds}`}</p>
                                 <p>Date: {item.date}</p>
-                                <div className="flex gap-2 mt-2 float-end text-sm">
-                                    <button onClick={() => downloadIndividualResult(item)} className="flex items-center bg-blue-500 text-white p-1 rounded hover:bg-blue-600 transition">
-                                        <FaDownload className="mr-2" /> Download
-                                    </button>
-                                    <button onClick={() => generateCanvasAndShare(item)} className="flex items-center bg-green-500 text-white p-1 rounded hover:bg-green-600 transition">
-                                        <FaShare className="mr-2" /> Share
-                                    </button>
-                                </div>
+                                <DownloadShare shareable={item} />
                             </div>
                         ))}
                 </div>
