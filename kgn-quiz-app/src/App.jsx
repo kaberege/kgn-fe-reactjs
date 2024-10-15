@@ -22,9 +22,9 @@ export default function App() {
     <div className={`${mode && "dark"}`}>
       <div className="min-h-screen bg-gray-100 flex dark:bg-slate-900 flex-col transition-colors duration-300">
         <header className="sticky top-0 z-10 bg-blue-600 dark:bg-slate-600 shadow-2xl transition-colors duration-300">
-          <div className='max-w-7xl mx-auto flex flex-row items-center text-white max-sm:p-2 p-1 text-center'>
-            <div className='flex flex-row flex-grow items-center gap-2 bg-red-400'>
-              <img src={logo} alt="logo" className="w-10 h-10 md:w-12 md:h-12 rounded-full animate-image cursor-pointer" title='kgn logo' />
+          <div className='max-w-7xl mx-auto flex flex-row items-center text-white p-1 text-center'>
+            <div className='flex flex-row flex-grow items-center gap-2'>
+              <img src={logo} alt="logo" className="w-10 h-10 sm:w-12 sm:h-12 rounded-full animate-image cursor-pointer" title='kgn logo' />
               <h1 className="max-md:text-2xl text-3xl font-bold">Quiz App</h1>
             </div>
             <div
@@ -34,13 +34,14 @@ export default function App() {
             </div>
             <nav
               style={{ transition: "right 0.8s linear" }}
-              className={`flex flex-row max-sm:flex-col shadow-lg ${hideNav ? "max-sm:-right-1/2 max-sm:overflow-hidden" : "max-sm:right-0 max-sm:w-1/2"} max-sm:h-full max-sm:fixed max-sm:top-0  max-sm:p-2 max-sm:bg-blue-600 max-sm:dark:bg-slate-600 transition-colors duration-300`}>
+              className={`flex flex-row max-sm:flex-col shadow-lg ${hideNav ? "max-sm:-right-1/2 max-sm:overflow-hidden" : "max-sm:right-0 max-sm:w-1/2"} max-sm:h-full max-sm:fixed max-sm:top-0  max-sm:p-2 max-sm:bg-blue-600 max-sm:dark:bg-slate-600 transition-colors duration-300`}
+            >
               <div
                 onClick={() => setHideNav(true)}
-                className=' flex text-2xl items-center justify-center float-end sm:hidden font-bold flex-row w-9 h-9 hover:bg-slate-400 rounded-full cursor-pointer' >
+                className=' flex text-2xl items-center justify-center ml-auto sm:hidden font-bold w-9 h-9 hover:bg-slate-400 rounded-full cursor-pointer' >
                 <FaWindowClose />
               </div>
-              <ul className="flex flex-row max-sm:flex-col items-center gap-3 max-sm:gap-5 max-sm:mt-14">
+              <ul className="flex flex-row max-sm:flex-col items-center gap-3 max-sm:gap-5 max-sm:mt-8">
                 <li className='hover:text-cyan-300 transition font-bold'><NavLink to="/" className={({ isActive }) => isActive ? "text-cyan-300" : ""}>Home</NavLink></li>
                 <li className='hover:text-cyan-300 transition font-bold'><NavLink to="/history" className={({ isActive }) => isActive ? "text-cyan-300" : ""}>History</NavLink></li>
                 <li>
@@ -62,16 +63,16 @@ export default function App() {
                   />
                 </li>
               </ul>
-              <ul className="flex items-center gap-2">
+              <ul className="flex items-center justify-center flex-row gap-2 sm:mx-8 max-sm:mt-8 max-sm:mb-5">
                 <li>
                   <a
                     href="https://www.linkedin.com/in/kaberege-godard-nestor-53a0b4215"
                     alt="LinkedIn kgn"
                     title="kgn LinkedIn"
                     target="_blank"
-                    className="text-white hover:text-blue-400 transition-colors duration-300"
+                    className="text-white hover:text-cyan-300 transition-colors duration-300"
                   >
-                    <FaLinkedin />
+                    <FaLinkedin className='font-bold text-xl' />
                   </a>
                 </li>
                 <li>
@@ -80,9 +81,9 @@ export default function App() {
                     target="_blank"
                     alt="Discord kgn"
                     title="kgn Discord"
-                    className="text-white hover:text-indigo-500 transition-colors duration-300"
+                    className="text-white hover:text-cyan-300 transition-colors duration-300"
                   >
-                    <FaDiscord />
+                    <FaDiscord className='font-bold text-xl' />
                   </a>
                 </li>
                 <li>
@@ -91,9 +92,9 @@ export default function App() {
                     target="_blank"
                     alt="Twitter kgn"
                     title="kgn Twitter"
-                    className="text-white hover:text-blue-500 transition-colors duration-300"
+                    className="text-white hover:text-cyan-300 transition-colors duration-300"
                   >
-                    <FaXTwitter />
+                    <FaXTwitter className='font-bold text-xl' />
                   </a>
                 </li>
                 <li>
@@ -102,9 +103,9 @@ export default function App() {
                     target="_blank"
                     alt="Instagram kgn"
                     title="kgn Instagram"
-                    className="text-white hover:text-pink-400 transition-colors duration-300"
+                    className="text-white hover:text-cyan-300 transition-colors duration-300"
                   >
-                    <FaInstagram />
+                    <FaInstagram className='font-bold text-xl' />
                   </a>
                 </li>
               </ul>
@@ -112,7 +113,7 @@ export default function App() {
                 src={kgnProfile}
                 alt="kgn profile"
                 title="Kgn profile"
-                className="w-11 h-11 rounded-full cursor-pointer sm:ml-4 hover:scale-110 transition-transform duration-300"
+                className="w-11 h-11 rounded-full cursor-pointer max-sm:mx-auto hover:scale-110 transition-transform duration-300"
               />
             </nav>
           </div>
