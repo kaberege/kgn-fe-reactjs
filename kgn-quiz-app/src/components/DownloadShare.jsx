@@ -2,10 +2,11 @@ import React from "react";
 import html2canvas from "html2canvas";
 import { FaDownload, FaShare } from "react-icons/fa";
 import logoUrl from "../assets/logo-png1.png";
+import { Link } from "react-router-dom";
 
 const DownloadShare = ({ shareable }) => {
 
-     // Setting sharaeable & downloadable div
+    // Setting sharaeable & downloadable div
     const createResultElement = (item) => {
         const element = document.createElement("div");
         element.style.width = "320px";
@@ -19,7 +20,7 @@ const DownloadShare = ({ shareable }) => {
         element.style.left = "-50%";
         element.innerHTML = `
         <div style="text-align: center;">
-            <img src="${logoUrl}" alt="Logo" style="width: 100px; margin-bottom: 10px; border-radius: 50%; margin: 0 auto 0 auto" />
+            <img src="${logoUrl}" alt="Logo" style="width: 80px; height:60px; margin-bottom: 10px; border-radius: 50%; margin: 0 auto 0 auto" />
             <h2>Topic: <strong>${item.topic}</strong></h2>
             <h3>Difficulty: ${item.level}</h3>
             <p>Score: ${item.scored}%</p>
@@ -77,12 +78,20 @@ const DownloadShare = ({ shareable }) => {
     };
 
     return (
-        <div className="flex gap-2 mt-2 justify-end text-sm">
-            <button onClick={() => downloadIndividualResult(shareable)} className="flex items-center bg-indigo-600 hover:bg-indigo-800 text-white font-bold p-1 rounded transition">
-                <FaDownload className="mr-2" /> Download
+        <div className="flex gap-2 items-center justify-end max-sm:justify-center text-sm">
+            <button
+                onClick={() => downloadIndividualResult(shareable)}
+                className="flex items-center gap-1 bg-indigo-600 hover:bg-indigo-800 text-white font-bold p-1 rounded transition"
+                title="Download quiz result"
+            >
+                <FaDownload className="text-sm" /><span style={{fontSize:"11px"}}>Download</span>
             </button>
-            <button onClick={() => generateCanvasAndShare(shareable)} className="flex items-center bg-green-500 text-white p-1 rounded hover:bg-green-600 transition">
-                <FaShare className="mr-2" /> Share
+            <button
+                onClick={() => generateCanvasAndShare(shareable)}
+                className="flex items-center gap-1 bg-green-500 hover:bg-green-600 text-white font-bold p-1 rounded transition"
+                title="Share quiz result"
+            >
+                <FaShare className="text-sm" /><span style={{fontSize:"11px"}}>Share</span>
             </button>
         </div>
     );
