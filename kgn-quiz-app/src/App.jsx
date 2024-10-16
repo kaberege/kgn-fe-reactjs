@@ -18,11 +18,10 @@ export default function App() {
   }, [])
 
   return (
-
     <div className={`${mode && "dark"}`}>
       <div className="min-h-screen bg-gray-100 flex dark:bg-slate-900 flex-col transition-colors duration-300">
         <header className="sticky top-0 z-10 bg-blue-600 dark:bg-slate-600 shadow-2xl transition-colors duration-300">
-          <div className='max-w-7xl mx-auto flex flex-row items-center text-white p-1 text-center'>
+          <div className='max-w-7xl mx-auto flex flex-row items-center text-white py-1 px-2 xl:px-1 text-center'>
             <div className='flex flex-row flex-grow items-center gap-2'>
               <img src={logo} alt="logo" className="w-10 h-10 sm:w-12 sm:h-12 rounded-full animate-image cursor-pointer" title='kgn logo' />
               <h1 className="max-md:text-2xl text-3xl font-bold">Quiz App</h1>
@@ -118,7 +117,7 @@ export default function App() {
             </nav>
           </div>
         </header>
-        <main className="flex-grow p-5">
+        <main className="flex-grow max-sm:p-3 p-5">
           <Outlet />
         </main>
         <footer className="bg-gray-800 text-white p-4 text-center dark:text-slate-300 transition-colors duration-300">

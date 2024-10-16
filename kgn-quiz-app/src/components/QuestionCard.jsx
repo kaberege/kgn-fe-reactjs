@@ -18,6 +18,7 @@ export default function QuestionCard() {
     const [answerOptions, setAnswerOptions] = useState([]);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [currentAnswer, setCurrentAnswer] = useState("");
+    const [choiceDetails, setChoiceDetails] = useState([]);
     const [countTime, setCountTime] = useState(0);
     const [time, setTime] = useState({});
     const [score, setScore] = useState(0);
@@ -118,6 +119,7 @@ export default function QuestionCard() {
             scored: topicScore,
             spent: time,
             date: formattedDate,
+            details: choiceDetails
         };
         const localArr = JSON.parse(localStorage.getItem("history")) || [];
         localArr.push(topicResults)
@@ -143,9 +145,16 @@ export default function QuestionCard() {
         e.preventDefault();
         if (currentQuestionIndex < myQuiz.length) {
             const correctAnswer = currentQuestion.correct_answer;
+            const optionDetails = {                                // Details of each question
+                question: currentQuestion.question,
+                options: answerOptions,
+                choosed: currentAnswer,
+                correct: correctAnswer
+            };
             if (currentAnswer === correctAnswer) {
                 setScore(score + 1);
             }
+            setChoiceDetails(prev => ([...prev, optionDetails]));
             setCurrentQuestionIndex(currentQuestionIndex + 1);
         }
     };

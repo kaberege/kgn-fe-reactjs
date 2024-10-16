@@ -2,7 +2,6 @@ import React from "react";
 import html2canvas from "html2canvas";
 import { FaDownload, FaShare } from "react-icons/fa";
 import logoUrl from "../assets/logo-png1.png";
-import { Link } from "react-router-dom";
 
 const DownloadShare = ({ shareable }) => {
 
@@ -61,7 +60,7 @@ const DownloadShare = ({ shareable }) => {
 
         document.body.removeChild(element); // Clean up the added sharaeable div
 
-        // Share the image
+        // Share the image if no error
         try {
             await navigator.share({
                 title: `Quiz Result: ${item.topic}`,
@@ -72,7 +71,6 @@ const DownloadShare = ({ shareable }) => {
             });
             alert('Result shared successfully!');
         } catch (error) {
-            console.error('Error sharing:', error);
             alert('Error sharing:', error);
         }
     };
@@ -84,14 +82,14 @@ const DownloadShare = ({ shareable }) => {
                 className="flex items-center gap-1 bg-indigo-600 hover:bg-indigo-800 text-white font-bold p-1 rounded transition"
                 title="Download quiz result"
             >
-                <FaDownload className="text-sm" /><span style={{fontSize:"11px"}}>Download</span>
+                <FaDownload className="text-sm" /><span style={{ fontSize: "11px" }}>Download</span>
             </button>
             <button
                 onClick={() => generateCanvasAndShare(shareable)}
                 className="flex items-center gap-1 bg-green-500 hover:bg-green-600 text-white font-bold p-1 rounded transition"
                 title="Share quiz result"
             >
-                <FaShare className="text-sm" /><span style={{fontSize:"11px"}}>Share</span>
+                <FaShare className="text-sm" /><span style={{ fontSize: "11px" }}>Share</span>
             </button>
         </div>
     );

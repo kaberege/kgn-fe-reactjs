@@ -4,6 +4,7 @@ import DownloadShare from "./DownloadShare";
 import useQuizStore from "../stateStore/QuizStore";
 import SearchingBar from "./SearchingBar";
 import { Link } from "react-router-dom";
+import he from "he";
 
 // Displays quiz history and allows searching
 export default function History() {
@@ -23,7 +24,7 @@ export default function History() {
     }, [quizHistory]);
 
     return (
-        <div className="max-sm:p-0 p-5 mt-16">
+        <div className="max-sm:p-0 p-5 mt-13">
             <h2 className="max-md:text-xl text-2xl text-center font-semibold mb-4 dark:text-white">Quiz History</h2>
             {displayHistory.length > 0 && displayHistory[0].topic === "No matches found" && (
                 <button
@@ -44,14 +45,14 @@ export default function History() {
                     {displayHistory.length > 0 && displayHistory[0].topic !== "No matches found" &&
                         displayHistory.map(item => (
                             <div key={item.id} className="border w-full rounded p-4 mb-1 bg-gray-200 shadow cursor-pointer transition duration-300 hover:scale-105 dark:bg-stone-700 dark:text-slate-300">
-                                <h2>Topic: <span className="font-bold">{item.topic}</span></h2>
+                                <h2>Topic: <span className="font-bold">{he.decode(item.topic)}</span></h2>
                                 <h3 className="text-gray-700 dark:text-gray-500">Difficulty: {item.level}</h3>
                                 <p>Score: {item.scored}%</p>
                                 <p>Time taken: {`${item.spent.hours}:${item.spent.minutes}:${item.spent.seconds}`}</p>
                                 <p>Date: {item.date}</p>
                                 <p className="mt-1 mb-4">
                                     <Link
-                                        to="details"
+                                        to={`/details/${item.id}`}
                                         className="text-base text-cyan-600 hover:underline hover:text-cyan-400 transition"
                                     >
                                         View details

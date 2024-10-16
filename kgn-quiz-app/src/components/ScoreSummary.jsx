@@ -2,6 +2,7 @@ import React from "react";
 import useQuizStore from "../stateStore/QuizStore";
 import { Link } from "react-router-dom";
 import DownloadShare from "./DownloadShare";
+import he from "he";
 
 // Displays the score summary after the quiz
 export default function ScoreSummary() {
@@ -25,7 +26,7 @@ export default function ScoreSummary() {
                 Go to history
             </Link>
             <div className="mt-4 dark:text-slate-300 text-center">
-                <p className="mb-2">Topic: <span className="font-bold">{quizScore.topic}</span></p>
+                <p className="mb-2">Topic: <span className="font-bold">{he.decode(quizScore.topic)}</span></p>
                 <p className="mb-2">Number of Questions: <span className="font-bold">{quizScore.questions}</span></p>
                 <p className="mb-2">Correct Answers: <span className="font-bold">{quizScore.correct}</span></p>
                 <p className="mb-2">Incorrect Answers: <span className="font-bold">{quizScore.questions - quizScore.correct}</span></p>
