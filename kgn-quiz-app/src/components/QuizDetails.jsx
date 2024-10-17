@@ -27,7 +27,7 @@ export default function QuizDetails() {
         newDocument.style.position = "fixed";
         newDocument.style.right = "-50%";
 
-        const wrapper = document.createElement("div");   // A wrapper div with a constant width of 500px
+        const wrapper = document.createElement("div");   // A wrapper div with fixed width of 520px
         wrapper.innerHTML = `<img src="${logoUrl}" alt="Logo" style="width: 80px; height:60px; margin-bottom: 10px; border-radius: 50%; margin: 0 auto" />`
         wrapper.style.width = '520px';
         wrapper.style.margin = '0 auto';

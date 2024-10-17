@@ -19,8 +19,8 @@ export default function QuestionCard() {
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [currentAnswer, setCurrentAnswer] = useState("");
     const [choiceDetails, setChoiceDetails] = useState([]);
-    const [countTime, setCountTime] = useState(0);
-    const [time, setTime] = useState({});
+    const [countTime, setCountTime] = useState(0); // State for total quiz time
+    const [leftTime, setLeftTime] = useState(60); // Timer set to 60 seconds
     const [score, setScore] = useState(0);
     const [loading, setLoading] = useState(false);
     const [loadError, setLoadError] = useState("");
@@ -36,13 +36,31 @@ export default function QuestionCard() {
     // Timer for the quiz duration
     useEffect(() => {
         if (myQuiz.length > 0 && currentQuestionIndex < myQuiz.length) {
-            handleTime(countTime);
             const timer = setTimeout(() => {
-                setCountTime(countTime + 1);
+                setCountTime(prevCount => prevCount + 1);// Calling handleTime with the updated value
             }, 1000);
-            return () => clearTimeout(timer);
+
+            return () => clearTimeout(timer); // Cleanup timer
         }
-    }, [myQuiz, countTime]);
+    }, [myQuiz, countTime]); // Run effect when quiz or countTime changes
+
+    // Timer for each question
+    useEffect(() => {
+        if (myQuiz.length > 0 && currentQuestionIndex < myQuiz.length) {
+            setLeftTime(60); // Reset timer to 60 seconds for each question
+            const timer = setInterval(() => {
+                setLeftTime(prev => {
+                    if (prev <= 1) {
+                        clearInterval(timer);
+                        handleSubmit(); // Auto-submit when time runs out
+                        return 0;
+                    }
+                    return prev - 1;
+                });
+            }, 1000);
+            return () => clearInterval(timer);
+        }
+    }, [myQuiz, currentQuestionIndex]);
 
     // Update current question and history after the last question
     useEffect(() => {
@@ -117,7 +135,7 @@ export default function QuestionCard() {
             correct: score,
             questions: myQuiz.length,
             scored: topicScore,
-            spent: time,
+            spent: handleTime(countTime),
             date: formattedDate,
             details: choiceDetails
         };
@@ -127,22 +145,23 @@ export default function QuestionCard() {
         setQuizScore(topicResults);
     };
 
-    //Function keep track on time
-    const handleTime = (currentTime) => {
-        let s = currentTime % 60;
-        let m = Math.floor(currentTime / 60) % 60;
-        let h = Math.floor(currentTime / 3600);
-        const timeValue = {
-            hours: h.toString().padStart(2, '0'),
-            minutes: m.toString().padStart(2, '0'),
-            seconds: s.toString().padStart(2, '0'),
+        //Function for tracking total used time
+        const handleTime = (currentTime) => {
+            let s = currentTime % 60;
+            let m = Math.floor(currentTime / 60) % 60;
+            let h = Math.floor(currentTime / 3600);
+            const timeValue = {
+                hours: h.toString().padStart(2, '0'),
+                minutes: m.toString().padStart(2, '0'),
+                seconds: s.toString().padStart(2, '0'),
+            };
+            return timeValue;
         };
-        setTime(timeValue);
-    };
+    
 
     //Function for navigating to the next question
     const handleSubmit = (e) => {
-        e.preventDefault();
+        if (e) e.preventDefault();  // Prevent default if the event is provided
         if (currentQuestionIndex < myQuiz.length) {
             const correctAnswer = currentQuestion.correct_answer;
             const optionDetails = {                                // Details of each question
@@ -157,6 +176,16 @@ export default function QuestionCard() {
             setChoiceDetails(prev => ([...prev, optionDetails]));
             setCurrentQuestionIndex(currentQuestionIndex + 1);
         }
+    };
+
+    // Convert seconds to time format to display time left
+    const formatTime = (seconds) => {
+        const s = seconds % 60;
+        const m = Math.floor(seconds / 60);
+        return {
+            minutes: m.toString().padStart(2, '0'),
+            seconds: s.toString().padStart(2, '0'),
+        };
     };
 
     return (
@@ -174,7 +203,7 @@ export default function QuestionCard() {
             {Object.keys(currentQuestion).length > 0 && (
                 <div className="shadow rounded max-sm:p-1 p-5 dark:bg-stone-700 transition duration-300">
                     <div className="text-right">
-                        <p className="dark:text-slate-300">Time: <span className="font-semibold text-red-500">{`${time.hours}:${time.minutes}:${time.seconds}`}</span></p>
+                        <p className="dark:text-slate-300">Time Remaining: <span className="font-semibold text-red-500">{`${formatTime(leftTime).minutes}:${formatTime(leftTime).seconds}`}</span></p>
                     </div>
                     <div className="w-full bg-gray-300 rounded-full h-4 shadow-sm cursor-pointer mt-6" title="Progress bar">
                         <div
