@@ -1,10 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { FaAngleDoubleLeft, FaPrint } from "react-icons/fa";
 import he from "he";
+import html2canvas from 'html2canvas';
+import logoUrl from "../assets/logo-png1.png";
+
 
 export default function QuizDetails() {
     const { id } = useParams();
     const [details, setDetails] = useState({});
+    const print = useRef();
 
     useEffect(() => {
         const historyDetails = JSON.parse(localStorage.getItem("history")) || [];           // Fetching quiz history from local storage
@@ -16,15 +21,56 @@ export default function QuizDetails() {
         return `${hours}:${minutes}:${seconds}`;                  // Displaying time taken to complete the quiz
     };
 
+    // Function for printing quiz details
+    function handlePrint() {
+        const newDocument = document.createElement("div");
+        newDocument.style.position = "fixed";
+        newDocument.style.right = "-50%";
+
+        const wrapper = document.createElement("div");   // A wrapper div with a constant width of 500px
+        wrapper.innerHTML = `<img src="${logoUrl}" alt="Logo" style="width: 80px; height:60px; margin-bottom: 10px; border-radius: 50%; margin: 0 auto" />`
+        wrapper.style.width = '500px';
+        wrapper.style.margin = '0 auto';
+
+        wrapper.appendChild(print.current.cloneNode(true));  // Appending the current print ref content to the wrapper
+        newDocument.appendChild(wrapper);                    // Appending the wrapper to the newDocument
+        document.body.appendChild(newDocument);              // Appending the newDocument into the body
+
+        html2canvas(newDocument).then(canvas => {
+            const element = document.createElement("a");
+            element.href = canvas.toDataURL("image/png");
+            element.download = "Quiz results.png";
+            element.click();
+            document.body.removeChild(newDocument); // Clean up the newDocument from the body
+        });
+    }
+
+
     return (
         <div className="max-w-4xl mx-auto">
-            <Link
-                to="/history"
-                className="text-sm font-semibold text-cyan-600 hover:underline hover:text-cyan-300 transition duration-300 ease-in-out p-2 rounded hover:bg-cyan-800"
+            <div className="flex items-center justify-between">
+                <Link
+                    to="/history"
+                >
+                    <button className='flex items-center justify-center text-sm font-semibold text-cyan-600 hover:underline hover:text-cyan-300 transition duration-300 ease-in-out p-2 rounded hover:bg-cyan-800'>
+
+                        <FaAngleDoubleLeft className='mr-1' />
+                        Back
+                    </button>
+                </Link>
+                <button
+                    onClick={handlePrint}
+                    className="flex items-center gap-1 cursor-pointer bg-gray-800 text-white border border-gray-600 hover:bg-gray-700 transition duration-300 ease-in-out text-sm p-1 rounded shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+                >
+                    <FaPrint />
+                    Print
+                </button>
+
+            </div>
+            <div
+                ref={print}
+                className="mt-5 max-sm:p-2 p-4 border rounded shadow-md bg-gray-800 text-gray-200"
             >
-                Back to history
-            </Link>
-            <div className="mt-5 max-sm:p-2 p-4 border rounded shadow-md bg-gray-800 text-gray-200">
                 {Object.keys(details).length === 0 ? (
                     <p className="text-center text-red-500">Sorry! No matching details</p>
                 ) : (
