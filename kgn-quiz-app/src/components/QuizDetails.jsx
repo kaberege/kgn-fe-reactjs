@@ -29,8 +29,9 @@ export default function QuizDetails() {
 
         const wrapper = document.createElement("div");   // A wrapper div with a constant width of 500px
         wrapper.innerHTML = `<img src="${logoUrl}" alt="Logo" style="width: 80px; height:60px; margin-bottom: 10px; border-radius: 50%; margin: 0 auto" />`
-        wrapper.style.width = '500px';
+        wrapper.style.width = '520px';
         wrapper.style.margin = '0 auto';
+        wrapper.style.padding = "10px"
 
         wrapper.appendChild(print.current.cloneNode(true));  // Appending the current print ref content to the wrapper
         newDocument.appendChild(wrapper);                    // Appending the wrapper to the newDocument
