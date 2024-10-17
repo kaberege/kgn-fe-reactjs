@@ -61,12 +61,13 @@ const DownloadShare = ({ shareable }) => {
         document.body.removeChild(element); // Clean up the added sharaeable div
 
         // Share the image if no error
+        //await fetch(imageDataUrl).then(res => res.blob())
         try {
             await navigator.share({
                 title: `Quiz Result: ${item.topic}`,
                 text: `Check out my quiz result!`,
                 files: [
-                    new File([await fetch(imageDataUrl).then(res => res.blob())], `${item.topic}_result.png`, { type: 'image/png' })
+                    new File([imageDataUrl], `${item.topic}_result.png`, { type: 'image/png' })
                 ],
             });
             alert('Result shared successfully!');
