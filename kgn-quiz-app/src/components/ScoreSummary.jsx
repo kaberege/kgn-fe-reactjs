@@ -31,7 +31,7 @@ export default function ScoreSummary() {
                 <p className="mb-2">Correct Answers: <span className="font-bold">{quizScore.correct}</span></p>
                 <p className="mb-2">Incorrect Answers: <span className="font-bold">{quizScore.questions - quizScore.correct}</span></p>
                 <p className="mb-2">Your Score: <span className="font-bold">{quizScore.scored}%</span></p>
-                <p>Time Used: <span className="font-semibold">{`${quizScore.spent.hours}:${quizScore.spent.minutes}:${quizScore.spent.seconds}`}</span></p>
+                <p>Time Used: <span className="font-semibold">{quizScore.spent}</span></p>
             </div>
 
             <div className="mt-4 flex flex-row gap-2 justify-center items-center">

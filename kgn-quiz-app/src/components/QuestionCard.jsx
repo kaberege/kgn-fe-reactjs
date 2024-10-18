@@ -145,19 +145,18 @@ export default function QuestionCard() {
         setQuizScore(topicResults);
     };
 
-        //Function for tracking total used time
-        const handleTime = (currentTime) => {
-            let s = currentTime % 60;
-            let m = Math.floor(currentTime / 60) % 60;
-            let h = Math.floor(currentTime / 3600);
-            const timeValue = {
-                hours: h.toString().padStart(2, '0'),
-                minutes: m.toString().padStart(2, '0'),
-                seconds: s.toString().padStart(2, '0'),
-            };
-            return timeValue;
-        };
-    
+    //Function for tracking total used time
+    const handleTime = (currentTime) => {
+        let s = currentTime % 60;
+        let m = Math.floor(currentTime / 60) % 60;
+        let h = Math.floor(currentTime / 3600);
+        const hours = h.toString().padStart(2, '0');
+        const minutes = m.toString().padStart(2, '0');
+        const seconds = s.toString().padStart(2, '0');
+        const timeValue = `${hours}:${minutes}:${seconds}`;
+        return timeValue;
+    };
+
 
     //Function for navigating to the next question
     const handleSubmit = (e) => {

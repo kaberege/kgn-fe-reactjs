@@ -16,7 +16,7 @@ export default function SearchingBar() {
         }
     }, [search]);
 
-    useEffect(() => { 
+    useEffect(() => {
         setDisplayHistory(filterHistory);
     }, [filterHistory])
 

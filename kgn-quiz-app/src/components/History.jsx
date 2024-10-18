@@ -9,6 +9,7 @@ import he from "he";
 // Displays quiz history and allows searching
 export default function History() {
 
+   // localStorage.clear()
     const quizHistory = useQuizStore(state => state.quizHistory);
     const setQuizHistory = useQuizStore(state => state.setQuizHistory);
     const displayHistory = useQuizStore(state => state.displayHistory);
@@ -61,7 +62,7 @@ export default function History() {
                                 <h2>Topic: <span className="font-bold">{he.decode(item.topic)}</span></h2>
                                 <h3 className="text-gray-700 dark:text-gray-500">Difficulty: {item.level}</h3>
                                 <p>Score: {item.scored}%</p>
-                                <p>Time taken: {`${item.spent.hours}:${item.spent.minutes}:${item.spent.seconds}`}</p>
+                                <p>Time taken: {item.spent}</p>
                                 <p>Date: {item.date}</p>
                                 <p className="mt-1 mb-4">
                                     <Link

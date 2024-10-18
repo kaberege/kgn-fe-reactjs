@@ -23,7 +23,7 @@ const DownloadShare = ({ shareable }) => {
             <h2>Topic: <strong>${item.topic}</strong></h2>
             <h3>Difficulty: ${item.level}</h3>
             <p>Score: ${item.scored}%</p>
-            <p>Time taken: ${item.spent.hours}:${item.spent.minutes}:${item.spent.seconds}</p>
+            <p>Time taken: ${item.spent}</p>
             <p>Date: ${item.date}</p>
         </div>
     `;

@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { FaAngleDoubleLeft, FaPrint } from "react-icons/fa";
 import he from "he";
-import html2canvas from 'html2canvas';
+import html2pdf from "html2pdf.js"
 import logoUrl from "../assets/logo-png1.png";
 
 
@@ -17,33 +17,35 @@ export default function QuizDetails() {
         setDetails(currentDetails);                                                          // Updating displayable quiz
     }, [id]);
 
-    const formatTimeSpent = ({ hours, minutes, seconds }) => {
-        return `${hours}:${minutes}:${seconds}`;                  // Displaying time taken to complete the quiz
-    };
-
     // Function for printing quiz details
     function handlePrint() {
         const newDocument = document.createElement("div");
-        newDocument.style.position = "fixed";
-        newDocument.style.right = "-50%";
 
         const wrapper = document.createElement("div");   // A wrapper div with fixed width of 520px
         wrapper.innerHTML = `<img src="${logoUrl}" alt="Logo" style="width: 80px; height:60px; margin-bottom: 10px; border-radius: 50%; margin: 0 auto" />`
         wrapper.style.width = '520px';
         wrapper.style.margin = '0 auto';
-        wrapper.style.padding = "10px"
+        wrapper.style.padding = "1px"
 
         wrapper.appendChild(print.current.cloneNode(true));  // Appending the current print ref content to the wrapper
         newDocument.appendChild(wrapper);                    // Appending the wrapper to the newDocument
         document.body.appendChild(newDocument);              // Appending the newDocument into the body
 
-        html2canvas(newDocument).then(canvas => {
-            const element = document.createElement("a");
-            element.href = canvas.toDataURL("image/png");
-            element.download = "Quiz results.png";
-            element.click();
-            document.body.removeChild(newDocument); // Clean up the newDocument from the body
-        });
+        // Setting options for the printed PDF file
+        const options = {
+            margin: 1,
+            filename: 'quiz-results.pdf',
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2 },
+            jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' },
+        };
+        html2pdf()
+            .from(newDocument)
+            .set(options)
+            .save()
+            .then(() => {
+                document.body.removeChild(newDocument); // Clean up after saving
+            });
     }
 
 
@@ -80,7 +82,7 @@ export default function QuizDetails() {
                         <p><strong>Level:</strong> {details.level}</p>
                         <p><strong>Correct Answers:</strong> {details.correct} out of {details.questions}</p>
                         <p><strong>Score:</strong> {details.scored}%</p>
-                        <p><strong>Time Spent:</strong> {formatTimeSpent(details.spent)}</p>
+                        <p><strong>Time Spent:</strong> {details.spent}</p>
                         <p><strong>Date:</strong> {details.date}</p>
 
                         <h3 className="mt-5 text-xl font-semibold">Questions:</h3>
