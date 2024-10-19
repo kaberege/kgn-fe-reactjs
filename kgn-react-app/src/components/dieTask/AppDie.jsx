@@ -2,8 +2,6 @@ import React from "react";
 import Die from "./Die";
 import "./die.css";
 import { nanoid } from "nanoid";
-//import Confetti from "react-confetti"
-// {tenzies && <Confetti />}
 
 export default function AppDie() {
 
@@ -38,7 +36,7 @@ export default function AppDie() {
         let s = value % 60;
         let m = parseInt(value / 60) % 60;
         let h = parseInt(value / 3600);
-        return h + ":" + m + ":" + s;
+        return h.toString().padStart(2, "0") + ":" + m.toString().padStart(2, "0") + ":" + s.toString().padStart(2, "0");
 
     }
 
@@ -58,10 +56,7 @@ export default function AppDie() {
         return newDice
     }
 
-    /**
-     * Challenge: Allow the user to play a new game when the
-     * button is clicked and they've already won
-     */
+
 
     function rollDice() {
         if (!tenzies) {
@@ -80,7 +75,7 @@ export default function AppDie() {
     }
 
     function holdDice(id) {
-        //console.log(id)
+
         setDice(oldDice => oldDice.map(die => {
             return die.id === id ?
                 { ...die, isHeld: !die.isHeld } :
@@ -97,13 +92,21 @@ export default function AppDie() {
         />
     ))
 
-    const styles = !tenzies ? "#000" : "#e90752";
+    const styles = !tenzies ? "#ffffff" : "#fffb7d";
+    const timer = <div className={!tenzies ? "time-roll" : "off-roll"}>
+        <p><em>Time</em>: <span style={{ color: styles }}>{timeInterval(time)}</span></p>
+        <p><em>N<sup>o</sup> of rolls</em>: <span style={{ color: styles }}>{count.current}</span></p>
+    </div >;
 
     return (
         <div className="main">
             <h1 className="title">Tenzies</h1>
-            <p className="instructions">Roll until all dice are the same.
-                Click each die to freeze it at its current value between rolls.</p>
+            {!tenzies ? (
+                <p className="instructions">Roll until all dice are the same.
+                    Click each die to freeze it at its current value between rolls.
+                </p>
+            ) : timer
+            }
             <div className="dice-container">
                 {diceElements}
             </div>
@@ -113,10 +116,7 @@ export default function AppDie() {
             >
                 {tenzies ? "New Game" : "Roll"}
             </button>
-            <div className="time-roll">
-                <p><em>Time</em>: <span style={{ color: styles }}>{timeInterval(time)}</span></p>
-                <p><em>N<sup>o</sup> of rolls</em>: <span style={{ color: styles }}>{count.current}</span></p>
-            </div>
+            {!tenzies && timer}
         </div>
     )
 }

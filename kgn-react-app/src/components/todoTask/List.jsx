@@ -1,6 +1,7 @@
 import React from "react";
 import Check from "./Check";
 import Delete from "./Delete";
+import "./todo.css"
 
 export default function List({ todos, removed, isChecked }) {
     //console.log(deleted)

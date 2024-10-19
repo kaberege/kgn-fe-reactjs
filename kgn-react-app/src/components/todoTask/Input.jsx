@@ -1,4 +1,5 @@
 import React from "react";
+import "./todo.css";
 
 export default function Input({ todos }) {
     // console.log(todos)
@@ -27,7 +28,9 @@ export default function Input({ todos }) {
                 value={name}
                 onChange={handleChange}
             />
-            <button onClick={addItems}>Add +</button>
+            <button 
+            onClick={addItems}
+            >Add +</button>
         </div>
     );
 }

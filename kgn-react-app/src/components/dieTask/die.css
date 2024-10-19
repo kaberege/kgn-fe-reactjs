@@ -34,12 +34,16 @@
 .die-face {
     height: 50px;
     width: 50px;
-    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.15);
+    box-shadow: 3px 3px 2px rgba(0, 0, 0, 0.15) inset;
     border-radius: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    transition: opacity 0.2s linear;
+}
+.die-face:hover{
+    opacity: 0.7;
 }
 
 .die-num {
@@ -57,6 +61,11 @@
     font-size: 1.2rem;
     font-family: 'Karla', sans-serif;
     cursor: pointer;
+    transition: background-color 0.3s linear;
+}
+
+.roll-dice:hover {
+    background-color: #4638a0;
 }
 
 .roll-dice:focus {
@@ -118,6 +127,9 @@
     position: absolute;
     left: 10px;
     bottom: 20px;
+    background-color: rgba(200, 200, 200, 0.5);
+    padding: 10px;
+    border-radius: 5px;
 }
 
 .time-roll>p {
@@ -125,6 +137,19 @@
     font-weight: bold;
     color: rgb(110, 10, 240);
 }
+
+.off-roll {
+    /* Styles for Tenzies state */
+    background-color: rgba(233, 7, 82, 0.7); /* Light pink with opacity */
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional shadow for depth */
+}
+
+.off-roll p {
+    color: #ffffff; /* White text for paragraphs */
+}
+
 
 .nav-bar-header {
     display: flex;
@@ -141,13 +166,46 @@
     font-weight: bold;
 }
 
-.nav-bar-header>a:hover{
-    color: #e90752 ;
+.nav-bar-header>a:hover {
+    color: #e90752;
 }
+
 .active {
     color: #e90752;
 }
 
 .pending {
     color: rgba(90, 90, 90, 1);
+}
+
+
+@media (max-width: 600px) {
+    .dice-container {
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    .die-face {
+        height: 33px;
+        width: 33px;
+    }
+
+    .die-one,
+    .die-two-content,
+    .die-three-content,
+    .die-four-content,
+    .die-five-content,
+    .die-six-content {
+        height: 5px;
+        width: 5px;
+    }
+
+    .roll-dice {
+        height: 30px;
+        width: 130px;
+        font-size: 1rem;
+        margin-bottom: 60px;
+    }
+
+
 }
