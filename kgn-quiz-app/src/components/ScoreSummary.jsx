@@ -19,12 +19,14 @@ export default function ScoreSummary() {
     return (
         <div className="flex flex-col text-center max-sm:p-2 p-5 bg-slate-50 dark:bg-stone-700 rounded shadow cursor-pointer transition duration-300 hover:scale-105">
             <h2 className="text-2xl font-semibold mb-4 dark:text-white sm:text-xl">Quiz Results</h2>
-            <Link
-                to="/history"
-                className="text-sm text-cyan-600 hover:underline hover:text-cyan-400 transition"
-            >
-                Go to history
-            </Link>
+            <button className=" w-24 mx-auto">
+                <Link
+                    to="/history"
+                    className="text-sm text-cyan-600 hover:underline hover:text-cyan-400 transition"
+                >
+                    Go to history
+                </Link>
+            </button>
             <div className="mt-4 dark:text-slate-300 text-center">
                 <p className="mb-2">Topic: <span className="font-bold">{he.decode(quizScore.topic)}</span></p>
                 <p className="mb-2">Number of Questions: <span className="font-bold">{quizScore.questions}</span></p>

@@ -18,7 +18,7 @@ export default function SearchingBar() {
 
     useEffect(() => {
         setDisplayHistory(filterHistory);
-    }, [filterHistory])
+    }, [filterHistory]);
 
     return (
         <div className="mb-4 mt-10 max-w-96 mx-auto">

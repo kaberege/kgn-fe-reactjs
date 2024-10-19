@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { FaAngleDoubleLeft, FaPrint } from "react-icons/fa";
 import he from "he";
-import html2pdf from "html2pdf.js"
+import html2pdf from "html2pdf.js";
 import logoUrl from "../assets/logo-png1.png";
 
 
@@ -44,7 +44,7 @@ export default function QuizDetails() {
             .set(options)
             .save()
             .then(() => {
-                document.body.removeChild(newDocument); // Clean up after saving
+                document.body.removeChild(newDocument); // Clean up newDocument after saving
             });
     }
 
