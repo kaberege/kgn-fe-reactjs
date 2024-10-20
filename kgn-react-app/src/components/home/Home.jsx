@@ -1,11 +1,24 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import kgnImage from '../../assets/kgn-g1.jpg'
 function Home() {
-    return (
-      <div style={{ padding: '20px', maxWidth: "600px", margin: "0 auto", textAlign: "center" }}>
-        <h1>Welcome to Our Company</h1>
-        <p>We are dedicated to delivering excellence in all our services.</p>
-      </div>
-    );
-  }
+  return (
 
-  export default Home;
+    <div className="home-container">
+      <img
+        src={kgnImage} // Replace with your image path
+        alt="Profile"
+        className="profile-image"
+        title="kgn profile"
+      />
+      <h1>Welcome to kgn services</h1>
+      <p>I am dedicated to delivering excellence in all my services.</p>
+      <nav className="nav-links">
+        <Link to="/die">Tenzies Game</Link>
+        <Link to="/todo">To-Do List</Link>
+      </nav>
+    </div>
+  );
+}
+
+export default Home;
