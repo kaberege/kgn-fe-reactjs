@@ -9,7 +9,8 @@ import { FaBars, FaWindowClose, FaLinkedin, FaDiscord, FaInstagram } from "react
 export default function App() {
   const [year, setYear] = useState(0);  // Set current year
   const [mode, setMode] = useState(false); // handle dark and light modes
-  const [hideNav, setHideNav] = useState(true);
+  const [hideNav, setHideNav] = useState(true); //handle navigation bar close and open
+
   //setting current year in the footer
   useEffect(() => {
     const date = new Date();
@@ -57,7 +58,7 @@ export default function App() {
                     id="toggleBox"
                     type='checkbox'
                     checked={mode}
-                    onChange={() => setMode(!mode)}
+                    onChange={() => setMode(prev => !prev)}
                     className='hidden'
                   />
                 </li>
