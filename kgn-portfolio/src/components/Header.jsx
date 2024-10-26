@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import logo from "../assets/logo-png2.png";
+import devLaptop from "../assets/devLaptop.jpg";
+import profile from "../assets/kgn-g1.jpg";
 import { FaXTwitter } from "react-icons/fa6";
 import { FaBars, FaWindowClose, FaLinkedin, FaDiscord, FaInstagram } from "react-icons/fa";
 
@@ -7,15 +9,15 @@ export default function Header({ handleMode }) {
     const [hideNav, setHideNav] = useState(true); //handle navigation bar close and open
 
     return (
-        <header>
-            <nav className=' bg-slate-400 sticky top-0'>
-                <div className=' flex flex-row max-w-7xl mx-auto max-xl:px-2'>
+        <header className='w-full h-screen flex flex-col'>
+            <nav className=' bg-slate-400 sticky top-0 z-10 shadow-xl'>
+                <div className=' flex flex-row max-w-7xl mx-auto p-1 sm:py-2 max-xl:px-2'>
                     <div className='flex flex-row flex-grow items-center'>
                         <img
                             src={logo}
                             alt="kgn logo"
                             title='kgn logo'
-                            className='w-28 h-8 cursor-pointer rounded-sm' />
+                            className='w-24 h-7 sm:w-32 sm:h-10 cursor-pointer rounded-sm' />
                         <p className='max-md:hidden'>
                             <span className='mx-3'>|</span>
                             Software developer
@@ -39,6 +41,7 @@ export default function Header({ handleMode }) {
                             <li className='flex items-center'><a href="#about">About</a></li>
                             <li className='flex items-center'><a href="#projects">Projects</a></li>
                             <li className='flex items-center'><a href="#contact">Contact</a></li>
+                            <li className='flex items-center'><a href="#resume">Resume</a></li>
                             <li className='flex items-center'>
                                 <div
                                     title='Toggle light/dark mode'
@@ -99,6 +102,35 @@ export default function Header({ handleMode }) {
 
                 </div>
             </nav>
+            <div className='flex flex-col bg-red-300 flex-grow w-full max-w-7xl  p-2 mx-auto'>
+                <h1
+                    className='text-4xl font-bold mt-9'
+                >
+                    <span>Hi, I'am</span> <span>Kaberege Godard Nestor</span>
+                </h1>
+                <p className='text-2xl font-semibold flex flex-col mt-5'>
+                    <span>Innovative Software Developer,</span>
+                    <span>building web applications.</span>
+                </p>
+                <div className="flex items-center justify-center flex-grow bg-slate-400">
+                    <div className='w-full max-sm:h-40 max-sm:max-w-96 sm:max-w-xl sm:h-80 relative'>
+                        <img
+                            src={devLaptop}
+                            alt="Dev machine"
+                            className='rounded-lg w-full h-full'
+                        />
+                        <div
+                            className='absolute top-5 left-1/3 flex items-center justify-center max-sm:w-20 max-sm:h-20 w-40 h-40 '
+                        >
+                            <img
+                                src={profile}
+                                alt="kgn profile"
+                                className='w-full h-full rounded-full cursor-pointer hover:scale-105 transition-transform duration-300'
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
         </header>
     )
 }
