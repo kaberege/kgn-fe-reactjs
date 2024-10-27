@@ -9,8 +9,8 @@ export default function Header({ handleMode }) {
     const [hideNav, setHideNav] = useState(true); //handle navigation bar close and open
 
     return (
-        <header className='w-full h-screen flex flex-col'>
-            <nav className=' bg-slate-400 sticky top-0 z-10 shadow-xl'>
+        <header className='w-full h-screen flex flex-col bg-gradient-to-r from-blue-700 via-purple-700 to-pink-700 dark:bg-gradient-to-r dark:from-blue-900 dark:via-purple-900 dark:to-pink-900 '>
+            <nav className=' dark:bg-slate-400 bg-slate-200 sticky top-0 z-10 shadow-xl'>
                 <div className=' flex flex-row max-w-7xl mx-auto p-1 sm:py-2 max-xl:px-2'>
                     <div className='flex flex-row flex-grow items-center'>
                         <img
@@ -102,17 +102,17 @@ export default function Header({ handleMode }) {
 
                 </div>
             </nav>
-            <div className='flex flex-col bg-red-300 flex-grow w-full max-w-7xl  p-2 mx-auto'>
+            <div className='flex flex-col flex-grow w-full max-w-7xl  p-2 mx-auto'>
                 <h1
-                    className='text-4xl font-bold mt-9'
+                    className='text-4xl max-sm:text-3xl font-bold mt-9'
                 >
                     <span>Hi, I'am</span> <span>Kaberege Godard Nestor</span>
                 </h1>
-                <p className='text-2xl font-semibold flex flex-col mt-5'>
+                <p className='text-2xl max-sm:text-xl font-semibold flex flex-col mt-5'>
                     <span>Innovative Software Developer,</span>
                     <span>building web applications.</span>
                 </p>
-                <div className="flex items-center justify-center flex-grow bg-slate-400">
+                <div className="flex items-center justify-center flex-grow">
                     <div className='w-full max-sm:h-40 max-sm:max-w-96 sm:max-w-xl sm:h-80 relative'>
                         <img
                             src={devLaptop}
@@ -120,7 +120,7 @@ export default function Header({ handleMode }) {
                             className='rounded-lg w-full h-full'
                         />
                         <div
-                            className='absolute top-5 left-1/3 flex items-center justify-center max-sm:w-20 max-sm:h-20 w-40 h-40 '
+                            className='absolute max-sm:top-3 max-sm:left-1/3 sm:top-5 sm:left-1/3 flex items-center justify-center max-sm:w-20 max-sm:h-20 w-40 h-40 '
                         >
                             <img
                                 src={profile}
