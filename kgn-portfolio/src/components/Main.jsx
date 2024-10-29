@@ -9,7 +9,7 @@ import vanilla from "../assets/web-project.jpg";
 const Main = () => {
     return (
         <main>
-            <div className='max-w-7xl mx-auto max-sm:px-3 sm:px-10 py-5 flex flex-col gap-16 '>
+            <div className='max-w-7xl mx-auto max-sm:px-3 sm:px-14 py-12 flex flex-col gap-16 '>
                 <section >
                     <h2 className='text-4xl max-sm:text-2xl font-bold mb-5'>About Me</h2>
                     <p
@@ -103,6 +103,62 @@ const Main = () => {
                         </div>
                     </div>
                 </section>
+                <section>
+                    <div></div>
+                    <div className='xl:w-96'>
+                        <form
+                            className='flex flex-col gap-6 bg-slate-400 p-6 rounded-3xl'
+                        >
+                            <div className='flex flex-col gap-2'>
+                                <label htmlFor="name">Your Name</label>
+                                <input
+                                    type="text"
+                                    name="name"
+                                    id="name"
+                                    placeholder="What's your good name?"
+                                    maxLength={25}
+                                    className='border rounded-md p-1'
+                                />
+                            </div>
+                            <div className='flex flex-col gap-2'>
+                                <label htmlFor="email">Your Email</label>
+                                <input
+                                    type="email"
+                                    name=""
+                                    id=""
+                                    placeholder="What's your web adress?"
+                                    maxLength={25}
+                                    className='border rounded-md p-1'
+                                />
+                            </div>
+                            <div className='flex flex-col gap-2'>
+                                <label htmlFor="text">Your Message</label>
+                                <textarea
+                                    name="text"
+                                    id="text"
+                                    rows={5}
+                                    cols={30}
+                                    placeholder="What's do you want to say?"
+                                    className='border rounded-md p-1'
+                                />
+                            </div>
+                            <button className='border rounded-md w-16 p-1'>Send</button>
+                        </form>
+                    </div>
+                </section>
+                <div className='fixed bottom-3 left-3 z-50 hover:scale-105 transition duration-300 '>
+                    <div className='w-24 h-24 relative'>
+                        <div className='w-full h-full absolute animate-spin flex items-center justify-center border-t-4 border-blue-500 rounded-full'>
+
+                        </div>
+                        <a href='mailto:kabgnestor@gmail.com'
+                            className='text-sm absolute left-4 top-4 w-16 h-16  flex items-center justify-center bg-gradient-to-b from-slate-400 via-orange-500 to-green-900 rounded-full font-semibold'
+                        >
+                            Hire Me
+                        </a>
+
+                    </div>
+                </div>
             </div>
 
         </main>

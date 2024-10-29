@@ -4,7 +4,7 @@ import devLaptop from "../assets/devLaptop.jpg";
 import profile from "../assets/kgn-g1.jpg";
 import { FaXTwitter } from "react-icons/fa6";
 import { FaBars, FaWindowClose, FaLinkedin, FaDiscord, FaInstagram } from "react-icons/fa";
-import fire from "../assets/fire.jpg";
+
 
 export default function Header({ handleMode }) {
     const [hideNav, setHideNav] = useState(true); //handle navigation bar close and open
