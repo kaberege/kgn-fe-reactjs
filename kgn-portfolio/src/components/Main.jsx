@@ -140,8 +140,16 @@ const Main = () => {
                     </div>
                 </section>
                 <section>
-                    <div></div>
-                    <div className='xl:w-96 bg-slate-400 p-6 rounded-3xl'>
+                    <div className="cube">
+                        <div className="face front"><img src={quiz} alt="Front" /></div>
+                        <div className="face back"><img src={tenzy} alt="Back" /></div>
+                        <div className="face left"><img src={vanilla} alt="Left" /></div>
+                        <div className="face right"><img src={devLaptop} alt="Right" /></div>
+                        <div className="face top"><img src={profile} alt="Top" /></div>
+                        <div className="face bottom"><img src={quiz} alt="Bottom" /></div>
+                    </div>
+
+                    <div className='xl:w-96 bg-slate-400 p-6 rounded-3xl mt-5'>
                         <h2 className='text-4xl max-sm:text-2xl font-bold mb-5'>Contact Me</h2>
                         <form
                             className='flex flex-col gap-6 '
@@ -196,8 +204,8 @@ const Main = () => {
 
                     </div>
                 </div>
-            </div>
-        </main>
+            </div >
+        </main >
     )
 }
 
