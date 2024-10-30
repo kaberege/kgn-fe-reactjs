@@ -7,6 +7,9 @@ import tenzy from "../assets/tenzy-project.jpg";
 import vanilla from "../assets/web-project.jpg";
 import devLaptop from "../assets/devLaptop.jpg";
 import profile from "../assets/kgn-g1.jpg";
+import fire from "../assets/fire.jpg";
+import space from "../assets/space.jpg";
+import spaceThree from "../assets/space-3.jpg";
 
 const Main = () => {
     return (
@@ -141,12 +144,13 @@ const Main = () => {
                 </section>
                 <section>
                     <div className="cube">
-                        <div className="face front"><img src={quiz} alt="Front" /></div>
-                        <div className="face back"><img src={tenzy} alt="Back" /></div>
+                        <div className="face front"><img src={tenzy} alt="Front" /></div>
+                        <div className="face back"><img src={fire} alt="Back" /></div>
                         <div className="face left"><img src={vanilla} alt="Left" /></div>
-                        <div className="face right"><img src={devLaptop} alt="Right" /></div>
-                        <div className="face top"><img src={profile} alt="Top" /></div>
-                        <div className="face bottom"><img src={quiz} alt="Bottom" /></div>
+                        <div className="face right"><img src={space} alt="Right" /></div>
+                        <div className="face top"><img src={quiz} alt="Top" /></div>
+                        <div className="face bottom"><img src={spaceThree} alt="Bottom" /></div>
+                        <div className="face behind"><img src={profile} alt="Bottom" /></div>
                     </div>
 
                     <div className='xl:w-96 bg-slate-400 p-6 rounded-3xl mt-5'>
