@@ -8,9 +8,9 @@ function App() {
   const [mode, setMode] = useState(false); // update toggle dark\light mode
 
   return (
-    <div className={`${mode && "dark"}`}>
+    <div className={`${mode &&"dark"}`}>
       <Header handleMode={setMode} />
-      <Main />
+      <Main mode={mode} />
       <Footer />
     </div>
   )

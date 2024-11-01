@@ -11,7 +11,7 @@ export default function Header({ handleMode }) {
 
     return (
         <header className='sticky top-0  z-10 '>
-            <nav className='dark:bg-slate-400 bg-slate-200 shadow-xl'>
+            <nav className='bg-gradient-to-r from-blue-500 to-purple-600 shadow-xl'>
                 <div className='max-w-7xl mx-auto flex flex-row p-1 sm:py-2 max-xl:px-2 '>
                     <div className='flex flex-row flex-grow items-center'>
                         <img
@@ -19,7 +19,7 @@ export default function Header({ handleMode }) {
                             alt="kgn logo"
                             title='kgn logo'
                             className='w-24 h-7 sm:w-32 sm:h-10 cursor-pointer rounded-sm' />
-                        <p className='max-md:hidden'>
+                        <p className='max-lg:hidden text-white font-bold'>
                             <span className='mx-3'>|</span>
                             Software developer
                         </p>
@@ -39,10 +39,10 @@ export default function Header({ handleMode }) {
                             <FaWindowClose />
                         </div>
                         <ul className="flex flex-row max-sm:flex-col items-center gap-3 max-sm:gap-5 max-sm:mt-8">
-                            <li className='flex items-center'><a href="#about">About</a></li>
-                            <li className='flex items-center'><a href="#projects">Projects</a></li>
-                            <li className='flex items-center'><a href="#contact">Contact</a></li>
-                            <li className='flex items-center'><a href="#resume">Resume</a></li>
+                            <li className='flex items-center text-white hover:underline font-bold'><a href="#about">About</a></li>
+                            <li className='flex items-center text-white hover:underline font-bold'><a href="#projects">Projects</a></li>
+                            <li className='flex items-center text-white hover:underline font-bold'><a href="#contact">Contact</a></li>
+                            <li className='flex items-center text-white hover:underline font-bold'><a href="#resume">Resume</a></li>
                             <li className='flex items-center'>
                                 <div
                                     title='Toggle light/dark mode'
@@ -53,7 +53,7 @@ export default function Header({ handleMode }) {
                                 </div>
                             </li>
                         </ul>
-                        <ul className="flex items-center justify-center flex-row gap-2 max-sm:mt-8 max-sm:mb-5">
+                        <ul className="flex items-center justify-center flex-row gap-2 max-md:hidden">
                             <li  className='sm:w-7 sm:h-7 sm:rounded-full sm:hover:bg-red-400 flex items-center justify-center cursor-pointer'>
                                 <a
                                     href="https://www.linkedin.com/in/kaberege-godard-nestor-53a0b4215"

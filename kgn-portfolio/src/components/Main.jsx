@@ -14,7 +14,7 @@ import fire from "../assets/fire.jpg";
 import space from "../assets/space.jpg";
 import spaceThree from "../assets/space-3.jpg";
 
-const Main = () => {
+const Main = ({ mode }) => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState({});
     const [contact, setContact] = useState(
@@ -79,17 +79,14 @@ const Main = () => {
     }
 
     return (
-        <main>
-            <section className='h-screen w-full flex flex-col bg-gradient-to-r from-blue-700 via-purple-700 to-pink-700 dark:bg-gradient-to-r dark:from-blue-900 dark:via-purple-900 dark:to-pink-900'>
+        <main className="">
+            <section className='h-screen w-full flex flex-col radial-gradient'>
                 <div className='flex flex-col w-full max-sm:px-4 max-xl:px-10 max-w-6xl mx-auto'>
-                    <h1
-                        className='text-4xl max-sm:text-3xl font-bold mt-9'
-                    >
-                        <span>Hi, I'am</span> <span>Kaberege Godard Nestor</span>
+                    <h1 className='text-4xl max-sm:text-3xl  md:text-5xl font-bold mt-9 dark:text-white'>
+                        Hi, I'm <span className="text-yellow-600 dark:text-yellow-300">Kaberege Godard Nestor</span>
                     </h1>
-                    <p className='text-2xl max-sm:text-xl font-semibold flex flex-col mt-5'>
-                        <span>Innovative Software Developer,</span>
-                        <span>building web applications.</span>
+                    <p className='text-2xl max-sm:text-xl  font-semibold dark:text-white mt-5'>
+                        Innovative Software Developer, building web applications.
                     </p>
                 </div>
                 <div className="flex items-center justify-center flex-grow">
@@ -111,191 +108,166 @@ const Main = () => {
                     </div>
                 </div>
             </section>
-            <div className=' max-w-7xl mx-auto max-sm:px-3 sm:px-14 flex flex-col gap-20'>
-                <section id="about">
-                    <h2 className='text-4xl max-sm:text-2xl font-bold mb-5'>About Me</h2>
-                    <p
-                        className='max-w-4xl text-lg mb-10'
-                    >
-                        I am a skilled software developer with experience in JavaScript and TypeScript, as well as expertise in the React.js framework. A quick learner, I collaborate closely with clients to create efficient, scalable, and user-friendly solutions that address real-world problems. Let’s work together to bring your ideas to life!
-                    </p>
-                    <div className='flex flex-row flex-wrap justify-center w-full sm:max-w-4xl xl:max-w-7xl mx-auto gap-12'>
-                        <div className='flex flex-col items-center justify-center cursor-pointer border-2 border-x-indigo-800 border-y-yellow-400  max-sm:mx-auto bg-blue-400 w-full max-sm:max-w-96 max-sm:h-64 sm:w-64 sm:h-72 rounded-2xl shadow-md hover:scale-105 transition'>
-                            <FaReact className='font-bold text-4xl animate-bounce' />
-                            <p className='flex flex-col items-center justify-center font-semibold text-xl sm:text-2xl mt-7'>
-                                <span>React</span> <span>Developer</span>
-                            </p>
-                        </div>
-                        <div className='flex flex-col items-center justify-center cursor-pointer border-2 border-x-indigo-800 border-y-yellow-400  max-sm:mx-auto bg-blue-400 w-full max-sm:max-w-96 max-sm:h-64 sm:w-64 sm:h-72 rounded-2xl shadow-md hover:scale-105 transition'>
-                            <TbBrandJavascript className='font-bold text-4xl animate-bounce' />
-                            <p className='flex flex-col items-center justify-center font-semibold text-xl sm:text-2xl mt-7'>
-                                <span>JavaScript</span> <span>Developer</span>
-                            </p>
-                        </div>
-                        <div className='flex flex-col items-center justify-center cursor-pointer border-2 border-x-indigo-800 border-y-yellow-400   max-sm:mx-auto bg-blue-400 w-full max-sm:max-w-96 max-sm:h-64 sm:w-64 sm:h-72 rounded-2xl shadow-md hover:scale-105 transition'>
-                            <TbBrandTypescript className='font-bold text-4xl animate-bounce' />
-                            <p className='flex flex-col items-center justify-center font-semibold text-xl sm:text-2xl mt-7'
-                            ><span>TypeScript</span> <span>Developer</span>
-                            </p>
-                        </div>
-                    </div>
-                </section>
-                <section id="projects">
-                    <h2 className='text-4xl max-sm:text-2xl font-bold mb-5'>Projects</h2>
-                    <p
-                        className='max-w-4xl text-lg mb-10'
-                    >
-                        The following projects showcase my skills and experience through real-world examples of my work. They reflect my ability to solve complex problems, work with various technologies, and manage projects effectively.
-                    </p>
-                    <div className='flex flex-row flex-wrap justify-center gap-6 xl:grid xl:grid-cols-3'>
-                        <div className='flex flex-col gap-4 w-full sm:w-96 xl:w-auto p-4 bg-slate-500 rounded-2xl'>
-                            <a href="#"
-                                title='Click to open'
-                                style={{ backgroundImage: `url(${quiz})` }}
-                                className={`w-full h-60 relative max-sm:h-52 rounded-2xl cursor-pointer bg-cover bg-center bg-no-repeat`}>
-                                <div className='flex items-center justify-center w-7 h-7 rounded-full bg-slate-400 shadow-xl absolute right-3 top-10'>
-                                    <FiPlay className='text-red-700' />
-                                </div>
-                            </a>
-                            <h3 className='text-xl font-semibold'>Quiz App</h3>
-                            <p>
-                                Transforming the learning experience with an interactive quiz app that offers personalized assessments and progress tracking. Built on a user-friendly platform using React, JavaScript, and Tailwind CSS, it provides a seamless gateway to engaging and effective learning.
-
-                            </p>
-                            <p>
-                                <span>#React JS</span>
-                                <span>#Tailwind CSS</span>
-                            </p>
-                        </div>
-                        <div className='flex flex-col gap-4 w-full sm:w-96 xl:w-auto  p-4 bg-slate-500 rounded-2xl'>
-                            <a href="#"
-                                title='Click to open'
-                                style={{ backgroundImage: `url(${tenzy})` }}
-                                className={`w-full h-60 relative max-sm:h-52 rounded-2xl cursor-pointer bg-cover bg-center bg-no-repeat`}>
-                                <div className='flex items-center justify-center w-7 h-7 rounded-full bg-slate-400 shadow-xl absolute right-3 top-10'>
-                                    <FiPlay className='text-red-700' />
-                                </div>
-                            </a>
-                            <h3 className='text-xl font-semibold'>Tenzies Game App</h3>
-                            <p>
-                                Revolutionizing casual gaming with a fun and interactive Tenzies game app. Developed using React and CSS, this user-friendly platform offers an engaging experience while tracking player progress and providing hours of entertainment.
-                            </p>
-                            <p>
-                                <span>#React JS</span>
-                                <span>#CSS</span>
-                            </p>
-                        </div>
-                        <div className='flex flex-col gap-4 w-full sm:w-96 xl:w-auto p-4 bg-slate-500 rounded-2xl'>
-
-                            <a href="#"
-                                title='Click to open'
-                                style={{ backgroundImage: `url(${vanilla})` }}
-                                className={`w-full h-60 relative max-sm:h-52 rounded-2xl cursor-pointer bg-cover bg-center bg-no-repeat`}>
-                                <div className='flex items-center justify-center w-7 h-7 rounded-full bg-slate-400 shadow-xl absolute right-3 top-10'>
-                                    <FiPlay className='text-red-700' />
-                                </div>
-                            </a>
-
-                            <h3 className='text-xl font-semibold'>Vanilla JS Website</h3>
-                            <p>
-                                Showcasing the power of simplicity, this website is built using vanilla JavaScript and CSS. It provides an intuitive and responsive user experience, serving as a digital gateway to information and features without the complexity of frameworks.
-                            </p>
-                            <p>
-                                <span>#Vanilla JS</span>
-                                <span>#CSS</span>
-
-                            </p>
-                        </div>
-                    </div>
-                </section>
-                <section id="contact">
-                    <div className="cube">
-                        <div className="face front"><img src={tenzy} alt="Front" /></div>
-                        <div className="face back"><img src={fire} alt="Back" /></div>
-                        <div className="face left"><img src={vanilla} alt="Left" /></div>
-                        <div className="face right"><img src={space} alt="Right" /></div>
-                        <div className="face top"><img src={quiz} alt="Top" /></div>
-                        <div className="face bottom"><img src={spaceThree} alt="Bottom" /></div>
-                        <div className="face behind"><img src={profile} alt="Bottom" /></div>
-                    </div>
-
-                    <div className='relative w-full xl:max-w-md bg-slate-400 p-6 rounded-3xl max-sm:mt-10 max-xl:mt-20'>
-                        <h2 className='text-4xl max-sm:text-2xl font-bold mb-5'>Contact Me</h2>
-                        <a
-                            href="https://www.linkedin.com/in/kaberege-godard-nestor-53a0b4215"
-                            alt="LinkedIn kgn"
-                            title="kgn LinkedIn"
-                            target="_blank"
-                            className="absolute top-1 right-1 flex items-center justify-center rounded-full w-8 h-8 bg-red-400 text-white hover:text-cyan-300 transition-colors duration-300"
+            <div className={mode ? "bg-gray-900" : "light"}>
+                <div className=' max-w-7xl mx-auto max-sm:px-3 sm:px-14 flex flex-col gap-20 pb-10'>
+                    <section id="about">
+                        <h2 className='text-4xl max-sm:text-2xl font-bold mb-5 dark:text-stone-100'>About Me</h2>
+                        <p
+                            className='max-w-4xl text-lg mb-10 dark:text-stone-100'
                         >
-                            <FaLinkedin className='font-bold text-xl' />
-                        </a>
-                        <form
-                            onSubmit={handleSubmit}
-                            className='flex flex-col gap-6 '
+                            I am a skilled software developer with experience in JavaScript and TypeScript, as well as expertise in the React.js framework. A quick learner, I collaborate closely with clients to create efficient, scalable, and user-friendly solutions that address real-world problems. Let’s work together to bring your ideas to life!
+                        </p>
+                        <div className='dark:text-stone-100 flex flex-row flex-wrap justify-center w-full sm:max-w-4xl xl:max-w-7xl mx-auto gap-12'>
+                            <div className='flex flex-col items-center justify-center cursor-pointer border-2 border-x-indigo-800 border-y-yellow-400  max-sm:mx-auto bg-blue-400 w-full max-sm:max-w-96 max-sm:h-64 sm:w-64 sm:h-72 rounded-2xl shadow-md hover:scale-105 transition'>
+                                <FaReact className='font-bold text-4xl animate-bounce' />
+                                <p className='flex flex-col items-center justify-center font-semibold text-xl sm:text-2xl mt-7'>
+                                    <span>React</span> <span>Developer</span>
+                                </p>
+                            </div>
+                            <div className='dark:text-stone-100 flex flex-col items-center justify-center cursor-pointer border-2 border-x-indigo-800 border-y-yellow-400  max-sm:mx-auto bg-blue-400 w-full max-sm:max-w-96 max-sm:h-64 sm:w-64 sm:h-72 rounded-2xl shadow-md hover:scale-105 transition'>
+                                <TbBrandJavascript className='font-bold text-4xl animate-bounce' />
+                                <p className='flex flex-col items-center justify-center font-semibold text-xl sm:text-2xl mt-7'>
+                                    <span>JavaScript</span> <span>Developer</span>
+                                </p>
+                            </div>
+                            <div className='flex flex-col items-center justify-center cursor-pointer border-2 border-x-indigo-800 border-y-yellow-400   max-sm:mx-auto bg-blue-400 w-full max-sm:max-w-96 max-sm:h-64 sm:w-64 sm:h-72 rounded-2xl shadow-md hover:scale-105 transition'>
+                                <TbBrandTypescript className='font-bold text-4xl animate-bounce' />
+                                <p className='flex flex-col items-center justify-center font-semibold text-xl sm:text-2xl mt-7'
+                                ><span>TypeScript</span> <span>Developer</span>
+                                </p>
+                            </div>
+                        </div>
+                    </section>
+                    <section id="projects">
+                        <h2 className='text-4xl max-sm:text-2xl font-bold mb-5 dark:text-stone-100'>Projects</h2>
+                        <p
+                            className='max-w-4xl text-lg mb-10 dark:text-stone-100'
                         >
-                            <div className='flex flex-col gap-2'>
-                                <label htmlFor="name">Your Name</label>
-                                <input
-                                    type="text"
-                                    id="name"
-                                    name="name"
-                                    value={contact.name}
-                                    placeholder="What's your good name?"
-                                    maxLength={25}
-                                    className='border rounded-md p-1'
-                                    onChange={handleChange}
-                                />
-                                {error.nameError && <p>{error.nameError}</p>}
+                            The following projects showcase my skills and experience through real-world examples of my work. They reflect my ability to solve complex problems, work with various technologies, and manage projects effectively.
+                        </p>
+                        <div className='flex flex-row flex-wrap justify-center gap-6 xl:grid xl:grid-cols-3'>
+                            <div className='flex flex-col gap-4 w-full sm:w-96 xl:w-auto p-4 bg-slate-400 dark:bg-gray-700 shadow-md rounded-2xl'>
+                                <a href="#"
+                                    title='Click to open'
+                                    style={{ backgroundImage: `url(${quiz})` }}
+                                    className={`w-full h-60 relative max-sm:h-52 rounded-2xl cursor-pointer bg-cover bg-center bg-no-repeat`}>
+                                    <div className='flex items-center justify-center w-7 h-7 rounded-full bg-slate-400 shadow-xl absolute right-3 top-10'>
+                                        <FiPlay className='text-red-500 dark:text-red-300' />
+                                    </div>
+                                </a>
+                                <h3 className='text-xl font-semibold dark:text-stone-100'>Quiz App</h3>
+                                <p className='dark:text-stone-100'>
+                                    Transforming the learning experience with an interactive quiz app that offers personalized assessments and progress tracking. Built on a user-friendly platform using React, JavaScript, and Tailwind CSS, it provides a seamless gateway to engaging and effective learning.
+
+                                </p>
+                                <p className='flex gap-1 text-gray-800 dark:text-gray-200'>
+                                    <span className='text-sm bg-blue-100 dark:bg-blue-800 text-blue-800 dark:text-blue-200 p-1  rounded-full'>#React JS</span>
+                                    <span className='text-sm bg-green-100 dark:bg-green-800 text-green-800 dark:text-green-200 p-1 rounded-full'>#Tailwind CSS</span>
+                                </p>
                             </div>
-                            <div className='flex flex-col gap-2'>
-                                <label htmlFor="email">Your Email</label>
-                                <input
-                                    type="email"
-                                    id="email"
-                                    name="email"
-                                    value={contact.email}
-                                    placeholder="What's your web adress?"
-                                    maxLength={50}
-                                    className='border rounded-md p-1'
-                                    onChange={handleChange}
-                                />
-                                {error.emailError && <p>{error.emailError}</p>}
+                            <div className='flex flex-col gap-4 w-full sm:w-96 xl:w-auto  p-4 bg-slate-400 dark:bg-gray-700 shadow-md rounded-2xl'>
+                                <a href="#"
+                                    title='Click to open'
+                                    style={{ backgroundImage: `url(${tenzy})` }}
+                                    className={`w-full h-60 relative max-sm:h-52 rounded-2xl cursor-pointer bg-cover bg-center bg-no-repeat`}>
+                                    <div className='flex items-center justify-center w-7 h-7 rounded-full bg-slate-400 shadow-xl absolute right-3 top-10'>
+                                        <FiPlay className='text-red-500 dark:text-red-300' />
+                                    </div>
+                                </a>
+                                <h3 className='text-xl font-semibold dark:text-stone-100'>Tenzies Game App</h3>
+                                <p className='dark:text-stone-100'>
+                                    Revolutionizing casual gaming with a fun and interactive Tenzies game app. Developed using React and CSS, this user-friendly platform offers an engaging experience while tracking player progress and providing hours of entertainment.
+                                </p>
+                                <p className='flex gap-1 text-gray-800 dark:text-gray-200'>
+                                    <span className='text-sm bg-blue-100 dark:bg-blue-800 text-blue-800 dark:text-blue-200 p-1 rounded-full'>#React JS</span>
+                                    <span className='text-sm bg-green-100 dark:bg-green-800 text-green-800 dark:text-green-200 p-1  rounded-full'>#CSS</span>
+                                </p>
                             </div>
-                            <div className='flex flex-col gap-2'>
-                                <label htmlFor="text">Your Message</label>
-                                <textarea
-                                    id="text"
-                                    name="message"
-                                    value={contact.message}
-                                    rows={5}
-                                    cols={30}
-                                    placeholder="What do you want to say?"
-                                    className='border rounded-md p-1'
-                                    onChange={handleChange}
-                                />
-                                {error.messageError && <p>{error.messageError}</p>}
+                            <div className='flex flex-col gap-4 w-full sm:w-96 xl:w-auto p-4 bg-slate-400 dark:bg-gray-700 shadow-md rounded-2xl'>
+
+                                <a href="#"
+                                    title='Click to open'
+                                    style={{ backgroundImage: `url(${vanilla})` }}
+                                    className={`w-full h-60 relative max-sm:h-52 rounded-2xl cursor-pointer bg-cover bg-center bg-no-repeat`}>
+                                    <div className='flex items-center justify-center w-7 h-7 rounded-full bg-slate-400 shadow-xl absolute right-3 top-10'>
+                                        <FiPlay className='text-red-500 dark:text-red-300' />
+                                    </div>
+                                </a>
+
+                                <h3 className='text-xl font-semibold dark:text-stone-100'>Vanilla JS Website</h3>
+                                <p className='dark:text-stone-100'>
+                                    Showcasing the power of simplicity, this website is built using vanilla JavaScript and CSS. It provides an intuitive and responsive user experience, serving as a digital gateway to information and features without the complexity of frameworks.
+                                </p>
+                                <p className='flex gap-1 text-gray-800 dark:text-gray-200'>
+                                    <span className='text-sm bg-blue-100 dark:bg-blue-800 text-blue-800 dark:text-blue-200 p-1 rounded-full'>
+                                        #Vanilla JS
+                                    </span>
+                                    <span className='text-sm bg-green-100 dark:bg-green-800 text-green-800 dark:text-green-200 p-1  rounded-full'>
+                                        #CSS
+                                    </span>
+                                </p>
                             </div>
-                            <button className={`border rounded-md ${loading ? "w-20" : "w-16"} p-1`}>
-                                {loading ? <span>Sending<span className='animate-bounce'>...</span></span> : "Send"}
-                            </button>
-                        </form>
-                    </div>
-                </section>
-                <div className='max-sm:hidden fixed bottom-4 left-2 z-50 hover:scale-105 transition duration-300 '>
-                    <div className='w-24 h-24 relative'>
-                        <div className='w-full h-full absolute animate-spin flex items-center justify-center border-t-4 border-blue-500 rounded-full'>
+                        </div>
+                    </section>
+                    <section id="contact">
+                        <div className="cube">
+                            <div className="face front"><img src={tenzy} alt="Front" /></div>
+                            <div className="face back"><img src={fire} alt="Back" /></div>
+                            <div className="face left"><img src={vanilla} alt="Left" /></div>
+                            <div className="face right"><img src={space} alt="Right" /></div>
+                            <div className="face top"><img src={quiz} alt="Top" /></div>
+                            <div className="face bottom"><img src={spaceThree} alt="Bottom" /></div>
+                            <div className="face behind"><img src={profile} alt="Bottom" /></div>
+                        </div>
+
+                        <div className='relative w-full xl:max-w-md bg-white dark:bg-gray-800 p-6 rounded-3xl max-sm:mt-10 max-xl:mt-20'>
+                            <h2 className='text-4xl max-sm:text-2xl font-bold mb-5 dark:text-stone-100'>Contact Me</h2>
+                            <a
+                                href="https://www.linkedin.com/in/kaberege-godard-nestor-53a0b4215"
+                                alt="LinkedIn kgn"
+                                title="kgn LinkedIn"
+                                target="_blank"
+                                className="absolute top-1 right-1 flex items-center justify-center rounded-full w-8 h-8 bg-red-400 hover:bg-red-600 text-white hover:text-cyan-300 transition-colors duration-300"
+                            >
+                                <FaLinkedin className='font-bold text-xl' />
+                            </a>
+                            <form onSubmit={handleSubmit} className='flex flex-col gap-6'>
+                                <div className='flex flex-col gap-2'>
+                                    <label htmlFor="name" className="font-semibold dark:text-stone-100">Your Name</label>
+                                    <input type="text" id="name" name="name" value={contact.name} placeholder="What's your good name?" className='border rounded-md p-2' onChange={handleChange} />
+                                    {error.nameError && <p className='text-red-500'>{error.nameError}</p>}
+                                </div>
+                                <div className='flex flex-col gap-2'>
+                                    <label htmlFor="email" className="font-semibold dark:text-stone-100">Your Email</label>
+                                    <input type="email" id="email" name="email" value={contact.email} placeholder="What's your web address?" className='border rounded-md p-2' onChange={handleChange} />
+                                    {error.emailError && <p className='text-red-500'>{error.emailError}</p>}
+                                </div>
+                                <div className='flex flex-col gap-2'>
+                                    <label htmlFor="message" className="font-semibold dark:text-stone-100">Your Message</label>
+                                    <textarea id="message" name="message" value={contact.message} placeholder="Write your message here..." className='border rounded-md p-2' onChange={handleChange}></textarea>
+                                    {error.messageError && <p className='text-red-500'>{error.messageError}</p>}
+                                </div>
+                                <button type="submit" className='bg-blue-500 font-semibold text-white py-2 rounded-md hover:bg-blue-600 transition duration-300' disabled={loading}>
+                                    {loading ? 'Sending...' : 'Send Message'}
+                                </button>
+                            </form>
+                        </div>
+                    </section>
+                    <div className='max-sm:hidden fixed bottom-4 left-2 z-50 hover:scale-105 transition duration-300 '>
+                        <div className='w-24 h-24 relative'>
+                            <div className='w-full h-full absolute animate-spin flex items-center justify-center border-t-4 border-blue-500 rounded-full'>
+
+                            </div>
+                            <a href='mailto:kabgnestor@gmail.com'
+                                className='text-sm absolute left-4 top-4 w-16 h-16  flex items-center justify-center bg-gradient-to-b from-slate-400 via-orange-500 to-green-900 rounded-full font-semibold'
+                            >
+                                Hire Me
+                            </a>
 
                         </div>
-                        <a href='mailto:kabgnestor@gmail.com'
-                            className='text-sm absolute left-4 top-4 w-16 h-16  flex items-center justify-center bg-gradient-to-b from-slate-400 via-orange-500 to-green-900 rounded-full font-semibold'
-                        >
-                            Hire Me
-                        </a>
-
                     </div>
-                </div>
-            </div >
+                </div >
+            </div>
         </main >
     )
 }
