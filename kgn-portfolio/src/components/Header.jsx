@@ -1,3 +1,5 @@
+
+
 import React, { useState } from 'react';
 import logo from "../assets/logo-png2.png";
 import { FaXTwitter } from "react-icons/fa6";
@@ -28,8 +30,8 @@ export default function Header({ handleMode }) {
                         <FaBars />
                     </div>
                     <div
-                        style={{ transition: "right 0.8s linear" }}
-                        className={`flex flex-row max-sm:flex-col shadow-lg sm:gap-10 ${hideNav ? "max-sm:-right-1/2 max-sm:overflow-hidden" : "max-sm:right-0 max-sm:w-1/2"} max-sm:h-full max-sm:fixed max-sm:top-0  max-sm:p-2 max-sm:bg-blue-600 max-sm:dark:bg-slate-600 transition-colors duration-300`}
+                        style={{ transition: "right 0.4s linear" }}
+                        className={`flex flex-row max-sm:flex-col shadow-lg sm:gap-10 ${hideNav ? "max-sm:-right-3/4 max-sm:overflow-hidden" : "max-sm:right-0 max-sm:w-1/2"} max-sm:h-full max-sm:fixed max-sm:top-0  max-sm:p-2 max-sm:bg-blue-600 max-sm:dark:bg-slate-600 transition-colors duration-300`}
                     >
                         <div
                             onClick={() => setHideNav(true)}
@@ -52,7 +54,7 @@ export default function Header({ handleMode }) {
                             </li>
                         </ul>
                         <ul className="flex items-center justify-center flex-row gap-2 max-sm:mt-8 max-sm:mb-5">
-                            <li>
+                            <li  className='sm:w-7 sm:h-7 sm:rounded-full sm:hover:bg-red-400 flex items-center justify-center cursor-pointer'>
                                 <a
                                     href="https://www.linkedin.com/in/kaberege-godard-nestor-53a0b4215"
                                     alt="LinkedIn kgn"
@@ -63,7 +65,7 @@ export default function Header({ handleMode }) {
                                     <FaLinkedin className='font-bold text-xl' />
                                 </a>
                             </li>
-                            <li>
+                            <li className='sm:w-7 sm:h-7 sm:rounded-full sm:hover:bg-red-400 flex items-center justify-center cursor-pointer'>
                                 <a
                                     href="https://discord.com/invite/Yx5CjAFM"
                                     target="_blank"
@@ -74,7 +76,7 @@ export default function Header({ handleMode }) {
                                     <FaDiscord className='font-bold text-xl' />
                                 </a>
                             </li>
-                            <li>
+                            <li  className='sm:w-7 sm:h-7 sm:rounded-full sm:hover:bg-red-400 flex items-center justify-center cursor-pointer'>
                                 <a
                                     href="https://x.com/Kaberege_gn"
                                     target="_blank"
@@ -85,7 +87,7 @@ export default function Header({ handleMode }) {
                                     <FaXTwitter className='font-bold text-xl' />
                                 </a>
                             </li>
-                            <li>
+                            <li  className='sm:w-7 sm:h-7 sm:rounded-full sm:hover:bg-red-400 flex items-center justify-center cursor-pointer'>
                                 <a
                                     href="https://www.instagram.com/kgn_ke_hong/"
                                     target="_blank"
@@ -104,3 +106,5 @@ export default function Header({ handleMode }) {
         </header>
     )
 }
+
+

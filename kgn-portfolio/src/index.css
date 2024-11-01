@@ -10,17 +10,18 @@
 
 .cube {
   position: relative;
-  width: 100px;
-  height: 100px;
+  width: 300px;
+  height: 300px;
   transform-style: preserve-3d;
   animation: rotate 20s infinite linear;
   perspective: 1000px;
+  margin: auto;
 }
 
 .face {
   position: absolute;
-  width: 100px;
-  height: 100px;
+  width: 300px;
+  height: 300px;
   border-radius: 10px;
   display: flex;
   align-items: center;
@@ -28,31 +29,31 @@
 }
 
 .front {
-  transform: rotateY(0deg) translateZ(50px); 
+  transform: rotateY(0deg) translateZ(150px);
 }
 
 .back {
-  transform: rotateY(180deg) translateZ(50px);
+  transform: rotateY(180deg) translateZ(150px);
 }
 
 .left {
-  transform: rotateY(-90deg) translateZ(50px);
+  transform: rotateY(-90deg) translateZ(150px);
 }
 
 .right {
-  transform: rotateY(90deg) translateZ(50px);
+  transform: rotateY(90deg) translateZ(150px);
 }
 
 .top {
-  transform: rotateX(90deg) translateZ(50px);
+  transform: rotateX(90deg) translateZ(150px);
 }
 
 .bottom {
-  transform: rotateX(-90deg) translateZ(50px);
+  transform: rotateX(-90deg) translateZ(150px);
 }
 
 .behind {
-  transform: rotateY(-180deg) translateZ(50px);
+  transform: rotateY(-180deg) translateZ(150px);
 }
 
 
@@ -77,4 +78,57 @@
 
 .face img:hover {
   transform: translateY(-20px);
+}
+
+@media screen and (max-width: 640px) {
+  .cube {
+    width: 100px;
+    height: 100px;
+  }
+
+  .face {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+  }
+
+  .front {
+    transform: rotateY(0deg) translateZ(50px);
+  }
+
+  .back {
+    transform: rotateY(180deg) translateZ(50px);
+  }
+
+  .left {
+    transform: rotateY(-90deg) translateZ(50px);
+  }
+
+  .right {
+    transform: rotateY(90deg) translateZ(50px);
+  }
+
+  .top {
+    transform: rotateX(90deg) translateZ(50px);
+  }
+
+  .bottom {
+    transform: rotateX(-90deg) translateZ(50px);
+  }
+
+  .behind {
+    transform: rotateY(-180deg) translateZ(50px);
+  }
+
+}
+
+@media (min-width: 1280px) {
+  #contact {
+    display: grid;
+    grid-template-columns: auto auto;
+  }
+
+  .cube {
+    grid-area: 1/2/2/3;
+  }
 }
