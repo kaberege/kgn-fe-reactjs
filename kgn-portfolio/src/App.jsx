@@ -9,9 +9,9 @@ function App() {
 
   return (
     <div className={`${mode &&"dark"}`}>
-      <Header handleMode={setMode} />
+      <Header handleMode={setMode} mode={mode} />
       <Main mode={mode} />
-      <Footer />
+      <Footer mode={mode} />
     </div>
   )
 }

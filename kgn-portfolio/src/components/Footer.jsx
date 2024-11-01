@@ -1,11 +1,11 @@
 import React from 'react';
 
 
-const Footer = () => {
+const Footer = ({ mode }) => {
     const currentYear = new Date().getFullYear();
     return (
-        <footer className='bg-gray-800 dark:bg-gray-950 dark:shadow-md text-white p-4 text-center'>
-            <p className='text-sm'>Copyright &copy; {currentYear}
+        <footer className={`${!mode ? "bg-gradient-130" : "bg-gradient-130-dark"} shadow-md text-gray-900 dark:text-white p-4 text-center`}>
+            <p className='text-sm text-gray-300 font-semibold'>Copyright &copy; {currentYear}
                 <a
                     href='https://kaberege.github.io/kgn.github.io/'
                     target='_blank' rel="noopener noreferrer"
@@ -19,19 +19,4 @@ const Footer = () => {
 };
 
 export default Footer;
-
-/*
-
-const Footer = () => {
- 
-
-    return (
-        <footer className="bg-gray-800 text-white mt-16 p-4 text-center dark:text-slate-300 transition-colors duration-300">
-           
-        </footer>
-    );
-}
-
-export default Footer;
-*/
 

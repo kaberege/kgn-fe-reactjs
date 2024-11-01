@@ -79,8 +79,8 @@ const Main = ({ mode }) => {
     }
 
     return (
-        <main className="">
-            <section className='h-screen w-full flex flex-col radial-gradient'>
+        <main>
+            <section className={`h-screen w-full flex flex-col ${!mode? "bg-light-gradient": "bg-dark-gradient"}`}>
                 <div className='flex flex-col w-full max-sm:px-4 max-xl:px-10 max-w-6xl mx-auto'>
                     <h1 className='text-4xl max-sm:text-3xl  md:text-5xl font-bold mt-9 dark:text-white'>
                         Hi, I'm <span className="text-yellow-600 dark:text-yellow-300">Kaberege Godard Nestor</span>
@@ -108,7 +108,7 @@ const Main = ({ mode }) => {
                     </div>
                 </div>
             </section>
-            <div className={mode ? "bg-gray-900" : "light"}>
+            <div className={`${mode ? "bg-slate-900" : "light"} pt-6`}>
                 <div className=' max-w-7xl mx-auto max-sm:px-3 sm:px-14 flex flex-col gap-20 pb-10'>
                     <section id="about">
                         <h2 className='text-4xl max-sm:text-2xl font-bold mb-5 dark:text-stone-100'>About Me</h2>
@@ -119,19 +119,19 @@ const Main = ({ mode }) => {
                         </p>
                         <div className='dark:text-stone-100 flex flex-row flex-wrap justify-center w-full sm:max-w-4xl xl:max-w-7xl mx-auto gap-12'>
                             <div className='flex flex-col items-center justify-center cursor-pointer border-2 border-x-indigo-800 border-y-yellow-400  max-sm:mx-auto bg-blue-400 w-full max-sm:max-w-96 max-sm:h-64 sm:w-64 sm:h-72 rounded-2xl shadow-md hover:scale-105 transition'>
-                                <FaReact className='font-bold text-4xl animate-bounce' />
+                                <FaReact className='font-bold text-4xl animate-bounce text-blue-950 dark:text-blue-200' />
                                 <p className='flex flex-col items-center justify-center font-semibold text-xl sm:text-2xl mt-7'>
                                     <span>React</span> <span>Developer</span>
                                 </p>
                             </div>
                             <div className='dark:text-stone-100 flex flex-col items-center justify-center cursor-pointer border-2 border-x-indigo-800 border-y-yellow-400  max-sm:mx-auto bg-blue-400 w-full max-sm:max-w-96 max-sm:h-64 sm:w-64 sm:h-72 rounded-2xl shadow-md hover:scale-105 transition'>
-                                <TbBrandJavascript className='font-bold text-4xl animate-bounce' />
+                                <TbBrandJavascript className='font-bold text-4xl animate-bounce text-blue-950 dark:text-blue-200' />
                                 <p className='flex flex-col items-center justify-center font-semibold text-xl sm:text-2xl mt-7'>
                                     <span>JavaScript</span> <span>Developer</span>
                                 </p>
                             </div>
                             <div className='flex flex-col items-center justify-center cursor-pointer border-2 border-x-indigo-800 border-y-yellow-400   max-sm:mx-auto bg-blue-400 w-full max-sm:max-w-96 max-sm:h-64 sm:w-64 sm:h-72 rounded-2xl shadow-md hover:scale-105 transition'>
-                                <TbBrandTypescript className='font-bold text-4xl animate-bounce' />
+                                <TbBrandTypescript className='font-bold text-4xl animate-bounce text-blue-950 dark:text-blue-200' />
                                 <p className='flex flex-col items-center justify-center font-semibold text-xl sm:text-2xl mt-7'
                                 ><span>TypeScript</span> <span>Developer</span>
                                 </p>

@@ -136,26 +136,38 @@ body {
     grid-area: 1/2/2/3;
   }
 }
-.radial-gradient {
-  background: radial-gradient(circle, 
-    rgba(255, 0, 0, 0.1), 
-    rgba(0, 255, 0, 0.3), 
-    rgba(0, 0, 255, 0.5), 
-    rgba(0, 0, 0, 0.7));
+
+/* Light mode background */
+.light-nav {
+  background: radial-gradient(circle, rgb(104, 99, 99), rgb(146, 140, 140), rgb(104, 99, 99));
 }
 
+/* Dark mode background */
+.dark-nav {
+  background: radial-gradient(circle, rgb(34, 34, 34), rgb(56, 56, 56), rgb(34, 34, 34));
+}
+/* Background for introductory content*/
+.bg-light-gradient {
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.2), rgba(255, 200, 200, 0.3), rgba(200, 200, 255, 0.2), rgba(0, 0, 0, 0.2));
+}
+
+.bg-dark-gradient {
+  background: radial-gradient(circle, rgba(0, 0, 0, 1), rgba(20, 20, 20, 0.9), rgba(40, 40, 40, 0.8), rgba(0, 0, 0, 0.7));
+}
+
+/* Background for main content*/
 .light {
   background: radial-gradient(circle, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.2));
 }
 
-.light {
-  color: #333;
+/* Styling the footer */
+
+.bg-gradient-130 {
+  background-image: linear-gradient(130deg, rgb(36, 29, 44), rgb(26, 38, 46), rgb(8, 29, 54));
+  /* Light mode colors */
 }
 
-.dark2 {
-  background-color: #1a1a2e;
-  color: #eaeaea;
-}
-header, footer {
-  background: linear-gradient(135deg, #6e7ef3, #5a67e2);
+.bg-gradient-130-dark {
+  background-image: linear-gradient(130deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.4));
+  /* Dark mode colors */
 }
