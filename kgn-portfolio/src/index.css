@@ -12,6 +12,7 @@ body {
   font-family: 'Poppins', sans-serif;
 }
 
+/* Styling 3-d rotating images */
 .cube {
   position: relative;
   width: 300px;
@@ -146,6 +147,7 @@ body {
 .dark-nav {
   background: radial-gradient(circle, rgb(34, 34, 34), rgb(56, 56, 56), rgb(34, 34, 34));
 }
+
 /* Background for introductory content*/
 .bg-light-gradient {
   background: radial-gradient(circle, rgba(255, 255, 255, 0.2), rgba(255, 200, 200, 0.3), rgba(200, 200, 255, 0.2), rgba(0, 0, 0, 0.2));
@@ -163,11 +165,9 @@ body {
 /* Styling the footer */
 
 .bg-gradient-130 {
-  background-image: linear-gradient(130deg, rgb(36, 29, 44), rgb(26, 38, 46), rgb(8, 29, 54));
-  /* Light mode colors */
+  background-image: linear-gradient(130deg, rgb(36, 29, 44), rgb(26, 38, 46), rgb(8, 29, 54)); /* Light mode colors */
 }
 
 .bg-gradient-130-dark {
-  background-image: linear-gradient(130deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.4));
-  /* Dark mode colors */
+  background-image: linear-gradient(130deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.4)); /* Dark mode colors */
 }
