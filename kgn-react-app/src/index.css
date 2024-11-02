@@ -15,13 +15,44 @@ body {
     min-height: 100vh;
 }
 
+
+.nav-bar-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding-left: 30px;
+}
+
+.nav-bar-header>a {
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.nav-bar-header>a:hover {
+    color: #e90752;
+}
+
+.active {
+    color: #e90752;
+}
+
+.pending {
+    color: rgba(90, 90, 90, 1);
+}
+
 .main-app {
     flex-grow: 1;
+    padding: 0 10px 0 10px;
 }
 
 header {
     position: sticky;
     top: 0;
+    margin-bottom: 50px;
+    background-color: aqua;
+    height: 60px;
+    display: flex;
+    align-items: center;
 }
 
 .home-container {
@@ -50,6 +81,8 @@ header {
 
 .nav-links {
     margin-top: 20px;
+    display: flex;
+    justify-content: center;
 }
 
 .nav-links a {
@@ -88,4 +121,30 @@ a:hover {
 
 .my-footer>p>a>span:hover {
     color: #1d4ed8;
+}
+
+@media (max-width: 480px) {
+    header {
+        height: 30px;
+    }
+    
+    .nav-links {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        justify-content: center;
+    }
+
+    .nav-bar-header {
+        position: fixed;
+        top: 35px;
+        left: 1px;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: #07e9a5;
+        padding: 10px;
+        border-radius: 10px;
+    }
 }

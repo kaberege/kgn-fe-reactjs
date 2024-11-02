@@ -12,7 +12,7 @@ const Footer = () => {
     return (
         <div className="my-footer ">
             <p> Copyright &copy; {year} <a
-                href='https://kaberege.github.io/kgn.github.io/' target='_blank'
+                href="https://www.linkedin.com/in/kaberege-godard-nestor-53a0b4215" target='_blank'
                 title='Visit kgn website'>
                 <span>KGN</span>
             </a>

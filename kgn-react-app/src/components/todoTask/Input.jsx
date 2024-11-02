@@ -9,7 +9,8 @@ export default function Input({ todos }) {
         setName(e.target.value);
     }
 
-    function addItems() {
+    function addItems(e) {
+        e.preventDefault();
         if (name === "") {
             alert("Please! Add an item.");
         } else {
@@ -20,17 +21,17 @@ export default function Input({ todos }) {
     }
 
     return (
-        <div className="todo-input-button">
+        <form className="todos-input-button">
             <input
-                maxLength={13}
+            maxLength={10}
                 type="text"
                 placeholder="Type here..."
                 value={name}
                 onChange={handleChange}
             />
-            <button 
-            onClick={addItems}
+            <button
+                onClick={addItems}
             >Add +</button>
-        </div>
+        </form>
     );
 }
