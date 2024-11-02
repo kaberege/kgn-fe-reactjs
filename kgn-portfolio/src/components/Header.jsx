@@ -11,7 +11,7 @@ export default function Header({ mode, handleMode }) {
 
     return (
         <header className='sticky top-0  z-10 '>
-            <nav className={`${mode ? "dark-nav" : "light-nav"} shadow-md`}>
+            <nav className={`${mode ? "dark-nav" : "light-nav"} shadow-md transition-colors duration-300`}>
                 <div className='max-w-7xl mx-auto flex flex-row p-1 sm:py-2 max-xl:px-2 '>
                     <div className='flex flex-row flex-grow items-center'>
                         <img
@@ -19,7 +19,7 @@ export default function Header({ mode, handleMode }) {
                             alt="kgn logo"
                             title='kgn logo'
                             className='w-24 h-7 sm:w-32 sm:h-10 cursor-pointer rounded-sm' />
-                        <p className='max-lg:hidden dark:text-white font-bold'>
+                        <p className='max-lg:hidden dark:text-white font-bold transition-colors duration-300'>
                             <span className='mx-3'>|</span>
                             Software developer
                         </p>
@@ -27,34 +27,34 @@ export default function Header({ mode, handleMode }) {
                     <div
                         onClick={() => setHideNav(false)}
                         className=' flex text-2xl items-center justify-center sm:hidden font-bold flex-row w-9 h-9 hover:bg-slate-400 rounded-full cursor-pointer' >
-                        <FaBars />
+                        <FaBars className='dark:text-white' />
                     </div>
                     <div
-                        style={{ transition: "right 0.4s linear" }}
+                        style={{ transition: "right 0.3s linear" }}
                         className={`flex flex-row max-sm:flex-col shadow-lg sm:gap-10 ${hideNav ? "max-sm:-right-3/4 max-sm:overflow-hidden" : "max-sm:right-0 max-sm:w-1/2"} max-sm:h-full max-sm:fixed max-sm:top-0  max-sm:p-2 max-sm:bg-slate-300 max-sm:dark:bg-slate-600 transition-colors duration-300`}
                     >
                         <div
                             onClick={() => setHideNav(true)}
                             className=' flex text-2xl items-center justify-center ml-auto sm:hidden font-bold w-9 h-9 hover:bg-slate-400 rounded-full cursor-pointer' >
-                            <FaWindowClose />
+                            <FaWindowClose className='dark:text-white' />
                         </div>
                         <ul className="flex flex-row max-sm:flex-col items-center gap-3 max-sm:gap-5 max-sm:mt-8">
-                            <li className='flex items-center dark:text-white hover:underline font-bold'><a href="#about">About</a></li>
-                            <li className='flex items-center dark:text-white hover:underline font-bold'><a href="#projects">Projects</a></li>
-                            <li className='flex items-center dark:text-white hover:underline font-bold'><a href="#contact">Contact</a></li>
-                            <li className='flex items-center dark:text-white hover:underline font-bold'><a href="#resume">Resume</a></li>
+                            <li className='flex items-center dark:text-white border-black dark:border-white  hover:border-b-2 dark:hover:border-b-2 font-bold transition-colors duration-300'><a href="#about">About</a></li>
+                            <li className='flex items-center dark:text-white border-black dark:border-white hover:border-b-2 dark:hover:border-b-2  font-bold transition-colors duration-300'><a href="#projects">Projects</a></li>
+                            <li className='flex items-center dark:text-white border-black dark:border-white hover:border-b-2 dark:hover:border-b-2  font-bold transition-colors duration-300'><a href="#contact">Contact</a></li>
+                            <li className='flex items-center dark:text-white border-black dark:border-white hover:border-b-2 dark:hover:border-b-2  font-bold transition-colors duration-300'><a href="#resume">Resume</a></li>
                             <li className='flex items-center'>
                                 <div
                                     title='Toggle light/dark mode'
-                                    className={`w-7 h-4 relative bg-white rounded-full cursor-pointer flex items-center`}
+                                    className={`w-7 h-4 relative bg-black dark:bg-white rounded-full cursor-pointer flex items-center transition-colors duration-300`}
                                     onClick={() => handleMode(prev => !prev)}
                                 >
-                                    <div className={`absolute w-3 h-3 bg-black rounded-full dark:right-0 transition duration-1000`} ></div>
+                                    <div className={`absolute w-3 h-3 bg-white dark:bg-black rounded-full dark:right-0 transition-all duration-300`} ></div>
                                 </div>
                             </li>
                         </ul>
                         <ul className="flex items-center justify-center flex-row gap-2 max-md:hidden">
-                            <li className='sm:w-7 sm:h-7 sm:rounded-full sm:hover:bg-red-400 flex items-center justify-center cursor-pointer'>
+                            <li className='sm:w-7 sm:h-7 sm:rounded-full sm:hover:bg-red-400 flex items-center justify-center cursor-pointer transition-colors duration-300'>
                                 <a
                                     href="https://www.linkedin.com/in/kaberege-godard-nestor-53a0b4215"
                                     alt="LinkedIn kgn"
@@ -76,7 +76,7 @@ export default function Header({ mode, handleMode }) {
                                     <FaDiscord className='font-bold text-xl' />
                                 </a>
                             </li>
-                            <li className='sm:w-7 sm:h-7 sm:rounded-full sm:hover:bg-red-400 flex items-center justify-center cursor-pointer'>
+                            <li className='sm:w-7 sm:h-7 sm:rounded-full sm:hover:bg-red-400 flex items-center justify-center cursor-pointer transition-colors duration-300'>
                                 <a
                                     href="https://x.com/Kaberege_gn"
                                     target="_blank"
@@ -87,7 +87,7 @@ export default function Header({ mode, handleMode }) {
                                     <FaXTwitter className='font-bold text-xl' />
                                 </a>
                             </li>
-                            <li className='sm:w-7 sm:h-7 sm:rounded-full sm:hover:bg-red-400 flex items-center justify-center cursor-pointer'>
+                            <li className='sm:w-7 sm:h-7 sm:rounded-full sm:hover:bg-red-400 flex items-center justify-center cursor-pointer transition-colors duration-300'>
                                 <a
                                     href="https://www.instagram.com/kgn_ke_hong/"
                                     target="_blank"
