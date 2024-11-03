@@ -16,7 +16,7 @@ function Project() {
                 </p>
                 <div className='flex flex-row flex-wrap justify-center gap-6 xl:grid xl:grid-cols-3'>
                     <div className='flex flex-col gap-4 w-full sm:w-96 xl:w-auto p-4 bg-slate-400 dark:bg-gray-700 shadow-md rounded-2xl transition-colors duration-300'>
-                        <a href="https://kgn-fe-reactjs.vercel.app/" target='_blank'
+                        <a href="https://kaberege-quiz-app.vercel.app/" target='_blank'
                             title='Click to open'
                             style={{ backgroundImage: `url(${quiz})` }}
                             className={`w-full h-60 relative max-sm:h-52 rounded-2xl cursor-pointer bg-cover bg-center bg-no-repeat`}>
@@ -35,7 +35,7 @@ function Project() {
                         </p>
                     </div>
                     <div className='flex flex-col gap-4 w-full sm:w-96 xl:w-auto  p-4 bg-slate-400 dark:bg-gray-700 shadow-md rounded-2xl transition-colors duration-300'>
-                        <a href="https://kgn-fe-reactjs-zrvz.vercel.app/" target='_blank'
+                        <a href="https://kaberege-tenzies-game.vercel.app/" target='_blank'
                             title='Click to open'
                             style={{ backgroundImage: `url(${tenzy})` }}
                             className={`w-full h-60 relative max-sm:h-52 rounded-2xl cursor-pointer bg-cover bg-center bg-no-repeat`}>

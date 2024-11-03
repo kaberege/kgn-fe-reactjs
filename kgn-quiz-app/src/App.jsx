@@ -45,7 +45,7 @@ export default function App() {
                 <li className='hover:text-cyan-300 transition font-bold'><NavLink to="/" className={({ isActive }) => isActive ? "text-cyan-300" : ""}>Home</NavLink></li>
                 <li className='hover:text-cyan-300 transition font-bold'><NavLink to="/history" className={({ isActive }) => isActive ? "text-cyan-300" : ""}>History</NavLink></li>
                 <li>
-                  <a href='https://kaberege.github.io/kgn.github.io/' target='_blank' className='hover:text-cyan-300 transition font-bold' title='Visit kgn portfolio'>
+                  <a href='https://kaberege-portfolio.vercel.app/' target='_blank' className='hover:text-cyan-300 transition font-bold' title='Visit kgn portfolio'>
                     About</a>
                 </li>
                 <li>
