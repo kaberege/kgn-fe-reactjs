@@ -53,6 +53,7 @@ header {
     height: 60px;
     display: flex;
     align-items: center;
+    z-index: 10;
 }
 
 .home-container {
@@ -105,6 +106,10 @@ a:hover {
     text-decoration: underline;
 }
 
+.bar-nav {
+    display: none;
+}
+
 .my-footer {
     padding: 14px;
     text-align: center;
@@ -123,11 +128,11 @@ a:hover {
     color: #1d4ed8;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 680px) {
     header {
         height: 30px;
     }
-    
+
     .nav-links {
         margin-top: 20px;
         display: flex;
@@ -137,14 +142,37 @@ a:hover {
     }
 
     .nav-bar-header {
+        display: none;
+        ;
+    }
+
+    .nav-hide {
         position: fixed;
-        top: 35px;
+        top: 40px;
         left: 1px;
+        display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        background-color: #07e9a5;
+        background-color: aqua;
         padding: 10px;
         border-radius: 10px;
+        margin-left: 5px;
+        box-shadow: 1px 1px 4px #888f8d;
+        transition: background-color 0.3s linear;
+    }
+
+    .nav-hide:hover {
+        background-color: #44dbae;
+    }
+
+    .bar-nav {
+        display: block;
+        font-size: 20px;
+        font-weight: bold;
+        margin-left: 10px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
     }
 }

@@ -42,7 +42,7 @@ export default function Header({ mode, handleMode }) {
                             <li className='flex items-center dark:text-white border-black dark:border-white  hover:border-b-2 dark:hover:border-b-2 font-bold transition-colors duration-300'><a href="#about">About</a></li>
                             <li className='flex items-center dark:text-white border-black dark:border-white hover:border-b-2 dark:hover:border-b-2  font-bold transition-colors duration-300'><a href="#projects">Projects</a></li>
                             <li className='flex items-center dark:text-white border-black dark:border-white hover:border-b-2 dark:hover:border-b-2  font-bold transition-colors duration-300'><a href="#contact">Contact</a></li>
-                            <li className='flex items-center dark:text-white border-black dark:border-white hover:border-b-2 dark:hover:border-b-2  font-bold transition-colors duration-300'><a href="#resume">Resume</a></li>
+                            <li className='flex items-center dark:text-white border-black dark:border-white hover:border-b-2 dark:hover:border-b-2  font-bold transition-colors duration-300'><a href="https://drive.google.com/file/d/1sJm_h0qf8al6gnfRu3pwhXnwYW9jj0os/view?usp=sharing" target='_blank'>Resume</a></li>
                             <li className='flex items-center'>
                                 <div
                                     title='Toggle light/dark mode'

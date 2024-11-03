@@ -11,6 +11,7 @@
     justify-content: space-around;
     align-items: center;
     margin: 0 auto;
+    z-index: 1;
 }
 
 .title {
@@ -173,7 +174,7 @@
     }
 
     .roll-dice {
-        height: 30px;
+        height: 40px;
         width: 130px;
         font-size: 1rem;
         margin-bottom: 60px;

@@ -1,9 +1,9 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-export default function Header() {
+export default function Header({hide}) {
     return (
-        <nav className="nav-bar-header">
+        <nav className={`nav-bar-header ${!hide && "nav-hide"}`}>
             <NavLink to="/" className={({ isActive }) => isActive ? "active" : "pending"}>
                 Home
             </NavLink>
