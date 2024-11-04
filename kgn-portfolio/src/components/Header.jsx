@@ -1,7 +1,7 @@
 
 
 import React, { useState } from 'react';
-import logo from "../assets/logo-png2.png";
+import favicon from "../assets/favicon.jpg";
 import { FaXTwitter } from "react-icons/fa6";
 import { FaBars, FaWindowClose, FaLinkedin, FaDiscord, FaInstagram } from "react-icons/fa";
 
@@ -12,13 +12,13 @@ export default function Header({ mode, handleMode }) {
     return (
         <header className='sticky top-0  z-10 '>
             <nav className={`${mode ? "dark-nav" : "light-nav"} shadow-md transition-colors duration-300`}>
-                <div className='max-w-7xl mx-auto flex flex-row p-1 sm:py-2 max-xl:px-2 '>
+                <div className='max-w-7xl mx-auto flex flex-row p-1 max-xl:px-2 '>
                     <div className='flex flex-row flex-grow items-center'>
                         <img
-                            src={logo}
+                            src={favicon}
                             alt="kgn logo"
                             title='kgn logo'
-                            className='w-24 h-7 sm:w-32 sm:h-10 cursor-pointer rounded-sm' />
+                            className='w-7 h-7 sm:w-11 sm:h-11 cursor-pointer rounded-full' />
                         <p className='max-lg:hidden dark:text-white font-bold transition-colors duration-300'>
                             <span className='mx-3'>|</span>
                             Software developer
@@ -26,7 +26,7 @@ export default function Header({ mode, handleMode }) {
                     </div>
                     <div
                         onClick={() => setHideNav(false)}
-                        className=' flex text-2xl items-center justify-center sm:hidden font-bold flex-row w-9 h-9 hover:bg-slate-400 rounded-full cursor-pointer' >
+                        className=' flex text-xl items-center justify-center sm:hidden font-bold flex-row w-7 h-7 hover:bg-slate-400 rounded-full cursor-pointer' >
                         <FaBars className='dark:text-white' />
                     </div>
                     <div
@@ -35,7 +35,7 @@ export default function Header({ mode, handleMode }) {
                     >
                         <div
                             onClick={() => setHideNav(true)}
-                            className=' flex text-2xl items-center justify-center ml-auto sm:hidden font-bold w-9 h-9 hover:bg-slate-400 rounded-full cursor-pointer' >
+                            className=' flex text-xl items-center justify-center ml-auto sm:hidden font-bold w-7 h-7 hover:bg-slate-400 rounded-full cursor-pointer' >
                             <FaWindowClose className='dark:text-white' />
                         </div>
                         <ul className="flex flex-row max-sm:flex-col items-center gap-3 max-sm:gap-5 max-sm:mt-8">
