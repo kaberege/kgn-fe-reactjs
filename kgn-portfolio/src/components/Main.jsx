@@ -22,14 +22,15 @@ const Main = ({ mode }) => {
 
                             </div>
                             <a href='mailto:kabgnestor@gmail.com'
-                                className='text-sm absolute left-4 top-4 w-16 h-16  flex items-center justify-center bg-gradient-to-b from-slate-400 via-orange-500 to-green-900 rounded-full font-semibold'
+                                className='text-sm absolute left-4 top-4 w-16 h-16  flex items-center justify-center bg-gradient-to-b from-slate-400 via-orange-500 to-green-800 rounded-full font-semibold'
                             >
                                 Hire Me
                             </a>
 
                         </div>
                     </div>
-                </div >
+
+                </div>
             </div>
         </main >
     )

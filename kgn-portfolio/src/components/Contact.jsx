@@ -84,7 +84,7 @@ export default function Contact() {
                     <div className="face bottom"><img src={spaceThree} alt="Bottom" /></div>
                     <div className="face behind"><img src={profile} alt="Bottom" /></div>
                 </div>
-                <div className='relative w-full xl:max-w-md bg-white dark:bg-gray-800 p-6 rounded-3xl max-sm:mt-10 max-xl:mt-20 transition-colors duration-300'>
+                <div className='relative w-full xl:max-w-md bg-gray-50 dark:bg-gray-800 p-6 rounded-3xl max-sm:mt-10 max-xl:mt-20 transition-colors duration-300'>
                     <h2 className='text-4xl max-sm:text-2xl font-bold mb-5 dark:text-stone-100'>Contact Me</h2>
                     <a
                         href="https://www.linkedin.com/in/kaberege-godard-nestor-53a0b4215"
