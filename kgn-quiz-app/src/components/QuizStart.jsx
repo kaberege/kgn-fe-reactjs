@@ -37,7 +37,7 @@ export default function QuizStart() {
         } finally {
             setLoading(false);
         }
-    };
+    }
 
     //Function that update user selected quiz parameters
     const handleChange = (e) => {
@@ -46,7 +46,7 @@ export default function QuizStart() {
             ...prev,
             [name]: value
         }));
-    };
+    }
 
     //Function for triggering quiz fetch action
     const handleSubmit = (e) => {
@@ -66,7 +66,7 @@ export default function QuizStart() {
             setError({});
             setQuizCategories([]);
         }
-    };
+    }
 
     return (
         <div className="max-sm:p-0 p-5 text-center">
