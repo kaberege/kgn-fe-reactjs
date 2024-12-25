@@ -28,12 +28,18 @@ interface WeatherDataTypes {
 
 export default function WeatherCard() {
   const [weather, setWeather] = useState<WeatherDataTypes | null>(null);
-  const [search, setSearch] = useState<string>("kigali");
+  const [search, setSearch] = useState<string>("");
   const [serchError, setSearchError] = useState<string>("");
 
   useEffect(() => {
-    weatherDetails();
-
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(position => {
+        const { latitude, longitude } = position.coords;
+        FetchLatLongData(latitude, longitude);
+      });
+    } else {
+      console.log("Geolocation is not supported by this browser.");
+    }
   }, []);
 
   function weatherConditions(condition: string) {
@@ -98,6 +104,19 @@ export default function WeatherCard() {
 
   }
 
+  async function FetchLatLongData(lat: number, lon: number) {
+    const id: string = "3d735c169cd8481b1c8153c9753f5971";
+    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&APPID=${id}&units=metric`;
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+      console.log(data);
+      setWeather(data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setSearchError("");
@@ -114,7 +133,7 @@ export default function WeatherCard() {
       <SearchBar search={search} setSearch={setSearch} handleSubmit={handleSubmit} />
       {serchError && <p>{serchError}</p>}
       {
-        weather !== null && weather.cod !== "404"? (
+        weather !== null && weather.cod !== "404" ? (
           <div className='flex flex-col gap-4 justify-center'>
             <div className='flex flex-row items-center justify-center mt-7 gap-1'>
               <h2 className='text-2xl font-bold'>{weather.name},</h2>
@@ -127,7 +146,7 @@ export default function WeatherCard() {
             </div>
             <div className='flex flex-row gap-6 w-full p-3 justify-center bg-slate-200 rounded-md'>
               <div className='flex flex-row items-center gap-1'><WiHumidity size={30} /><p className='flex flex-col'><span className='text-2xl font-semibold'>{weather.main.humidity}%</span><span>Humidity</span></p></div>
-              <div className='flex flex-row items-center gap-1'><SiTailwindcss size={30} /><p className='flex flex-col'><span className='text-2xl font-semibold'>{Math.round((weather.wind.speed)*3.6)}km/h</span><span>Wind Speed</span></p></div>
+              <div className='flex flex-row items-center gap-1'><SiTailwindcss size={30} /><p className='flex flex-col'><span className='text-2xl font-semibold'>{Math.round((weather.wind.speed) * 3.6)}km/h</span><span>Wind Speed</span></p></div>
             </div>
           </div>
         ) : (<p>{weather !== null && weather.message}</p>)

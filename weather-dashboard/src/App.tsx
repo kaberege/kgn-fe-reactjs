@@ -1,4 +1,4 @@
-import react from 'react'
+//import react from 'react'
 import "./index.css"
 import { Outlet } from 'react-router-dom'
 
