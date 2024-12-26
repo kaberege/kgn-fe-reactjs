@@ -30,6 +30,8 @@ export default function WeatherCard() {
   const [weather, setWeather] = useState<WeatherDataTypes | null>(null);
   const [search, setSearch] = useState<string>("");
   const [serchError, setSearchError] = useState<string>("");
+  const [load, setLoad] = useState<string>("");
+  const [time, setTime] = useState<number>(30);
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -40,6 +42,21 @@ export default function WeatherCard() {
     } else {
       console.log("Geolocation is not supported by this browser.");
     }
+  }, []);
+
+  useEffect(() => {
+    setTime(30);
+    let timer = setInterval(() => {
+      setTime(prev => {
+        if (prev > 1) {
+          return prev - 1
+        } else {
+          return 30;
+        }
+      });
+    }, 1000);
+    return () => clearInterval(timer);
+
   }, []);
 
   function weatherConditions(condition: string) {
@@ -91,15 +108,17 @@ export default function WeatherCard() {
   }
 
   const weatherDetails = async () => {
+    setLoad("Loading...");
     try {
       const data = await FetchWeatherData(search);
       console.log(data);
       setWeather(data);
     } catch (e) {
-      console.log(e, "Failed to fetch!");
-
+      console.log(e);
+      setSearchError("Failed to fetch!");
     } finally {
       setSearch("");
+      setLoad("");
     }
 
   }
@@ -107,6 +126,7 @@ export default function WeatherCard() {
   async function FetchLatLongData(lat: number, lon: number) {
     const id: string = "3d735c169cd8481b1c8153c9753f5971";
     const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&APPID=${id}&units=metric`;
+    setLoad("Loading...");
     try {
       const response = await fetch(url);
       const data = await response.json();
@@ -114,12 +134,16 @@ export default function WeatherCard() {
       setWeather(data);
     } catch (error) {
       console.error(error);
+      setSearchError("Failed to fetch!");
+    } finally {
+      setLoad("");
     }
   }
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setSearchError("");
+    setWeather(null);
     if (search === "") {
       setSearchError("Please enter a search term")
     } else {
@@ -131,9 +155,11 @@ export default function WeatherCard() {
   return (
     <div className='bg-slate-300 max-w-96 mx-auto rounded-md p-2'>
       <SearchBar search={search} setSearch={setSearch} handleSubmit={handleSubmit} />
+      {<p>{time}</p>}
       {serchError && <p>{serchError}</p>}
+      {load && <p className='text-center mt-3'>{load}</p>}
       {
-        weather !== null && weather.cod !== "404" ? (
+        weather !== null && Object.keys(weather).length > 2 ? (
           <div className='flex flex-col gap-4 justify-center'>
             <div className='flex flex-row items-center justify-center mt-7 gap-1'>
               <h2 className='text-2xl font-bold'>{weather.name},</h2>
