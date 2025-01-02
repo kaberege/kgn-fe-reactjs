@@ -6,8 +6,14 @@ import { TiWeatherPartlySunny } from 'react-icons/ti';
 import { WiHumidity } from 'react-icons/wi';
 import { SiTailwindcss } from 'react-icons/si';
 
+//localStorage.clear()
+
 interface WeatherDataTypes {
   cod: string | number;
+  coord: {
+    lon: number;
+    lat: number;
+  };
   message: string;
   name: string;
   main: {
@@ -31,7 +37,8 @@ export default function WeatherCard() {
   const [search, setSearch] = useState<string>("");
   const [serchError, setSearchError] = useState<string>("");
   const [load, setLoad] = useState<string>("");
-  const [time, setTime] = useState<number>(30);
+  const [time, setTime] = useState<number>(1800);
+  const [suggestions, setSuggestions] = useState<string[]>([]);
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -45,19 +52,35 @@ export default function WeatherCard() {
   }, []);
 
   useEffect(() => {
-    setTime(30);
-    let timer = setInterval(() => {
-      setTime(prev => {
-        if (prev > 1) {
-          return prev - 1
-        } else {
-          return 30;
-        }
-      });
-    }, 1000);
-    return () => clearInterval(timer);
+    const suggestArr = localStorage.getItem("suggestions");
+    const arr: string[] = suggestArr ? JSON.parse(suggestArr) : [];
+    arr.reverse();
+    setSuggestions(arr);
 
   }, []);
+
+  useEffect(() => {
+    if (weather !== null && Object.keys(weather).length > 2) {
+
+      setTime(1800);
+      let timer = setInterval(() => {
+        setTime(prev => {
+          if (prev <= 1) {
+            clearInterval(timer);
+            setWeather(null);
+            const { lat, lon } = weather.coord;
+            FetchLatLongData(lat, lon);
+            return 0;
+          } else {
+            return prev - 1;
+          }
+        });
+      }, 1000);
+
+      return () => clearInterval(timer);
+    }
+
+  }, [weather]);
 
   function weatherConditions(condition: string) {
     let iconImage: React.ReactNode;
@@ -107,12 +130,24 @@ export default function WeatherCard() {
     return <span className={`${iconColor} text-5xl font-bold`}>{iconImage}</span>;
   }
 
-  const weatherDetails = async () => {
+  const weatherDetails = async (value: string) => {
     setLoad("Loading...");
     try {
-      const data = await FetchWeatherData(search);
+      const data = await FetchWeatherData(value);
       console.log(data);
       setWeather(data);
+      const suggestArr = localStorage.getItem("suggestions");
+      const arr: string[] = suggestArr ? JSON.parse(suggestArr) : [];
+
+      while (arr.length > 4) {
+        console.log(arr);
+        arr.splice(0, 1);
+      }
+      
+      if (!arr.includes(search) && Object.keys(data).length > 2) {
+        arr.push(search);
+        localStorage.setItem("suggestions", JSON.stringify(arr));
+      }
     } catch (e) {
       console.log(e);
       setSearchError("Failed to fetch!");
@@ -140,6 +175,15 @@ export default function WeatherCard() {
     }
   }
 
+  function refreshCurrentWeather() {
+    if (weather !== null && Object.keys(weather).length > 2) {
+      setSearch(weather.name);
+      setWeather(null);
+      const { lat, lon } = weather.coord;
+      FetchLatLongData(lat, lon);
+    }
+  }
+
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setSearchError("");
@@ -147,7 +191,7 @@ export default function WeatherCard() {
     if (search === "") {
       setSearchError("Please enter a search term")
     } else {
-      weatherDetails();
+      weatherDetails(search);
     }
 
   }
@@ -157,10 +201,24 @@ export default function WeatherCard() {
       <SearchBar search={search} setSearch={setSearch} handleSubmit={handleSubmit} />
       {<p>{time}</p>}
       {serchError && <p>{serchError}</p>}
-      {load && <p className='text-center mt-3'>{load}</p>}
-      {
+      {load ? <p className='text-center mt-3'>{load}</p> : (
         weather !== null && Object.keys(weather).length > 2 ? (
           <div className='flex flex-col gap-4 justify-center'>
+            <div className=' flex flex-row flex-wrap justify-center gap-2'>
+              {suggestions && suggestions.map((value, index) =>
+                <button
+                  key={index}
+                  onClick={() => weatherDetails(value)}
+                  className='text-yellow-500 font-semibold hover:text-yellow-200'
+                >
+                  {value}
+                </button>
+              )}
+            </div>
+            <button
+              onClick={refreshCurrentWeather}
+              className='border-2'
+            >Refresh</button>
             <div className='flex flex-row items-center justify-center mt-7 gap-1'>
               <h2 className='text-2xl font-bold'>{weather.name},</h2>
               <h3>{weather.sys.country}</h3>
@@ -176,7 +234,7 @@ export default function WeatherCard() {
             </div>
           </div>
         ) : (<p>{weather !== null && weather.message}</p>)
-      }
+      )}
     </div>
   );
 }
