@@ -2,6 +2,7 @@ import quiz from "../assets/quiz-project.jpg";
 import tenzy from "../assets/tenzy-project.jpg";
 import vanilla from "../assets/web-project.jpg";
 import social from "../assets/social.jpg";
+import weather from "../assets/weather.jpg";
 
 export const projects = [
     {
@@ -18,6 +19,50 @@ export const projects = [
             },
             {
                 class: "text-sm bg-green-100 dark:bg-green-800 text-green-800 dark:text-green-200 p-1  rounded-full transition-colors duration-300",
+                content: "#Tailwind CSS"
+            }
+        ]
+    },
+    {
+        link: {
+            href: "https://kaberege.pythonanywhere.com/",
+            background: social
+        },
+        heading: "Social Media API",
+        description: "A comprehensive API, built with Django and Django REST Framework, simulates the functionalities of a social media platform, including post management, user interactions, notifications, JWT-based authentication...",
+        skills: [
+            {
+                class: "text-sm bg-blue-100 dark:bg-blue-800 text-blue-800 dark:text-blue-200 p-1  rounded-full transition-colors duration-300",
+                content: "#Django"
+            },
+            {
+                class: "text-sm bg-green-100 dark:bg-green-800 text-green-800 dark:text-green-200 p-1  rounded-full transition-colors duration-300",
+                content: "#REST API"
+            },
+            {
+                class: "text-sm bg-yellow-100 dark:bg-yellow-800 text-yellow-800 dark:text-yellow-200 p-1 rounded-full transition-colors duration-300",
+                content: "#JWT Authentication"
+            }
+        ]
+    },
+    {
+        link: {
+            href: "https://kgn-weather-dashboard.vercel.app/", 
+            background: weather  
+        },
+        heading: "Weather Dashboard",
+        description: "A weather dashboard built with React, TypeScript, and Tailwind CSS, offering real-time forecasts, temperature, and humidity. Its sleek, responsive design ensures a seamless experience on both desktop and mobile devices for accurate weather updates.",
+        skills: [
+            {
+                class: "text-sm bg-blue-100 dark:bg-blue-800 text-blue-800 dark:text-blue-200 p-1 rounded-full transition-colors duration-300",
+                content: "#React JS"
+            },
+            {
+                class: "text-sm bg-green-100 dark:bg-green-800 text-green-800 dark:text-green-200 p-1 rounded-full transition-colors duration-300",
+                content: "#TypeScript"
+            },
+            {
+                class: "text-sm bg-purple-100 dark:bg-purple-800 text-purple-800 dark:text-purple-200 p-1 rounded-full transition-colors duration-300",
                 content: "#Tailwind CSS"
             }
         ]
@@ -58,26 +103,4 @@ export const projects = [
             }
         ]
     },
-    {
-        link: {
-            href: "https://kaberege.pythonanywhere.com/",
-            background: social
-        },
-        heading: "Social Media API",
-        description: "A comprehensive API, built with Django and Django REST Framework, simulates the functionalities of a social media platform, including post management, user interactions, notifications, JWT-based authentication...",
-        skills: [
-            {
-                class: "text-sm bg-blue-100 dark:bg-blue-800 text-blue-800 dark:text-blue-200 p-1  rounded-full transition-colors duration-300",
-                content: "#Django"
-            },
-            {
-                class: "text-sm bg-green-100 dark:bg-green-800 text-green-800 dark:text-green-200 p-1  rounded-full transition-colors duration-300",
-                content: "#REST API"
-            },
-            {
-                class: "text-sm bg-yellow-100 dark:bg-yellow-800 text-yellow-800 dark:text-yellow-200 p-1 rounded-full transition-colors duration-300",
-                content: "#JWT Authentication"
-            }
-        ]
-    }
 ];
