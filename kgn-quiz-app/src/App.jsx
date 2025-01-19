@@ -34,7 +34,7 @@ export default function App() {
             </div>
             <nav
               style={{ transition: "right 0.3s linear" }}
-              className={`flex flex-row max-sm:flex-col shadow-lg ${hideNav ? "max-sm:-right-3/4 max-sm:overflow-hidden" : "max-sm:right-0 max-sm:w-1/2"} max-sm:h-full max-sm:fixed max-sm:top-0  max-sm:p-2 max-sm:bg-blue-600 max-sm:dark:bg-slate-600 transition-colors duration-300`}
+              className={`flex flex-row max-sm:flex-col ${hideNav ? "max-sm:-right-3/4 max-sm:overflow-hidden" : "max-sm:right-0 max-sm:w-1/2"} max-sm:h-full max-sm:fixed max-sm:top-0  max-sm:p-2 max-sm:bg-blue-600 max-sm:dark:bg-slate-600 transition-colors duration-300`}
             >
               <div
                 onClick={() => setHideNav(true)}

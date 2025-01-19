@@ -2,12 +2,12 @@ import React from 'react'
 import devLaptop from "../assets/devLaptop.jpg";
 import profile from "../assets/kgn-g1.jpg";
 
-const Welcome = ({mode}) => {
+const Welcome = ({ mode }) => {
     return (
         <>
             <section className={`min-h-screen w-full flex flex-col ${!mode ? "bg-light-gradient" : "bg-dark-gradient"} transition-colors duration-300`}>
                 <div className='flex flex-col w-full max-sm:px-4 max-xl:px-10 max-w-6xl mx-auto'>
-                    <h1 className='text-4xl max-sm:text-3xl  md:text-5xl font-bold mt-9 dark:text-white transition-colors duration-300'>
+                    <h1 className='max-sm:text-2xl  sm:text-3xl md:text-4xl font-bold mt-9 dark:text-white transition-colors duration-300'>
                         Hello, I'm <span className="text-yellow-600 dark:text-yellow-300">Kaberege Godard Nestor,</span>
                     </h1>
                     <p className='text-2xl max-sm:text-xl  font-semibold dark:text-white mt-5 transition-colors duration-300'>

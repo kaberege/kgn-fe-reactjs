@@ -10,9 +10,9 @@ export default function Header({ mode, handleMode }) {
     const [hideNav, setHideNav] = useState(true); //handle navigation bar close and open
 
     return (
-        <header className='sticky top-0  z-10 '>
+        <header className='sticky top-0  z-10'>
             <nav className={`${mode ? "dark-nav" : "light-nav"} shadow-md transition-colors duration-300`}>
-                <div className='max-w-7xl mx-auto flex flex-row py-1 px-3 '>
+                <div className='max-w-7xl mx-auto flex flex-row py-1 px-3'>
                     <div className='flex flex-row flex-grow items-center'>
                         <img
                             src={favicon}
@@ -31,7 +31,7 @@ export default function Header({ mode, handleMode }) {
                     </div>
                     <div
                         style={{ transition: "right 0.3s linear" }}
-                        className={`flex flex-row max-sm:flex-col shadow-lg sm:gap-10 ${hideNav ? "max-sm:-right-3/4 max-sm:overflow-hidden" : "max-sm:right-0 max-sm:w-1/2"} max-sm:h-full max-sm:fixed max-sm:top-0  max-sm:p-3 max-sm:bg-slate-300 max-sm:dark:bg-slate-600 transition-colors duration-300`}
+                        className={`flex flex-row max-sm:flex-col sm:gap-10 ${hideNav ? "max-sm:-right-3/4 max-sm:overflow-hidden" : "max-sm:right-0 max-sm:w-1/2"} max-sm:h-full max-sm:fixed max-sm:top-0  max-sm:p-3 max-sm:bg-slate-300 max-sm:dark:bg-slate-600 transition-colors duration-300`}
                     >
                         <div
                             onClick={() => setHideNav(true)}
