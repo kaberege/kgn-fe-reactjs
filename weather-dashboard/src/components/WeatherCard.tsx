@@ -316,7 +316,7 @@ export default function WeatherCard() {
     <div
       className={`${weather !== null && Object.keys(weather).length > 2 && getBackground(weather?.weather[0].main || 'Clear').container}
        w-full max-w-xl mx-auto rounded-lg p-4 max-sm:p-2
-       shadow-lg transition-all dark:text-white text-gray-900`}
+       shadow-lg transition-all dark:text-white text-gray-900 max-sm:mt-6`}
     >
       <div className="flex justify-between items-center w-full max-w-96 mx-auto mb-3">
         {/* Search Bar */}

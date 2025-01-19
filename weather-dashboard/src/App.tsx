@@ -40,7 +40,8 @@ function App() {
           </button>
         </nav>
       </header>
-      <main className="p-4 flex justify-center items-center flex-grow">
+      <main className="p-4 flex flex-col justify-center items-center flex-grow relative">
+        <h1 className="text-xl font-bold sm:hidden absolute top-2">Weather Dashboard</h1>
         <Outlet />
       </main>
       <footer className="bg-gray-800 dark:bg-gray-900 text-white text-center p-2">
