@@ -11,7 +11,7 @@ export default function Header({ mode, handleMode }) {
 
     return (
         <header className='sticky top-0  z-10'>
-            <nav className={`${mode ? "dark-nav" : "light-nav"} shadow-md transition-colors duration-300`}>
+            <nav className={`${mode ? "dark-nav" : "light-nav"} shadow-xl transition-colors duration-300`}>
                 <div className='max-w-7xl mx-auto flex flex-row py-1 px-3'>
                     <div className='flex flex-row flex-grow items-center'>
                         <img
