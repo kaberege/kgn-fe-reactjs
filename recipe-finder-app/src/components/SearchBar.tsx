@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import useRecipeStore from '../store/recipeStore';
+import { FaSearch } from 'react-icons/fa';
 
 // Defining props that will be passed in the SearchBar component
 interface FetchFunction {
@@ -29,7 +30,7 @@ const SearchBar = ({ fetchedData }: FetchFunction) => {
         <div className="">
             <form
                 onSubmit={recipeTerm}
-                className='mx-auto max-w-80 bg-amber-700 mt-7'
+                className='mx-auto w-full max-sm:max-w-50 sm:max-w-80 bg-amber-700 mt-7 flex py-1 sm:py-2 px-2 sm:px-4 rounded-full gap-1 items-center'
             >
                 <input
                     type="search"
@@ -37,12 +38,14 @@ const SearchBar = ({ fetchedData }: FetchFunction) => {
                     value={search}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)}
                     placeholder='Enter a recipe...'
-                    className=' border-2 border-amber-500'
+                    className={`grow max-sm:w-[85%] outline-0 ${error && "border-1 border-red-400"}`}
                 />
-                <button className='border-2 bg-amber-200'>Search</button>
+                <button 
+                className='outline-0 cursor-pointer flex items-center justify-center'
+                ><FaSearch size={17} className='hover:text-amber-300 transition-colors'/></button>
             </form>
 
-            {error && <p className='text-center'>{error}</p>}
+            {error && <p className='text-[18px] text-center text-red-400'>{error}</p>}
         </div>
     )
 }

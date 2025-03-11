@@ -29,9 +29,14 @@ const RecipeCard = () => {
     }, [recipeTerm]);
 
     async function fetchedData(term: string): Promise<void> {
+        setError("");
         setLoad("Loading...");
         try {
             const data: RecipesData[] = await fetchRecipes(term);
+            console.log("found data is: ", data);
+            if (!data) {
+                setError("Item not found");
+            }
             setResults(data);
         } catch (e) {
             console.log(e);
@@ -46,8 +51,8 @@ const RecipeCard = () => {
     return (
         <div>
             <SearchBar fetchedData={fetchedData} />
-            {load ? <p>{load}</p> : (
-                error ? <p>{error}</p> :
+            {load ? <p className='text-center text-[18px] mt-3'>{load}</p> : (
+                error ? <p className='text-center text-[18px] mt-3 text-red-400'>{error}</p> :
                     <div className='w-full max-w-7xl flex max-2xl:flex-row gap-5 justify-center flex-wrap mx-auto bg-red-300'>
                         {
                             results !== null && results.length > 0 && (
@@ -60,7 +65,7 @@ const RecipeCard = () => {
                                         <p>Recipe Title: {recipe.strMeal}</p>
                                         <p>Category: {recipe.strCategory}</p>
                                         <p>Cuisine: {recipe.strArea}</p>
-                                        <p className='text-center'>View details</p>
+                                        <a href="#" target="_blank" rel="noopener noreferrer">View details</a>
                                     </div>
                                 ))
                             )
