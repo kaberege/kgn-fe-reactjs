@@ -19,7 +19,7 @@ const router = createBrowserRouter([
         element: <RecipeCard />     // Recipe card component
       },
       {
-        path: "details/:id",
+        path: "details/:idMeal",
         element: <RecipeDetails />  // Recipe details component
       },
       {
