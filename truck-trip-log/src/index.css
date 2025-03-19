@@ -4,3 +4,28 @@
 body {
     font-family: Georgia, 'Times New Roman', Times, serif;
 }
+
+/* Customizing the default Leaflet marker color */
+.custom-icon.blue {
+    filter: hue-rotate(180deg);
+}
+
+.custom-icon.green {
+    filter: hue-rotate(90deg);
+}
+
+.custom-icon.red {
+    filter: hue-rotate(270deg);
+}
+
+/* Style for the route stop icon */
+.route-stop-icon {
+    width: 12px;
+    height: 12px;
+    background-color: #ff0000;
+    border-radius: 50%;
+    border: 2px solid #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
