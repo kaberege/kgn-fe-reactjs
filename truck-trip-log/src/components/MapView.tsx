@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import L, { Map, LeafletMouseEvent } from "leaflet"; // Import Leaflet library
 import fuel from "../assets/fuel.jpg"
+import { useLocation } from 'react-router-dom';
+
 
 const MapView = () => {
   // Set different locations within Paris
@@ -12,6 +14,7 @@ const MapView = () => {
   const [loading, setLoading] = useState<boolean>(false); // State to handle loading
   const [error, setError] = useState<string | null>(null); // State to handle errors
   const mapRef = useRef<Map | null>(null);
+  const { currentCycleUsed } = useLocation().state;
 
   useEffect(() => {
     // Initializing the map with the current location as the center
@@ -86,6 +89,9 @@ const MapView = () => {
           const routeLength = data.routes[0].distance; // In meters
           const routeDurationInSeconds = data.routes[0].duration; // In seconds
           const routeGeometry = routeGeoJSON.coordinates; // Array of coordinates
+          // Calculating total route distance including the current location, pickup, and dropoff
+          setRouteDistance(routeLength / 1000); // Converted to km
+          setRouteDuration(routeDurationInSeconds / 3600); // Converted to hours
 
           // Clear previous route (if any)
           mapRef.current?.eachLayer((layer) => {
@@ -150,15 +156,50 @@ const MapView = () => {
                 accumulatedDistance = 0; // Reset distance for the next fueling station
               }
             }
+
+            // Calculate hours worked per day and create shaded path sections
+            // Visualizing driving time and shading off-duty periods
+
+            // Given conditions
+            const totalDrivingTimeInHours = 70; // 70 hours over 8 days
+            const totalDays = 8; // 8 day
+
+            // Calculate driving time per day
+            const drivingTimePerDay = totalDrivingTimeInHours / totalDays; // 8.75 hours per day
+
+            const drivingDurationInHours = routeDurationInSeconds / 3600; // Total route duration in hours
+            const drivingTimePerKm = drivingDurationInHours / routeLength; // Approximate driving time per km
+
+            let accumulatedTimeDuty = 0;
+            let accumulatedDistanceDuty = 0;
+
+            // Assuming 8.75 hours of driving per day and visualizing the driving and resting periods
+            for (let i = 1; i < routeGeometry.length; i++) {
+              const [lng1, lat1] = routeGeometry[i - 1];
+              const [lng2, lat2] = routeGeometry[i];
+
+              // Calculate the distance between consecutive points (Haversine formula)
+              const distance = L.latLng(lat1, lng1).distanceTo(L.latLng(lat2, lng2)); // In meters
+              accumulatedDistanceDuty += distance;
+
+              // Calculate the accumulated driving time
+              accumulatedTimeDuty += distance * drivingTimePerKm;
+
+              // Add shading for off-duty (rest) time when accumulatedTime exceeds the allowed driving time
+              if (accumulatedTimeDuty >= drivingTimePerDay) { // Assuming the driver rests after driving for 8.75 hours
+                //L.marker([lat1, lng1]).addTo(mapRef.current).bindPopup('Start');
+                //L.marker([lat2, lng2]).addTo(mapRef.current).bindPopup('End');
+
+                // Create polyline with text indicating rest period
+                L.polyline([[lat1, lng1], [lat2, lng2]], { color: 'yellow', weight: 6, opacity: 1 })
+                  .addTo(mapRef.current)
+                  .bindPopup('Rest Period (off-duty time)')
+                  .bindTooltip("Rest Period (off-duty time)"); // Add tooltip with text
+
+                accumulatedTimeDuty = 0; // Reset driving time after a rest period
+              }
+            }
           }
-
-          // Calculating total route distance including the current location, pickup, and dropoff
-          const distance = data.routes[0].distance / 1000; // Convert from meters to kilometers
-          const duration = data.routes[0].duration / 60; // Convert from seconds to minutes
-
-          // Setting state to update UI with the calculated distance and duration
-          setRouteDistance(distance);
-          setRouteDuration(duration);
         }
       } catch (error) {
         console.error("Error fetching route data:", error);
@@ -193,12 +234,17 @@ const MapView = () => {
     };
   }, [currentLocation, pickupLocation, dropoffLocation]);
 
+  // Navigate to ELDLogView with currentCycleUsed passed as state
+  const viewLogs = () => ({
+    state: currentCycleUsed
+  });
+
   return <div>
     {/* Map container */}
     <div id="map" style={{ height: "500px", width: "100%" }} />
 
     {/* Display route information */}
-    <div className="absolute top-9 sm:top-13 right-2 z-[1000] cursor-pointer p-4 bg-white dark:bg-gray-800 rounded-lg shadow-lg max-w-[150px] sm:max-w-[180px] md:max-w-[200px] lg:max-w-[250px] xl:max-w-[300px] w-full">
+    <div className="absolute top-9 sm:top-13 right-2 z-[1000] p-3 bg-white dark:bg-gray-800 rounded-lg shadow-lg max-w-[150px] sm:max-w-[180px] md:max-w-[200px] lg:max-w-[250px] xl:max-w-[300px] w-full">
       <h3 className="text-xs sm:text-sm font-semibold text-gray-800 dark:text-white mb-1">Route Information</h3>
 
       <div className="text-xs sm:text-xs font-medium text-gray-700 dark:text-gray-300">
@@ -234,6 +280,7 @@ const MapView = () => {
           "Unknown error"
         )}
       </div>
+      <button onClick={viewLogs} className="mt-2 w-17 text-[11px] cursor-pointer font-semibold bg-green-500 p-1 rounded">View Logs</button>
     </div>
 
   </div>;
