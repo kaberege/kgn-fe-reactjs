@@ -7,6 +7,9 @@ function App() {
   const [navBar, setNavBar] = useState<boolean>(true);  // Toggle navigtion bar on small devices
   const [mode, setMode] = useState<boolean>(false);  // Toggle light/dark mode state
 
+
+  //no year!!
+
   return (
     <div className={`flex flex-col bg-violet-200 min-h-screen ${mode && "dark"}`}>
       <header className="bg-linear-to-r from-sky-800 to-sky-900  dark:bg-linear-to-r dark:from-slate-700 dark:to-slate-800  shadow-md">
