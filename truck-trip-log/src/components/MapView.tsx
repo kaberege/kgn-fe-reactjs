@@ -1,13 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import L, { Map, LeafletMouseEvent } from "leaflet"; // Import Leaflet library
 import fuel from "../assets/fuel.jpg"
-import { useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { MdAdd, MdRemove } from 'react-icons/md';
+import { useTripStore } from "../state-store/useZustand";
 
 
 const MapView = () => {
-  const { state } = useLocation();
-  const { currentLocation, pickupLocation, dropoffLocation, currentCycleUsed, currentLocationName, pickupLocationName, dropoffLocationName } = state;
+  const { currentLocation, pickupLocation, dropoffLocation, currentCycleUsed, currentLocationName, pickupLocationName, dropoffLocationName } = useTripStore(state => state);
   const [routeDistance, setRouteDistance] = useState<number | null>(null);  // State to store distance
   const [routeDuration, setRouteDuration] = useState<number | null>(null);  // State to store duration
   const [loading, setLoading] = useState<boolean>(false); // State to handle loading
@@ -16,15 +16,21 @@ const MapView = () => {
   const [isExpanded, setIsExpanded] = useState(true); // State to handle route information toggle visibility
 
   useEffect(() => {
-    // Initializing the map with the current location as the center
-    const [currentLat, currentLng] = currentLocation.split(",").map(Number);
-    mapRef.current = L.map('map').setView([currentLat, currentLng], 5); // Set zoom level to fit entire route
+    // Initialize map only if it's not already initialized
+    if (!mapRef.current && currentLocation) {
+      console.log("Initializing map...");
 
-    // This adds OpenStreetMap tile layer to the map
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 19,
-      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-    }).addTo(mapRef.current);
+      const [currentLat, currentLng] = currentLocation.split(",").map(Number);
+      // Initialize the map and set the view
+      mapRef.current = L.map('map').setView([currentLat, currentLng], 5);
+
+      // Add tile layer and other map setup...
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(mapRef.current);
+    } else if (mapRef.current && currentLocation) {
+      // If mapRef.current is already set, reset the view
+      const [currentLat, currentLng] = currentLocation.split(",").map(Number);
+      //mapRef.current.setView([currentLat, currentLng], 5);
+    }
 
     // Create a custom icon with the default Leaflet marker shape and custom color
     const createCustomIcon = (color: string) => {
@@ -41,7 +47,8 @@ const MapView = () => {
         className: `custom-icon ${color}`, // Adding the color class for styling
       });
     };
-
+// Only add markers if mapRef.current is initialized
+if (mapRef.current) {
     // Adding custom icons for different locations
     const currentIcon = createCustomIcon("blue");
     const pickupIcon = createCustomIcon("green");
@@ -79,9 +86,8 @@ const MapView = () => {
           (1 hour break)
         `);
     }
-
     fetchRoute(); // Invoking fetchRoute
-
+  }
     // Defining the onMapClick function
     var popup = L.popup();
     const onMapClick = (e: LeafletMouseEvent) => {
@@ -92,14 +98,13 @@ const MapView = () => {
     };
 
     // Adding the event listener for the map click
-    mapRef.current.on('click', onMapClick);
-
+   // mapRef.current.on('click', onMapClick);
 
     // Cleanup map on unmount
     return () => {
       if (mapRef.current) {
         mapRef.current.remove();
-        mapRef.current.off('click', onMapClick);
+        //mapRef.current.off('click', onMapClick);
       }
     };
   }, [currentLocation, pickupLocation, dropoffLocation]);
@@ -239,11 +244,6 @@ const MapView = () => {
     setIsExpanded(prevState => !prevState);
   };
 
-  // Navigate to ELDLogView with currentCycleUsed passed as state
-  const viewLogs = () => ({
-    state: currentCycleUsed
-  });
-
   return (
     <div className="relative">
       {/* Map container */}
@@ -292,9 +292,11 @@ const MapView = () => {
           )}
 
           {!loading && !error && (
-            <button onClick={viewLogs} className="mt-2 w-17 text-[11px] cursor-pointer font-semibold bg-green-500 p-1 rounded">
-              View Logs
-            </button>
+            <Link to={`/eld-log/${currentCycleUsed}`} state={{ estimatedRouteTime: routeDuration }} >
+              <button className="mt-2 w-17 text-[11px] cursor-pointer font-semibold bg-green-500 p-1 rounded">
+                View Logs
+              </button>
+            </Link>
           )}
         </div>
       </div>

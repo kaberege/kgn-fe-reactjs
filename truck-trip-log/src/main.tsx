@@ -22,7 +22,7 @@ const router = createBrowserRouter([
         element: <MapPage />  // component
       },
       {
-        path: "eld-log",
+        path: "eld-log/:cycleId",
         element: <ELDLogView />     //  component
       },
     ]

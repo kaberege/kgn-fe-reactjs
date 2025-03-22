@@ -1,22 +1,23 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import {TripDetails, LocationData} from "../types-store/types"
+import { useTripStore } from '../state-store/useZustand';
 
 const TripForm = () => {
-  const [currentLocation, setCurrentLocation] = useState<string>('');
-  const [pickupLocation, setPickupLocation] = useState<string>('');
-  const [dropoffLocation, setDropoffLocation] = useState<string>('');
-  const [currentCycleUsed, setCurrentCycleUsed] = useState<string>('');
-  const [errorMessage, setErrorMessage] = useState<string>('');
-  const [loading, setLoading] = useState<boolean>(false);
+    // Set driver trip details
+  const [formData, setFormData] = useState<TripDetails>({
+    currentLocation: '',
+    pickupLocation: '',
+    dropoffLocation: '',
+    currentCycleUsed: '',
+  });
+
+  const [errorMessage, setErrorMessage] = useState<string>('');  // Set error message
+  const [loading, setLoading] = useState<boolean>(false); // Set loading state
+  const setTripDetails = useTripStore((state) => state.setTripDetails);
 
   const navigate = useNavigate();
-
-  // Defining coords of searched location
-  interface LocationData {
-    lat: string;
-    lng: string;
-  }
 
   // Fetching coords of a specific location
   const fetchCoordinates = async (location: string) => {
@@ -46,11 +47,8 @@ const TripForm = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
 
-    // Constants for the driver's time limits
-    const MAX_HOURS_PER_DAY: number = 8.75; // MAX_HOURS_PER_8_DAYS = 70;
-
     // Validate the current cycle used input
-    const cycleUsed = parseFloat(currentCycleUsed);
+    const cycleUsed = parseFloat(formData.currentCycleUsed);
 
     // Ensure the current cycle used is a valid number and is non-negative
     if (isNaN(cycleUsed) || cycleUsed < 0) {
@@ -58,34 +56,36 @@ const TripForm = () => {
       return;
     }
 
-    // Check if the current cycle used exceeds the max hours per day (8.75 hours)
-    if (cycleUsed > MAX_HOURS_PER_DAY) {
-      setErrorMessage(`You cannot exceed ${MAX_HOURS_PER_DAY} hours per day. Please adjust your hours.`);
-      return;
-    }
-
     // Clear error message if validation passes
     setErrorMessage('');
 
-    const currentCoords = await fetchCoordinates(currentLocation);
-    const pickupCoords = await fetchCoordinates(pickupLocation);
-    const dropoffCoords = await fetchCoordinates(dropoffLocation);
+    const currentCoords = await fetchCoordinates(formData.currentLocation);
+    const pickupCoords = await fetchCoordinates(formData.pickupLocation);
+    const dropoffCoords = await fetchCoordinates(formData.dropoffLocation);
     if (currentCoords && pickupCoords && dropoffCoords) {
-      // Navigate and pass the coordinates/location as state to MapView
-      navigate('/map', {
-        state: {
-          currentLocation: currentCoords.coords,
-          pickupLocation: pickupCoords.coords,
-          dropoffLocation: dropoffCoords.coords,
-          currentCycleUsed: currentCycleUsed,
-          currentLocationName: currentCoords.name,
-          pickupLocationName: pickupCoords.name,
-          dropoffLocationName: dropoffCoords.name
-        }
+      setTripDetails({
+        currentLocation: currentCoords.coords,
+        pickupLocation: pickupCoords.coords,
+        dropoffLocation: dropoffCoords.coords,
+        currentCycleUsed: formData.currentCycleUsed,
+        currentLocationName: currentCoords.name,
+        pickupLocationName: pickupCoords.name,
+        dropoffLocationName: dropoffCoords.name,
       });
+      // Navigate and pass the coordinates/location as state to MapView
+      navigate('/map');
     } else {
       alert('One or more locations could not be geocoded.');
     }
+  };
+
+  // Handle input changes
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
 
   return (
@@ -94,33 +94,37 @@ const TripForm = () => {
       <form onSubmit={handleSubmit} className="space-y-4">
         <input
           type="text"
+          name="currentLocation"
           placeholder="Current Location"
-          value={currentLocation}
-          onChange={(e) => setCurrentLocation(e.target.value)}
+          value={formData.currentLocation}
+          onChange={handleChange}
           className="w-full p-2 border border-gray-300 rounded"
           required
         />
         <input
           type="text"
+          name="pickupLocation"
           placeholder="Pickup Location"
-          value={pickupLocation}
-          onChange={(e) => setPickupLocation(e.target.value)}
+          value={formData.pickupLocation}
+          onChange={handleChange}
           className="w-full p-2 border border-gray-300 rounded"
           required
         />
         <input
           type="text"
+          name="dropoffLocation"
           placeholder="Dropoff Location"
-          value={dropoffLocation}
-          onChange={(e) => setDropoffLocation(e.target.value)}
+          value={formData.dropoffLocation}
+          onChange={handleChange}
           className="w-full p-2 border border-gray-300 rounded"
           required
         />
         <input
           type="number"
+          name="currentCycleUsed"
           placeholder="Current Cycle Used (hrs)"
-          value={currentCycleUsed}
-          onChange={(e) => setCurrentCycleUsed(e.target.value)}
+          value={formData.currentCycleUsed}
+          onChange={handleChange}
           className="w-full p-2 border border-gray-300 rounded"
           required
         />
