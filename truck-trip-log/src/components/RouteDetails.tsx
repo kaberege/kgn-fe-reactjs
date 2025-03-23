@@ -4,11 +4,11 @@ import { Link } from 'react-router-dom';
 import { MdAdd, MdRemove } from 'react-icons/md';
 import { RouteDetailsProps } from '../types-store/types';
 
-const RouteDetails = ({ error, loading, fetchRoute, routeDistance, routeDuration, currentCycleUsed }:RouteDetailsProps) => {
-  
+const RouteDetails = ({ error, loading, fetchRoute, routeDistance, routeDuration, currentCycleUsed }: RouteDetailsProps) => {
+
   const [isExpanded, setIsExpanded] = useState(true); // State to handle route information toggle visibility
 
-   //Function for Distance Handling
+  //Function for Distance Handling
   const formatDistance = (distance: number | null) => {
     if (distance === null) return "No results found!";
     return distance < 1000 ? `${distance.toFixed(2)} meter${distance > 1 ? "s" : ""}` : `${(distance / 1000).toFixed(2)} km`;
@@ -86,7 +86,7 @@ const RouteDetails = ({ error, loading, fetchRoute, routeDistance, routeDuration
           )}
 
           {!loading && !error && (
-            <Link to={`/eld-log/${currentCycleUsed}`} state={{ estimatedRouteTime: routeDuration }} >
+            <Link to={`/eld-log/${currentCycleUsed}`} >
               <button className="mt-2 w-17 text-[11px] cursor-pointer font-semibold bg-green-500 p-1 rounded">
                 View Logs
               </button>
