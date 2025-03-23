@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import {TripDetails, LocationData} from "../types-store/types"
+import { TripDetails, LocationData } from "../types-store/types"
 import { useTripStore } from '../state-store/useZustand';
 
 const TripForm = () => {
-    // Set driver trip details
+  // Set driver trip details
   const [formData, setFormData] = useState<TripDetails>({
     currentLocation: '',
     pickupLocation: '',
@@ -63,7 +63,7 @@ const TripForm = () => {
     const pickupCoords = await fetchCoordinates(formData.pickupLocation);
     const dropoffCoords = await fetchCoordinates(formData.dropoffLocation);
     if (currentCoords && pickupCoords && dropoffCoords) {
-      setTripDetails({
+      const driverTripData = {
         currentLocation: currentCoords.coords,
         pickupLocation: pickupCoords.coords,
         dropoffLocation: dropoffCoords.coords,
@@ -71,7 +71,9 @@ const TripForm = () => {
         currentLocationName: currentCoords.name,
         pickupLocationName: pickupCoords.name,
         dropoffLocationName: dropoffCoords.name,
-      });
+      };
+      setTripDetails(driverTripData);
+      localStorage.setItem("driverTripData", JSON.stringify(driverTripData)); // Send trip details to the local storage
       // Navigate and pass the coordinates/location as state to MapView
       navigate('/map');
     } else {

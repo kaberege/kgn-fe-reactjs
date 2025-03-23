@@ -32,3 +32,13 @@ export interface TripDetails {
         dropoffLocationName: string;
     }) => void;
 }
+
+// Define prop types for RouteDetails
+export interface RouteDetailsProps {
+  error: string | null;
+  loading: boolean;
+  fetchRoute: () => void;
+  routeDistance: number | null;
+  routeDuration: number | null;
+  currentCycleUsed: string;
+}

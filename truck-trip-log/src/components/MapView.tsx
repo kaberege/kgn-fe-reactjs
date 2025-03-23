@@ -1,36 +1,61 @@
 import { useEffect, useRef, useState } from "react";
 import L, { Map, LeafletMouseEvent } from "leaflet"; // Import Leaflet library
 import fuel from "../assets/fuel.jpg"
-import { Link } from 'react-router-dom';
-import { MdAdd, MdRemove } from 'react-icons/md';
 import { useTripStore } from "../state-store/useZustand";
-
+import RouteDetails from "./RouteDetails";
 
 const MapView = () => {
+  const setTripDetails = useTripStore((state) => state.setTripDetails);
   const { currentLocation, pickupLocation, dropoffLocation, currentCycleUsed, currentLocationName, pickupLocationName, dropoffLocationName } = useTripStore(state => state);
   const [routeDistance, setRouteDistance] = useState<number | null>(null);  // State to store distance
   const [routeDuration, setRouteDuration] = useState<number | null>(null);  // State to store duration
   const [loading, setLoading] = useState<boolean>(false); // State to handle loading
   const [error, setError] = useState<string | null>(null); // State to handle errors
   const mapRef = useRef<Map | null>(null);
-  const [isExpanded, setIsExpanded] = useState(true); // State to handle route information toggle visibility
 
   useEffect(() => {
-    // Initialize map only if it's not already initialized
-    if (!mapRef.current && currentLocation) {
-      console.log("Initializing map...");
+    const storedData = localStorage.getItem("driverTripData");
+    const driverTripData = storedData ? JSON.parse(storedData) : {}
+    if (driverTripData && Object.keys(driverTripData).length > 0) {
+      setTripDetails(driverTripData);
+    }
+  }, []);
 
-      const [currentLat, currentLng] = currentLocation.split(",").map(Number);
-      // Initialize the map and set the view
+  useEffect(() => {
+    var container = L.DomUtil.get("map");
+
+    if (container != null) {
+      (container as any)._leaflet_id = null;
+    }
+
+    // Initialize the map only if it's not already initialized
+    const [currentLat, currentLng] = currentLocation.split(",").map(Number);
+
+    if (currentLocation) {
+      // Initialize the map and set the view currentLat, currentLng
       mapRef.current = L.map('map').setView([currentLat, currentLng], 5);
 
-      // Add tile layer and other map setup...
+      // Add tile layer and other map setup
       L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(mapRef.current);
-    } else if (mapRef.current && currentLocation) {
-      // If mapRef.current is already set, reset the view
-      const [currentLat, currentLng] = currentLocation.split(",").map(Number);
-      //mapRef.current.setView([currentLat, currentLng], 5);
+
     }
+    // Cleanup function to remove map instance on component unmount
+    return () => {
+      if (mapRef.current) {
+        mapRef.current.remove();
+      }
+    };
+  }, [currentLocation]);  // Make sure it runs when currentLocation changes
+
+
+  useEffect(() => {
+
+    // Iterate through all layers and remove them
+    mapRef.current?.eachLayer(function (layer) {
+      if (layer instanceof L.Marker || layer instanceof L.Polyline || layer instanceof L.Circle) {
+        mapRef.current?.removeLayer(layer);
+      }
+    });
 
     // Create a custom icon with the default Leaflet marker shape and custom color
     const createCustomIcon = (color: string) => {
@@ -47,47 +72,47 @@ const MapView = () => {
         className: `custom-icon ${color}`, // Adding the color class for styling
       });
     };
-// Only add markers if mapRef.current is initialized
-if (mapRef.current) {
-    // Adding custom icons for different locations
-    const currentIcon = createCustomIcon("blue");
-    const pickupIcon = createCustomIcon("green");
-    const dropoffIcon = createCustomIcon("red");
+    // Only add markers if mapRef.current is initialized
+    if (mapRef.current) {
+      // Adding custom icons for different locations
+      const currentIcon = createCustomIcon("blue");
+      const pickupIcon = createCustomIcon("green");
+      const dropoffIcon = createCustomIcon("red");
 
-    // Adding currentLocation marker
-    if (currentLocation) {
-      const [lat, lng] = currentLocation.split(",").map(Number);
-      L.marker([lat, lng], { icon: currentIcon })
-        .addTo(mapRef.current)
-        .bindPopup(`
+      // Adding currentLocation marker
+      if (currentLocation) {
+        const [lat, lng] = currentLocation.split(",").map(Number);
+        L.marker([lat, lng], { icon: currentIcon })
+          .addTo(mapRef.current)
+          .bindPopup(`
            <b>Current Location: ${currentLocationName}</b><br>
            This is your current location.
         `);
-    }
+      }
 
-    // Adding pickupLocation marker
-    if (pickupLocation) {
-      const [lat, lng] = pickupLocation.split(",").map(Number);
-      L.marker([lat, lng], { icon: pickupIcon })
-        .addTo(mapRef.current)
-        .bindPopup(`
+      // Adding pickupLocation marker
+      if (pickupLocation) {
+        const [lat, lng] = pickupLocation.split(",").map(Number);
+        L.marker([lat, lng], { icon: pickupIcon })
+          .addTo(mapRef.current)
+          .bindPopup(`
           <b>Pickup Location: ${pickupLocationName}</b><br>
           (1 hour break)
         `);
-    }
+      }
 
-    // Adding dropoffLocation marker
-    if (dropoffLocation) {
-      const [lat, lng] = dropoffLocation.split(",").map(Number);
-      L.marker([lat, lng], { icon: dropoffIcon })
-        .addTo(mapRef.current)
-        .bindPopup(`
+      // Adding dropoffLocation marker
+      if (dropoffLocation) {
+        const [lat, lng] = dropoffLocation.split(",").map(Number);
+        L.marker([lat, lng], { icon: dropoffIcon })
+          .addTo(mapRef.current)
+          .bindPopup(`
           <b>Dropoff Location: ${dropoffLocationName}</b><br>
           (1 hour break)
         `);
+      }
+      fetchRoute(); // Invoking fetchRoute
     }
-    fetchRoute(); // Invoking fetchRoute
-  }
     // Defining the onMapClick function
     var popup = L.popup();
     const onMapClick = (e: LeafletMouseEvent) => {
@@ -98,13 +123,14 @@ if (mapRef.current) {
     };
 
     // Adding the event listener for the map click
-   // mapRef.current.on('click', onMapClick);
+    if (mapRef.current) {
+      mapRef.current.on('click', onMapClick);
+    }
 
     // Cleanup map on unmount
     return () => {
       if (mapRef.current) {
-        mapRef.current.remove();
-        //mapRef.current.off('click', onMapClick);
+        mapRef.current.off('click', onMapClick);
       }
     };
   }, [currentLocation, pickupLocation, dropoffLocation]);
@@ -211,95 +237,18 @@ if (mapRef.current) {
     }
   };
 
-  //Function for Distance Handling
-  const formatDistance = (distance: number | null) => {
-    if (distance === null) return "No results found!";
-    return distance < 1000 ? `${distance.toFixed(2)} meter${distance > 1 ? "s" : ""}` : `${(distance / 1000).toFixed(2)} km`;
-  };
-
-  // Function for Duration Handling
-  const formatDuration = (duration: number | null) => {
-    if (duration === null) return "No results found!";
-
-    // Handling duration in seconds, minutes, hours, and days
-    const days = Math.floor(duration / 86400); // Number of days (86400 seconds in a day)
-    const hours = Math.floor((duration % 86400) / 3600); // Remaining hours
-    const minutes = Math.floor((duration % 3600) / 60); // Remaining minutes
-    const seconds = Math.round(duration % 60); // Remaining seconds
-
-    // Formatting the duration output based on the days, hours, minutes, and seconds
-    if (days > 0) {
-      return `${days} day${days > 1 ? 's' : ''} ${hours} hour${hours > 1 ? 's' : ''} ${minutes} minute${minutes > 1 ? 's' : ''}`;
-    } else if (hours > 0) {
-      return `${hours} hour${hours > 1 ? 's' : ''} ${minutes} minute${minutes > 1 ? 's' : ''}`;
-    } else if (minutes > 0) {
-      return `${minutes} minute${minutes > 1 ? 's' : ''} ${seconds} second${seconds > 1 ? 's' : ''}`;
-    } else {
-      return `${seconds} second${seconds > 1 ? 's' : ''}`;
-    }
-  };
-
-  // Function for expanding or collapsing route information section
-  const toggleExpanded = () => {
-    setIsExpanded(prevState => !prevState);
-  };
-
   return (
-    <div className="relative">
+    <div className="container mx-auto p-6 relative">
       {/* Map container */}
       <div id="map" style={{ height: "500px", width: "100%" }} />
-
-      {/* Display route information */}
-      <div className={`absolute top-1 right-2 z-[1000] p-3 bg-white dark:bg-gray-800 rounded-lg shadow-lg transition-all ${isExpanded ? "h-auto" : "h-12 overflow-hidden"}`}>
-        <h3 className="text-xs sm:text-sm font-semibold text-gray-800 dark:text-white mb-1 flex justify-between items-center">
-          Route Information
-          <button
-            onClick={toggleExpanded}
-            className="text-xs text-gray-600 cursor-pointer dark:text-white hover:text-gray-800 dark:hover:text-gray-200 transition-all transform hover:scale-110"
-            title={isExpanded ? "Collapse section" : "Expand section"}
-          >
-            {isExpanded ? (
-              <MdRemove className="text-xl transition-all duration-200" />
-            ) : (
-              <MdAdd className="text-xl transition-all duration-200" />
-            )}
-          </button>
-        </h3>
-
-        {/* Show loading spinner or error message */}
-        <div className={`text-xs sm:text-xs font-medium text-gray-700 dark:text-gray-300 transition-all ${isExpanded ? "opacity-100" : "opacity-0 pointer-events-none"}`}>
-          {loading ? (
-            <span className="text-yellow-500 flex items-center">
-              <div className="animate-spin rounded-full border-t-2 border-yellow-500 h-4 w-4 mr-2"></div>
-              Loading...
-            </span>
-          ) : error ? (
-            <span className="text-red-500">{error}</span>
-          ) : (
-            <>
-              <div className="text-[11px]"><strong>Distance: </strong>{formatDistance(routeDistance)}</div>
-              <div className="text-[11px]"><strong>Duration: </strong>{formatDuration(routeDuration)}</div>
-            </>
-          )}
-        </div>
-
-        {/* Buttons for retry or viewing logs */}
-        <div className={`transition-all ${isExpanded ? "opacity-100" : "opacity-0 pointer-events-none"}`}>
-          {error && (
-            <button onClick={fetchRoute} className="mt-2 text-xs text-blue-600 hover:text-blue-500 underline transition-colors duration-300 cursor-pointer">
-              Retry
-            </button>
-          )}
-
-          {!loading && !error && (
-            <Link to={`/eld-log/${currentCycleUsed}`} state={{ estimatedRouteTime: routeDuration }} >
-              <button className="mt-2 w-17 text-[11px] cursor-pointer font-semibold bg-green-500 p-1 rounded">
-                View Logs
-              </button>
-            </Link>
-          )}
-        </div>
-      </div>
+      < RouteDetails
+        error={error}
+        loading={loading}
+        fetchRoute={fetchRoute}
+        routeDistance={routeDistance}
+        routeDuration={routeDuration}
+        currentCycleUsed={currentCycleUsed}
+      />
     </div>
   );
 };

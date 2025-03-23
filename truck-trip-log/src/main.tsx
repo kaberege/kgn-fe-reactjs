@@ -5,7 +5,7 @@ import './index.css'
 import App from './App.tsx'
 import TripForm from './components/TripForm.tsx'
 import ErrorPage from './components/ErrorPage.tsx'
-import MapPage from './components/MapPage.tsx'
+import MapView from './components/MapView.tsx'
 import ELDLogView from './components/ELDLogView.tsx'
 
 const router = createBrowserRouter([
@@ -19,7 +19,7 @@ const router = createBrowserRouter([
       },
       {
         path: "map",
-        element: <MapPage />  // component
+        element: <MapView/>  // component
       },
       {
         path: "eld-log/:cycleId",
