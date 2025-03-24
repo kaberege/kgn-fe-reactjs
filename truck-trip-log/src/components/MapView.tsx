@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import L, { Map, LeafletMouseEvent } from "leaflet"; // Import Leaflet library
 import fuel from "../assets/fuel.jpg"
-import { useTripStore } from "../state-store/useZustand";
+import { useTripStore } from "../state-store/useStore";
 import RouteDetails from "./RouteDetails";
 
 const MapView = () => {

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { TripDetails, LocationData } from "../types-store/types"
-import { useTripStore } from '../state-store/useZustand';
+import { useTripStore } from '../state-store/useStore';
 
 const TripForm = () => {
   // Set driver trip details
@@ -53,6 +53,13 @@ const TripForm = () => {
     // Ensure the current cycle used is a valid number and is non-negative
     if (isNaN(cycleUsed) || cycleUsed < 0) {
       setErrorMessage('Please enter a valid non-negative number for the hours.');
+      return;
+    }
+
+    // Ensure the current cycle used is a valid number <= to 8.75,
+    //  Property-carrying driver, 70hrs/8days
+    if (cycleUsed > 8.75) {
+      setErrorMessage("Driving hours cannot exceed the allowed maximum of 8.75 hrs/day");
       return;
     }
 

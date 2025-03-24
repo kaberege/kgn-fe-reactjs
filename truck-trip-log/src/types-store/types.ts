@@ -56,20 +56,8 @@ export interface DutyTimes {
   drivingHours: DutyHours; // Driving hours for different periods
   offDutyHours: DutyHours; // Off-duty hours for different periods
   onDutyHours: DutyHours; // On-duty hours for different periods
+  sleeperBerthHours: DutyHours; //  Sleeper-BerthHours hours for different periods
   [key: string]: DutyHours; // Allows additional categories (e.g., 'driving', 'offDuty')
-}
-
-// Represents a log entry with driver details and hours worked
-export interface Logs {
-  date: string; // Date of the log
-  drivingHours: DutyHours; // Driving hours for the day
-  offDutyHours: DutyHours; // Off-duty hours for the day
-  sleeperBerthHours: number; // Hours spent in the sleeper berth
-  onDutyHours: DutyHours; // On-duty hours for the day
-  driverName: string; // Driver's name
-  truckNumber: string; // Truck number
-  carriedProduct: string; // Product being carried
-  isBelowAverage: boolean; // Whether driving hours are below average
 }
 
 // Holds the basic information about a driver
@@ -77,4 +65,6 @@ export interface DriverDetails {
   name: string; // Driver's name
   truckNumber: string; // Driver's truck number
   product: string; // Product being carried
+  miles: number; // Total miles for today
 }
+

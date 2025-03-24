@@ -71,7 +71,7 @@ const DownloadShare = ({ shareable }) => {
             });
             alert('Result shared successfully!');
         } catch (error) {
-            alert('Error sharing:', error);
+            alert(`Error sharing:' ${error}`);
         }
     };
 
