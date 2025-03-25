@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import L, { Map, LeafletMouseEvent } from "leaflet"; // Import Leaflet library
 import fuel from "../assets/fuel.jpg"
 import { useTripStore } from "../state-store/useStore";
@@ -238,10 +239,15 @@ const MapView = () => {
   };
 
   return (
-    <div className="container mx-auto p-6 relative">
+    <div className="container relative">
+      {/* Back to Home Button */}
+      <Link to="/" className=" bg-blue-500 text-xs text-amber-300 hover:bg-blue-600 transition-colors p-1 rounded-lg shadow-md">
+        Back to Home
+      </Link>
+
       {/* Map container */}
-      <div id="map" style={{ height: "500px", width: "100%" }} />
-      < RouteDetails
+      <div id="map" style={{ height: "450px", width: "100%", marginTop: "10px" }} />
+      <RouteDetails
         error={error}
         loading={loading}
         fetchRoute={fetchRoute}
@@ -254,4 +260,3 @@ const MapView = () => {
 };
 
 export default MapView;
-

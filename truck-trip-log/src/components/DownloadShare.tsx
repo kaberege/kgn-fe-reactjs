@@ -1,7 +1,6 @@
 import html2canvas from "html2canvas";
 import { useDriverStore } from '../state-store/useDriverStore';
-import { FaDownload, FaShare, FaPrint } from "react-icons/fa";
-import html2pdf from "html2pdf.js";
+import { FaDownload, FaShare } from "react-icons/fa";
 
 const DownloadShare = () => {
     const { logs, statusMessage, signature } = useDriverStore();
@@ -143,51 +142,21 @@ const DownloadShare = () => {
         }
     };
 
-    // Function for printing quiz details
-    function handlePrint() {
-        const newDocument = createResultElement();;
-        document.body.appendChild(newDocument);              // Appending the newDocument into the body
-
-        // Setting options for the printed PDF file
-        const options = {
-            margin: 1,
-            filename: 'quiz-results.pdf',
-            image: { type: 'jpeg', quality: 0.98 },
-            html2canvas: { scale: 2 },
-            jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' },
-        };
-
-        html2pdf()
-            .from(newDocument)
-            .set(options)
-            .save()
-            .then(() => {
-                document.body.removeChild(newDocument); // Clean up newDocument after saving
-            });
-    }
-
     return (
         <div className="flex gap-2 items-center justify-center mt-4 text-sm">
             <button
                 onClick={() => downloadIndividualResult()}
                 className="flex items-center cursor-pointer gap-1 bg-indigo-600 hover:bg-indigo-800 text-white font-bold p-1 rounded transition"
-                title="Download trip result"
+                title="Download trip log"
             >
                 <FaDownload className="text-sm" /><span className="text-[11px] max-sm:hidden">Download</span>
             </button>
             <button
                 onClick={() => generateCanvasAndShare()}
                 className="flex items-center cursor-pointer gap-1 bg-green-500 hover:bg-green-600 text-white font-bold p-1 rounded transition"
-                title="Share trip result"
+                title="Share trip log"
             >
                 <FaShare className="text-sm" /><span className="text-[11px] max-sm:hidden">Share</span>
-            </button>
-            <button
-                onClick={handlePrint}
-                className="flex items-center gap-1 cursor-pointer bg-gray-800 text-white border border-gray-600 hover:bg-gray-700 transition duration-300 ease-in-out text-sm p-1 rounded shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
-            >
-                <FaPrint className="text-sm" />
-                <span className="text-[11px] max-sm:hidden">Print</span>
             </button>
         </div>
     );

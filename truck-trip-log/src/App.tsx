@@ -1,7 +1,8 @@
-import { Outlet } from "react-router-dom"
-import logo from "./assets/favicon.jpg"
-import { useEffect, useState } from "react"
+import { Outlet } from "react-router-dom";
+import logo from "./assets/favicon.jpg";
+import { useEffect, useState } from "react";
 import { MdDarkMode, MdLightMode } from "react-icons/md";
+
 function App() {
   const [mode, setMode] = useState<boolean>(false);  // Toggle light/dark mode state
   const [year, setYear] = useState<number | null>(null); // Setting current year
@@ -10,35 +11,57 @@ function App() {
     const date = new Date();
     const yr = date.getFullYear();
     setYear(yr);
-  });
+  }, []);
 
   return (
-    <div className={`flex flex-col bg-violet-200 min-h-screen ${mode && "dark"}`}>
-      <header className="bg-linear-to-r from-sky-800 to-sky-900  dark:bg-linear-to-r dark:from-slate-700 dark:to-slate-800  shadow-md">
-        <nav className="flex flex-row items-center justify-between py-2 max-sm:p-1 max-xl:px-3 w-full max-w-7xl mx-auto">
-          <div className="flex flex-row items-center gap-3">
-            <img src={logo} alt="Logo" className="h-9 w-9 max-sm:h-7 max-sm:w-7 rounded-full" />
-            <h1 className="text-3xl max-sm:text-[20px] max-md:text-2xl font-bold">Truck Trip App</h1>
+    <div className={`flex flex-col min-h-screen transition-colors duration-300 ${mode && "dark"}`}>
+      {/* Header */}
+      <header className="bg-gradient-to-r from-sky-800 to-sky-900 dark:bg-gradient-to-r dark:from-slate-700 dark:to-slate-800 shadow-md">
+        <nav className="flex items-center justify-between py-1 sm:py-2 px-2 sm:px-4 max-w-7xl mx-auto">
+          <div className="flex items-center gap-3">
+            <img
+              src={logo}
+              alt="Logo"
+              title="KGN Logo"
+              className="h-7 w-7 sm:h-9 sm:w-9 rounded-full"
+            />
+            <h1 className="text-xl sm:text-2xl font-semibold text-white">
+              Truck Trip App
+            </h1>
           </div>
           <button
-            title='Toggle dark/light mode'
+            title="Toggle Dark/Light Mode"
             onClick={() => setMode(prev => !prev)}
-            className="flex items-center justify-center rounded-full hover:bg-blue-600 
-              w-6 h-6 sm:w-8 sm:h-8 cursor-pointer transition-colors duration-300 mx-auto"
-          >{mode ? <MdDarkMode size={20} /> : <MdLightMode size={20} />}
+            className="flex items-center justify-center rounded-full bg-white text-black dark:bg-gray-950
+             dark:text-white p-1 sm:p-2 hover:bg-blue-600 transition-colors duration-300 cursor-pointer"
+          >
+            {mode ? <MdDarkMode size={17} /> : <MdLightMode size={17} />}
           </button>
         </nav>
       </header>
-      <main className="grow">
+
+      {/* Main Content */}
+      <main className="grow flex justify-center items-center px-2 sm:px-6 bg-white dark:bg-gray-900 transition-all">
         <Outlet />
       </main>
-      <footer className="bg-linear-to-br from-violet-600 via-violet-800 to-violet-600">
-        <p className="text-center p-2 text-[15px]">&copy; {year && year}&nbsp;
-          <a href="https://www.linkedin.com/in/kaberege-godard-nestor-53a0b4215" target='_blank' className='text-blue-700 hover:text-violet-600' title='Visit kgn linkedin'>KGN</a>
-          . All rights reserved.</p>
+
+      {/* Footer */}
+      <footer className="bg-gradient-to-br from-indigo-600 via-blue-600 to-purple-600 dark:from-indigo-700 dark:via-blue-700 dark:to-purple-700 p-2 sm:p-3 text-white">
+        <p className="text-center text-xs sm:text-sm">
+          &copy; {year}{" "}
+          <a
+            href="https://www.linkedin.com/in/kaberege-godard-nestor-53a0b4215"
+            target="_blank"
+            className="text-blue-200 hover:text-blue-400 transition-colors"
+            title="Visit KGN LinkedIn"
+          >
+            KGN
+          </a>
+          . All rights reserved.
+        </p>
       </footer>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

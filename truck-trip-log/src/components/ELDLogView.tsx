@@ -16,7 +16,7 @@ const ELDLogView = () => {
   }, [cycleId]);
 
   return (
-    <div className="container mx-auto p-6 dark:bg-gray-900 dark:text-white">
+    <div className="container mx-auto dark:bg-gray-900 dark:text-white">
       {!isFormSubmitted ? (
         <DriverForm />
       ) : (

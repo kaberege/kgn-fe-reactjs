@@ -44,7 +44,7 @@ const RouteDetails = ({ error, loading, fetchRoute, routeDistance, routeDuration
   return (
     <>
       {/* Display route information */}
-      <div className={`absolute top-1 right-2 z-[1000] p-3 bg-white dark:bg-gray-800 rounded-lg shadow-lg transition-all ${isExpanded ? "h-auto" : "h-12 overflow-hidden"}`}>
+      <div className={`absolute top-5 right-1 sm:right-2 z-[1000] p-1 sm:p-2 bg-slate-100 dark:bg-gray-800 rounded-lg shadow-lg transition-all ${isExpanded ? "h-auto" : "h-7 sm:h-9 overflow-hidden"}`}>
         <h3 className="text-xs sm:text-sm font-semibold text-gray-800 dark:text-white mb-1 flex justify-between items-center">
           Route Information
           <button
@@ -78,16 +78,18 @@ const RouteDetails = ({ error, loading, fetchRoute, routeDistance, routeDuration
         </div>
 
         {/* Buttons for retry or viewing logs */}
-        <div className={`transition-all ${isExpanded ? "opacity-100" : "opacity-0 pointer-events-none"}`}>
+        <div className={`transition-all flex flex-col justify-center ${isExpanded ? "opacity-100" : "opacity-0 pointer-events-none"}`}>
           {error && (
-            <button onClick={fetchRoute} className="mt-2 text-xs text-blue-600 hover:text-blue-500 underline transition-colors duration-300 cursor-pointer">
+            <button onClick={fetchRoute} className="mt-2 text-xs text-blue-700 hover:text-blue-400 underline transition-colors duration-300 cursor-pointer">
               Retry
             </button>
           )}
 
           {!loading && !error && (
-            <Link to={`/eld-log/${currentCycleUsed}`} >
-              <button className="mt-2 w-17 text-[11px] cursor-pointer font-semibold bg-green-500 p-1 rounded">
+            <Link 
+            to={`/eld-log/${currentCycleUsed}`}
+            className=' flex justify-center' >
+              <button className="mt-2 w-17 text-[11px] cursor-pointer font-semibold bg-green-500 hover:bg-green-400 transition-colors p-1 rounded">
                 View Logs
               </button>
             </Link>

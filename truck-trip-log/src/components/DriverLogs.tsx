@@ -1,21 +1,32 @@
 import { useDriverStore } from '../state-store/useDriverStore';
 import DownloadShare from './DownloadShare';
+import { Link } from 'react-router-dom';
 
 const DriverLogs = () => {
 
     const { logs, setIsFormSubmitted, statusMessage, signature, setSignature } = useDriverStore();
 
     return (
-        <div>
-            {/* Back to Form Button */}
-            <button
-                onClick={() => setIsFormSubmitted(false)}
-                className="mt-4 px-6 py-2 bg-blue-500 text-white font-semibold rounded-lg shadow-md
+        <div className='p-5'>
+            <div className='flex gap-2'>
+                {/* Back to Home Button */}
+                <Link to="/" >
+                    <button className=" bg-blue-500 text-xs text-amber-300 hover:bg-blue-600 
+                     p-1 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400
+                  focus:ring-opacity-75 transition-all cursor-pointer
+                  ">Back to Home</button>
+                </Link>
+                {/* Back to Form Button */}
+                <button
+                    onClick={() => setIsFormSubmitted(false)}
+                    className="p-1 bg-blue-500 text-white rounded-lg shadow-md
                  hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400
-                  focus:ring-opacity-75 transition-all max-sm:p-1 max-sm:text-[12px] cursor-pointer"
-            >
-                Back to Form
-            </button>
+                  focus:ring-opacity-75 transition-all text-xs cursor-pointer"
+                >
+                    Back to Form
+                </button>
+            </div>
+
             <div className="border-b py-4 dark:border-gray-700">
                 <div className="mb-4">
                     <p><strong>Driver:</strong> {logs && logs.driverName}</p>

@@ -97,17 +97,23 @@ const TripForm = () => {
     }));
   };
 
+
   return (
-    <div className="container mx-auto p-6">
-      <h1 className="text-2xl font-bold mb-4">Trip Details</h1>
-      <form onSubmit={handleSubmit} className="space-y-4">
+    <div className="container px-1 py-6 sm:p-6">
+      <h2 className="text-[19px] sm:text-2xl font-semibold text-center text-gray-800 dark:text-gray-100 mb-4">
+        Fill out the driver details below:
+      </h2>
+      <h3 className="text-[18px] sm:text-xl font-bold text-center text-blue-600 dark:text-blue-400 mb-3">
+        Trip Details
+      </h3>
+      <form onSubmit={handleSubmit} className="flex flex-col justify-center items-center gap-5 max-w-2xl mx-auto">
         <input
           type="text"
           name="currentLocation"
           placeholder="Current Location"
           value={formData.currentLocation}
           onChange={handleChange}
-          className="w-full p-2 border border-gray-300 rounded"
+          className="w-full p-2 sm:p-3 border border-gray-300 rounded-md dark:bg-gray-800 dark:text-white dark:border-gray-600"
           required
         />
         <input
@@ -116,7 +122,7 @@ const TripForm = () => {
           placeholder="Pickup Location"
           value={formData.pickupLocation}
           onChange={handleChange}
-          className="w-full p-2 border border-gray-300 rounded"
+          className="w-full p-2 sm:p-3 border border-gray-300 rounded-md dark:bg-gray-800 dark:text-white dark:border-gray-600"
           required
         />
         <input
@@ -125,7 +131,7 @@ const TripForm = () => {
           placeholder="Dropoff Location"
           value={formData.dropoffLocation}
           onChange={handleChange}
-          className="w-full p-2 border border-gray-300 rounded"
+          className="w-full p-2 sm:p-3 border border-gray-300 rounded-md dark:bg-gray-800 dark:text-white dark:border-gray-600"
           required
         />
         <input
@@ -134,17 +140,16 @@ const TripForm = () => {
           placeholder="Current Cycle Used (hrs)"
           value={formData.currentCycleUsed}
           onChange={handleChange}
-          className="w-full p-2 border border-gray-300 rounded"
+          className="w-full p-2 sm:p-3 border border-gray-300 rounded-md dark:bg-gray-800 dark:text-white dark:border-gray-600"
           required
         />
 
-        {/* Display error message if any */}
         {errorMessage && <div className="text-red-500 text-sm">{errorMessage}</div>}
 
         <button
           type="submit"
-          className={`w-full p-2 rounded ${loading ? 'bg-gray-400' : 'bg-blue-500'} text-white`}
-          disabled={loading}  // Disable button while loading
+          className={`w-full max-sm:w-[100px] p-1 sm:p-3 rounded-md ${loading ? 'bg-gray-400' : 'bg-blue-500 hover:bg-blue-600'} text-white cursor-pointer`}
+          disabled={loading}
         >
           {loading ? 'Submitting...' : 'Submit'}
         </button>
