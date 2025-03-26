@@ -7,10 +7,20 @@ import TripForm from './components/TripForm.tsx'
 import ErrorPage from './components/ErrorPage.tsx'
 import MapView from './components/MapView.tsx'
 import ELDLogView from './components/ELDLogView.tsx'
+import Register from './pages/Register.tsx'
+import Login from './pages/Login.tsx'
 
 const router = createBrowserRouter([
   {
     path: "/",
+    element: <Register />   // Register page component
+  },
+  {
+    path: "/login",
+    element: <Login />   // Login page component
+  },
+  {
+    path: "/truck/",
     element: <App />,   // Main app component
     children: [
       {

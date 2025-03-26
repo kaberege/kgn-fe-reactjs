@@ -87,7 +87,7 @@ const RouteDetails = ({ error, loading, fetchRoute, routeDistance, routeDuration
 
           {!loading && !error && (
             <Link 
-            to={`/eld-log/${currentCycleUsed}`}
+            to={`/truck/eld-log/${currentCycleUsed}`}
             className=' flex justify-center' >
               <button className="mt-2 w-17 text-[11px] cursor-pointer font-semibold bg-green-500 hover:bg-green-400 transition-colors p-1 rounded">
                 View Logs

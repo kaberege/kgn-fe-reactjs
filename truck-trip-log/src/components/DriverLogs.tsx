@@ -10,7 +10,7 @@ const DriverLogs = () => {
         <div className='p-5'>
             <div className='flex gap-2'>
                 {/* Back to Home Button */}
-                <Link to="/" >
+                <Link to="/truck" >
                     <button className=" bg-blue-500 text-xs text-amber-300 hover:bg-blue-600 
                      p-1 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400
                   focus:ring-opacity-75 transition-all cursor-pointer

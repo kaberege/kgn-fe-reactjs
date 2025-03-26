@@ -241,12 +241,14 @@ const MapView = () => {
   return (
     <div className="container relative">
       {/* Back to Home Button */}
-      <Link to="/" className=" bg-blue-500 text-xs text-amber-300 hover:bg-blue-600 transition-colors p-1 rounded-lg shadow-md">
+      <Link to="/truck" className=" bg-blue-500 text-xs text-amber-300 hover:bg-blue-600 transition-colors p-1 rounded-lg shadow-md">
         Back to Home
       </Link>
 
       {/* Map container */}
-      <div id="map" style={{ height: "450px", width: "100%", marginTop: "10px" }} />
+      <div id="map" style={{ height: "450px", width: "100%", marginTop: "10px", borderRadius: "10px" }} />
+
+       {/* Route details component*/}
       <RouteDetails
         error={error}
         loading={loading}

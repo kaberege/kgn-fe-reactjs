@@ -137,7 +137,7 @@ const DriverForm = () => {
     return (
         <div className='pt-2'>
             {/* Back to Map Button */}
-            <Link to="/map" className=" bg-blue-500 text-xs text-amber-300 hover:bg-blue-600 transition-colors p-1 rounded-lg shadow-md">
+            <Link to="/truck/map" className=" bg-blue-500 text-xs text-amber-300 hover:bg-blue-600 transition-colors p-1 rounded-lg shadow-md">
                 Back to Map
             </Link>
             <div className="max-w-2xl mx-auto bg-stone-100 border border-stone-600 rounded-lg p-1 mt-2 mb-7 sm:p-6 shadow-lg dark:bg-gray-800">

@@ -82,7 +82,7 @@ const TripForm = () => {
       setTripDetails(driverTripData);
       localStorage.setItem("driverTripData", JSON.stringify(driverTripData)); // Send trip details to the local storage
       // Navigate and pass the coordinates/location as state to MapView
-      navigate('/map');
+      navigate('/truck/map');
     } else {
       alert('One or more locations could not be geocoded.');
     }
