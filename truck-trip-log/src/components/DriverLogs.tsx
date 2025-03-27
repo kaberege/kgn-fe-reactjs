@@ -16,15 +16,15 @@ const DriverLogs = () => {
                   focus:ring-opacity-75 transition-all cursor-pointer
                   ">Back to Home</button>
                 </Link>
-                {/* Back to Form Button */}
-                <button
+                {/* Back to Form Link */}
+                <Link to='/truck/map'
                     onClick={() => setIsFormSubmitted(false)}
-                    className="p-1 bg-blue-500 text-white rounded-lg shadow-md
+                    className="p-1 bg-blue-500  text-amber-300 rounded-lg shadow-md
                  hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400
                   focus:ring-opacity-75 transition-all text-xs cursor-pointer"
                 >
-                    Back to Form
-                </button>
+                    Back to map
+                </Link>
             </div>
 
             <div className="border-b py-4 dark:border-gray-700">

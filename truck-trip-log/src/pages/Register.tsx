@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import { MdDarkMode, MdLightMode } from 'react-icons/md';
@@ -11,11 +11,14 @@ function Register() {
   const [username, setUsername] = useState('');
   const [error, setError] = useState('');
   const [isDarkMode, setIsDarkMode] = useState<boolean>(false); // Dark mode state
+  const [loading, setLoading] = useState<boolean>(false);  //Loading state
   const navigate = useNavigate();
 
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError('');
+    setLoading(true);
     try {
       const response = await axios.post('http://localhost:8000/user/register/', {
         email: email,
@@ -25,6 +28,8 @@ function Register() {
       navigate('/login');
     } catch (err) {
       setError('Registration failed. Please try again.');
+    } finally {
+      setLoading(false);  // Reset loading state
     }
   };
 
@@ -32,9 +37,9 @@ function Register() {
     <div className={`flex items-center justify-center min-h-screen ${isDarkMode && "dark"} dark:bg-gray-900 bg-gray-100`}>
       <div className='p-6 rounded-lg shadow-lg w-full max-w-xs dark:bg-gray-800 dark:text-white bg-white text-gray-900'>
         <div className="flex justify-between items-center mb-4 p-2">
-          <img src={logo} alt="Logo" className="w-11 h-11 rounded-full" />
-          <button 
-            className="text-2xl text-gray-900 dark:text-white"
+          <img src={logo} alt="Logo" title='kgn log' className="w-11 h-11 rounded-full" />
+          <button
+            className="text-2xl text-gray-900 dark:text-white cursor-pointer"
             onClick={() => setIsDarkMode(prevMode => !prevMode)}
           >
             {isDarkMode ? <MdLightMode /> : <MdDarkMode />}
@@ -85,9 +90,12 @@ function Register() {
               required
             />
           </div>
-
-          <button type="submit" className="w-full cursor-pointer bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 dark:hover:bg-blue-700">
-            Register
+          <button
+            type="submit"
+            disabled={loading}
+            className={`w-full cursor-pointer p-2 rounded-md text-white ${loading ? 'bg-gray-400' : 'bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 dark:hover:from-blue-700 dark:hover:to-blue-800'}
+             transition-colors duration-300 ease-in-out`}>
+            {loading ? 'Submitting...' : 'Register'}
           </button>
         </form>
 

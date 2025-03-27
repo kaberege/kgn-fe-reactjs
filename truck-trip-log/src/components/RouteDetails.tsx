@@ -41,10 +41,10 @@ const RouteDetails = ({ error, loading, fetchRoute, routeDistance, routeDuration
     setIsExpanded(prevState => !prevState);
   };
 
-  return (
+  return ( 
     <>
       {/* Display route information */}
-      <div className={`absolute top-5 right-1 sm:right-2 z-[1000] p-1 sm:p-2 bg-slate-100 dark:bg-gray-800 rounded-lg shadow-lg transition-all ${isExpanded ? "h-auto" : "h-7 sm:h-9 overflow-hidden"}`}>
+      <div className={`absolute top-8 right-1 sm:right-2 z-[1000] p-1 sm:p-2 bg-slate-100 dark:bg-gray-800 rounded-lg shadow-lg transition-all ${isExpanded ? "h-auto" : "h-7 sm:h-9 overflow-hidden"}`}>
         <h3 className="text-xs sm:text-sm font-semibold text-gray-800 dark:text-white mb-1 flex justify-between items-center">
           Route Information
           <button

@@ -160,9 +160,13 @@ const MapView = () => {
         const routeDurationInSeconds = data.routes[0].duration; // In seconds
         const routeGeometry = routeGeoJSON.coordinates; // Array of coordinates
         // Calculating total route distance including the current location, pickup, and dropoff
-        setRouteDistance(routeLength); // Updating routeDistance
+        setRouteDistance(routeLength); // Updating routeDistance // In meters
         setRouteDuration(routeDurationInSeconds); // Updating routeDuration
-        console.log(`Distance:${routeLength}  Duration: ${routeDurationInSeconds}`);
+        const storedData = localStorage.getItem("driverTripData");
+        const driverTripData = storedData ? JSON.parse(storedData) : {}
+        const newData = {...driverTripData, estimatedRouteLength:routeLength, estimatedRouteDuration:routeDurationInSeconds};
+        localStorage.setItem("driverTripData", JSON.stringify(newData)); // Send updated trip details to the local storage
+        console.log(` new data: ${newData} Distance:${routeLength}  Duration: ${routeDurationInSeconds}`);
 
         // Clear previous route (if any)
         mapRef.current?.eachLayer((layer) => {
@@ -233,7 +237,7 @@ const MapView = () => {
       console.error("Error fetching route data:", error);
       setError("Error fetching route data");
     } finally {
-      // Set loading to false once the fetch is complete
+      // Set loading to false once the fetch is complete  
       setLoading(false);
     }
   };
@@ -241,14 +245,18 @@ const MapView = () => {
   return (
     <div className="container relative">
       {/* Back to Home Button */}
-      <Link to="/truck" className=" bg-blue-500 text-xs text-amber-300 hover:bg-blue-600 transition-colors p-1 rounded-lg shadow-md">
-        Back to Home
-      </Link>
-
+      <div className="flex justify-between items-center">
+        <Link to="/truck" className=" bg-blue-500 text-xs text-amber-300 hover:bg-blue-600 transition-colors p-1 rounded-lg shadow-md">
+          Back to Home
+        </Link>
+        <Link to="/truck/history" className=" bg-blue-500 text-xs text-amber-300 hover:bg-blue-600 transition-colors p-1 rounded-lg shadow-md">
+          Go to history
+        </Link>
+      </div>
       {/* Map container */}
       <div id="map" style={{ height: "450px", width: "100%", marginTop: "10px", borderRadius: "10px" }} />
 
-       {/* Route details component*/}
+      {/* Route details component*/}
       <RouteDetails
         error={error}
         loading={loading}

@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { DriverDetails, DutyTimes, DutyHours } from '../types-store/types';
 import { useDriverStore } from '../state-store/useDriverStore';
+import ErrorModal from './ErrorModal';
 
-const DriverForm = () => {
+const DriverForm = ({ handleSuccessMessage }: { handleSuccessMessage: () => void }) => {
+    const [loading, setLoading] = useState<boolean>(false); // Set loading state
     const [error, setError] = useState<string | null>(null); // For displaying errors
+    const [isModalOpen, setIsModalOpen] = useState(false); // For error modal
     const { isFormSubmitted, setLogs, setIsFormSubmitted, setStatusMessage, cycleIdHrs } = useDriverStore();
 
     // States for storing driver details and logs
@@ -48,37 +52,37 @@ const DriverForm = () => {
     const handleDutyTimeChange = (timePeriod: keyof DutyHours, type: 'driving' | 'offDuty' | 'onDuty' | 'sleeperBerth', input: number) => {
         // Validate the total driving hours to ensure they do not exceed the cycle limit
         const value: number = isNaN(input) ? 0 : input;
-        const totalDrivingHours = Object.values(dutyTimes.drivingHours).reduce((acc, hours) => acc + hours, 0);
-        const currentCycleUsed = cycleIdHrs ? parseFloat(cycleIdHrs) : 8.75; // Current Cycle Used (hrs)
-        const currentInputDrivingHrs: number = type === "driving" ? value : 0;
+        const currentCycleUsed: number = cycleIdHrs ? parseFloat(cycleIdHrs) : 8.75; // Current Cycle Used (hrs)
 
-        if (totalDrivingHours + currentInputDrivingHrs <= currentCycleUsed) {
-            setDutyTimes((prev) => {
-                const updatedTimes = {
-                    ...prev,
-                    [type + 'Hours']: {
-                        ...prev[type + 'Hours'],
-                        [timePeriod]: value,
-                    },
-                };
+        setDutyTimes((prev) => {
+            const updatedTimes = {
+                ...prev,
+                [type + 'Hours']: {
+                    ...prev[type + 'Hours'],
+                    [timePeriod]: value,
+                },
+            };
 
-                // Validate total hours do not exceed 24 for any time period
-                const totalHours = ['driving', 'offDuty', 'onDuty', 'sleeperBerth'].reduce((acc, key) => {
-                    acc += Object.values(updatedTimes[key + 'Hours']).reduce((sum, hours) => sum + hours, 0);
-                    return acc;
-                }, 0);
+            // Validate total hours do not exceed 24 for any time period
+            const totalHours = ['driving', 'offDuty', 'onDuty', 'sleeperBerth'].reduce((acc, key) => {
+                acc += Object.values(updatedTimes[key + 'Hours']).reduce((sum, hours) => sum + hours, 0);
+                return acc;
+            }, 0);
 
-                if (totalHours > 24) {
-                    setError('Total hours (driving, off-duty, and on-duty, sleeper-berth) cannot exceed 24 hours for any period.');
-                    return prev; // Prevent state update if the total exceeds 24
-                } else {
-                    setError(null);
-                    return updatedTimes;
-                }
-            });
-        } else {
-            setError(`Driving hours cannot exceed the Current Cycle Used (hrs) of ${currentCycleUsed}.`);
-        }
+            // Validate total driving hours do not exceed Current Cycle Used (hrs)
+            const totalDrivingHours = Object.values(updatedTimes.drivingHours).reduce((acc, hours) => acc + hours, 0);
+
+            if (totalDrivingHours > currentCycleUsed) {
+                setError(`Driving hours cannot exceed the Current Cycle Used (hrs) of ${currentCycleUsed}.`);
+                return prev; // Prevent state update if the total driving hrs exceed Current Cycle Used (hrs)
+            } else if (totalHours > 24) {
+                setError('Total hours (driving, off-duty, and on-duty, sleeper-berth) cannot exceed 24 hours for any period.');
+                return prev; // Prevent state update if the total exceeds 24
+            } else {
+                setError(null);
+                return updatedTimes;
+            }
+        });
     };
 
     // Handle form submission for driver details
@@ -90,7 +94,7 @@ const DriverForm = () => {
         const totalSleeperBerthHours = Object.values(dutyTimes.sleeperBerthHours).reduce((acc, hours) => acc + hours, 0);
         const currentCycleUsed = cycleIdHrs ? parseFloat(cycleIdHrs) : 8.75; // Current Cycle Used (hrs)
 
-        // Calculate the overall hours dynamically (Ensure the total hours do not exceed 24)
+        // Calculate the overall hours (Ensure the total hours do not exceed 24)
         const overallDutyHours: number = (totalDrivingHours + totalOffDutyHours + totalOnDutyHours + totalSleeperBerthHours);
 
         if (overallDutyHours < 24 || overallDutyHours > 24) {
@@ -102,19 +106,12 @@ const DriverForm = () => {
         } else if (currentCycleUsed !== totalDrivingHours) {
             setError(`Adjust your hours! Your Current Cycle Used (hrs): ${currentCycleUsed}, but you are sending: ${totalDrivingHours}`);
         } else {
-            generateLogs();
-            setIsFormSubmitted(true);
+            sendDataToBackend();
         }
     };
 
     // Generate logs based on the cycle used
-    const generateLogs = () => {
-        const maxHoursPerDay = 8.75; // Property-carrying driver, 70hrs/8days, no adverse driving conditions
-        const totalDrivingHours = Object.values(dutyTimes.drivingHours).reduce((acc, hours) => acc + hours, 0);
-        const isBelowAverage = totalDrivingHours < maxHoursPerDay;
-        const statusMessage = isBelowAverage
-            ? `Driving time is below the expected average (${maxHoursPerDay} hrs/day).`
-            : `Driving time is within the expected range.`;
+    const generateLogs = (totalDHrs: number, mxHrs: number, message: string): void => {
 
         const newLogs = {
             date: new Date().toLocaleDateString(),
@@ -126,13 +123,76 @@ const DriverForm = () => {
             truckNumber: driverDetails.truckNumber,
             carriedProduct: driverDetails.product,
             totalMiles: driverDetails.miles,
-            isBelowAverage: totalDrivingHours < maxHoursPerDay,
+            isBelowAverage: totalDHrs < mxHrs,
         };
 
         setLogs(newLogs); // Set the generated log
-        setStatusMessage(statusMessage); // Set the status message
+        setStatusMessage(message); // Set the status message
     };
 
+    // Send the driver trip data to the backend using Axios
+    const sendDataToBackend = async () => {
+        setLoading(true); // Set loading state to true when submitting
+        const token = localStorage.getItem('access_token');
+        if (!token) {
+            alert('No token found! Please login first.');
+        }
+        const maxHoursPerDay = 8.75; // Property-carrying driver, 70hrs/8days, no adverse driving conditions
+        const totalDrivingHours = Object.values(dutyTimes.drivingHours).reduce((acc, hours) => acc + hours, 0);
+        const isBelowAverage = totalDrivingHours < maxHoursPerDay;
+        const statusMessage = isBelowAverage
+            ? `Driving time is below the expected average (${maxHoursPerDay} hrs/day).`
+            : `Driving time is within the expected range.`;
+        const storedData = localStorage.getItem("driverTripData");  // Get stored driver input details
+        const driverTripData = storedData ? JSON.parse(storedData) : {}
+        const currentCycleUsed = driverTripData.currentCycleUsed ? parseFloat(driverTripData.currentCycleUsed) : 8.75; // Current Cycle Used (hrs)
+
+        // Data fields to be sent to the database
+        const data = {
+            current_cycle_used: currentCycleUsed,  //number
+            route_estimated_distance: driverTripData.estimatedRouteLength,
+            route_estimated_duration: driverTripData.estimatedRouteDuration,
+            current_location_name: driverTripData.currentLocationName,
+            pickup_location_name: driverTripData.pickupLocationName,
+            dropoff_location_name: driverTripData.dropoffLocationName,
+            truck_number: driverDetails.truckNumber,
+            carried_product_name: driverDetails.product,
+            total_daily_miles: driverDetails.miles,
+            duty_status: statusMessage,
+            driving_hours_0_11: dutyTimes.drivingHours['0-11'],
+            driving_hours_12_17: dutyTimes.drivingHours['12-17'],
+            driving_hours_18_23: dutyTimes.drivingHours['18-23'],
+            off_duty_hours_0_11: dutyTimes.offDutyHours['0-11'],
+            off_duty_hours_12_17: dutyTimes.offDutyHours['12-17'],
+            off_duty_hours_18_23: dutyTimes.offDutyHours['18-23'],
+            on_duty_hours_0_11: dutyTimes.onDutyHours['0-11'],
+            on_duty_hours_12_17: dutyTimes.onDutyHours['12-17'],
+            on_duty_hours_18_23: dutyTimes.onDutyHours['18-23'],
+            sleeper_berth_hours_0_11: dutyTimes.sleeperBerthHours['0-11'],
+            sleeper_berth_hours_12_17: dutyTimes.sleeperBerthHours['12-17'],
+            sleeper_berth_hours_18_23: dutyTimes.sleeperBerthHours['18-23'],
+        };
+
+        try {
+            const response = await axios.post(
+                'http://localhost:8000/log/trips/',
+                data,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
+            generateLogs(totalDrivingHours, maxHoursPerDay, statusMessage,);
+            handleSuccessMessage();
+            setIsFormSubmitted(true);
+        } catch (error) {
+            console.log(error);
+            setIsModalOpen(true); // Open the modal if an error occurs
+        } finally {
+            setLoading(false);  // Reset loading state
+        }
+    };
 
     return (
         <div className='pt-2'>
@@ -222,6 +282,7 @@ const DriverForm = () => {
                                             id={`driving-${timePeriod}`}
                                             min={0}
                                             max={12}
+                                            step="0.1"
                                             value={dutyTimes.drivingHours[timePeriod]}
                                             onChange={(e) => handleDutyTimeChange(timePeriod, 'driving', parseFloat(e.target.value))}
                                             className="w-full p-3 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500 transition-all"
@@ -236,6 +297,7 @@ const DriverForm = () => {
                                             id={`offDuty-${timePeriod}`}
                                             min={0}
                                             max={12}
+                                            step="0.1"
                                             value={dutyTimes.offDutyHours[timePeriod]}
                                             onChange={(e) => handleDutyTimeChange(timePeriod, 'offDuty', parseFloat(e.target.value))}
                                             className="w-full p-3 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500 transition-all"
@@ -250,6 +312,7 @@ const DriverForm = () => {
                                             id={`onDuty-${timePeriod}`}
                                             min={0}
                                             max={12}
+                                            step="0.1"
                                             value={dutyTimes.onDutyHours[timePeriod]}
                                             onChange={(e) => handleDutyTimeChange(timePeriod, 'onDuty', parseFloat(e.target.value))}
                                             className="w-full p-3 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500 transition-all"
@@ -264,6 +327,7 @@ const DriverForm = () => {
                                             id={`sleeperBerth-${timePeriod}`}
                                             min={0}
                                             max={12}
+                                            step="0.1"
                                             value={dutyTimes.sleeperBerthHours[timePeriod]}
                                             onChange={(e) => handleDutyTimeChange(timePeriod, 'sleeperBerth', parseFloat(e.target.value))}
                                             className="w-full p-3 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500 transition-all"
@@ -281,14 +345,27 @@ const DriverForm = () => {
                     <div>
                         <button
                             type="submit"
-                            className="w-full bg-green-500 text-white py-3 rounded-md font-semibold hover:bg-green-600
-                         focus:outline-none focus:ring-2 focus:ring-green-500 transition-all cursor-pointer"
+                            disabled={loading}
+                            className={`w-full text-white py-3 rounded-md font-semibold
+                             ${loading ? 'bg-gray-400' : 'bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 dark:hover:from-blue-700 dark:hover:to-blue-800'} 
+                            text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all" cursor-pointer`}
                         >
-                            Submit Driver Info
+                            {loading ? "Sending..." : "Submit Driver Info"}
                         </button>
                     </div>
                 </form>
             </div>
+
+            {/* Show error modal if there's an error */}
+            {isModalOpen && (
+                <ErrorModal
+                    message="There was an error submitting the data. Please try again."
+                    onRetry={() => {
+                        setIsModalOpen(false);
+                        sendDataToBackend(); // Retry form submission
+                    }}
+                />
+            )}
         </div>
     );
 };

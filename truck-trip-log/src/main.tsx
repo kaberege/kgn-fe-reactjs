@@ -9,6 +9,7 @@ import MapView from './components/MapView.tsx'
 import ELDLogView from './components/ELDLogView.tsx'
 import Register from './pages/Register.tsx'
 import Login from './pages/Login.tsx'
+import History from './components/History.tsx'
 
 const router = createBrowserRouter([
   {
@@ -25,15 +26,19 @@ const router = createBrowserRouter([
     children: [
       {
         path: "",
-        element: <TripForm />     //  component
+        element: <TripForm />     //  component TripForm
       },
       {
         path: "map",
-        element: <MapView/>  // component
+        element: <MapView/>  // component MapView
       },
       {
         path: "eld-log/:cycleId",
-        element: <ELDLogView />     //  component
+        element: <ELDLogView />     // component ELDLogView
+      },
+      {
+        path: "history",
+        element: <History />     // component History
       },
     ]
   },
