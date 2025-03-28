@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import L, { Map, LeafletMouseEvent } from "leaflet"; // Import Leaflet library
 import fuel from "../assets/fuel.jpg"
 import { useTripStore } from "../state-store/useStore";
 import RouteDetails from "./RouteDetails";
+import checkTokenExpiration from "../redirect/checkToken";
 
 const MapView = () => {
   const setTripDetails = useTripStore((state) => state.setTripDetails);
@@ -13,6 +14,17 @@ const MapView = () => {
   const [loading, setLoading] = useState<boolean>(false); // State to handle loading
   const [error, setError] = useState<string | null>(null); // State to handle errors
   const mapRef = useRef<Map | null>(null);
+
+  const navigate = useNavigate();
+
+  // Check the liftime of access token and handle redirection
+  useEffect(() => {
+      const token = localStorage.getItem("access_token") || '';
+      if (!token || checkTokenExpiration(token)) {
+          navigate("/"); // Redirect to the register/login page
+      }
+
+  }, []);
 
   useEffect(() => {
     const storedData = localStorage.getItem("driverTripData");
@@ -166,7 +178,6 @@ const MapView = () => {
         const driverTripData = storedData ? JSON.parse(storedData) : {}
         const newData = {...driverTripData, estimatedRouteLength:routeLength, estimatedRouteDuration:routeDurationInSeconds};
         localStorage.setItem("driverTripData", JSON.stringify(newData)); // Send updated trip details to the local storage
-        console.log(` new data: ${newData} Distance:${routeLength}  Duration: ${routeDurationInSeconds}`);
 
         // Clear previous route (if any)
         mapRef.current?.eachLayer((layer) => {
@@ -234,7 +245,6 @@ const MapView = () => {
         }
       }
     } catch (error) {
-      console.error("Error fetching route data:", error);
       setError("Error fetching route data");
     } finally {
       // Set loading to false once the fetch is complete  

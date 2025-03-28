@@ -25,6 +25,7 @@ function Register() {
         password: password,
         username: username,
       });
+      console.log(response);
       navigate('/login');
     } catch (err) {
       setError('Registration failed. Please try again.');
@@ -84,6 +85,7 @@ function Register() {
             <input
               type="password"
               id="password"
+              minLength={5}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="mt-1 p-2 w-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-md"

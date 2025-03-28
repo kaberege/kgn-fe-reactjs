@@ -5,7 +5,7 @@ import { FaDownload, FaShare } from "react-icons/fa";
 const DownloadShare = () => {
     const { logs, statusMessage, signature } = useDriverStore();
 
-    // Setting sharaeable & downloadable div
+    // Setting share & download div functionality
     const createResultElement = () => {
         const element = document.createElement("div");
         element.style.width = "700px";

@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { TripDetails, LocationData } from "../types-store/types"
 import { useTripStore } from '../state-store/useStore';
+import checkTokenExpiration from '../redirect/checkToken';
 
 const TripForm = () => {
   // Set driver trip details
@@ -18,6 +19,14 @@ const TripForm = () => {
   const setTripDetails = useTripStore((state) => state.setTripDetails);
 
   const navigate = useNavigate();
+
+  // Check the liftime of access token and handle redirection
+  useEffect(() => {
+    const token = localStorage.getItem("access_token") || '';
+    if (!token || checkTokenExpiration(token)) {
+      navigate("/"); // Redirect to the register/login page
+    }
+  }, []);
 
   // Fetching coords of a specific location
   const fetchCoordinates = async (location: string) => {

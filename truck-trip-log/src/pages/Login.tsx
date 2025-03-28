@@ -83,7 +83,7 @@ function Login() {
             disabled={loading}
             className={`w-full cursor-pointer p-2 rounded-md text-white ${loading ? 'bg-gray-400' : 'bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 dark:hover:from-blue-700 dark:hover:to-blue-800'}
              transition-colors duration-300 ease-in-out`}>
-            {loading ? 'Submitting...' : 'Register'}
+            {loading ? 'Submitting...' : 'Login'}
           </button>
         </form>
         <p className="mt-4 text-center text-sm dark:text-gray-400">

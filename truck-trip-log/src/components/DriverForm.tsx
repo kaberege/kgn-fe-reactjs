@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { DriverDetails, DutyTimes, DutyHours } from '../types-store/types';
 import { useDriverStore } from '../state-store/useDriverStore';
 import ErrorModal from './ErrorModal';
+import checkTokenExpiration from '../redirect/checkToken';
 
 const DriverForm = ({ handleSuccessMessage }: { handleSuccessMessage: () => void }) => {
     const [loading, setLoading] = useState<boolean>(false); // Set loading state
@@ -26,6 +27,16 @@ const DriverForm = ({ handleSuccessMessage }: { handleSuccessMessage: () => void
         sleeperBerthHours: { '0-11': 0, '12-17': 0, '18-23': 0 },
     });
 
+    const navigate = useNavigate();
+
+    // Check the liftime of access token and handle redirection
+    useEffect(() => {
+        const token = localStorage.getItem("access_token") || '';
+        if (!token || checkTokenExpiration(token)) {
+            navigate("/"); // Redirect to the register/login page
+        }
+
+    }, [loading]);
 
     useEffect(() => {
         if (cycleIdHrs && isFormSubmitted) {
@@ -133,10 +144,6 @@ const DriverForm = ({ handleSuccessMessage }: { handleSuccessMessage: () => void
     // Send the driver trip data to the backend using Axios
     const sendDataToBackend = async () => {
         setLoading(true); // Set loading state to true when submitting
-        const token = localStorage.getItem('access_token');
-        if (!token) {
-            alert('No token found! Please login first.');
-        }
         const maxHoursPerDay = 8.75; // Property-carrying driver, 70hrs/8days, no adverse driving conditions
         const totalDrivingHours = Object.values(dutyTimes.drivingHours).reduce((acc, hours) => acc + hours, 0);
         const isBelowAverage = totalDrivingHours < maxHoursPerDay;
@@ -174,6 +181,7 @@ const DriverForm = ({ handleSuccessMessage }: { handleSuccessMessage: () => void
         };
 
         try {
+            const token = localStorage.getItem("access_token");
             const response = await axios.post(
                 'http://localhost:8000/log/trips/',
                 data,
@@ -183,11 +191,11 @@ const DriverForm = ({ handleSuccessMessage }: { handleSuccessMessage: () => void
                     },
                 }
             );
+            console.log(response);
             generateLogs(totalDrivingHours, maxHoursPerDay, statusMessage,);
             handleSuccessMessage();
             setIsFormSubmitted(true);
         } catch (error) {
-            console.log(error);
             setIsModalOpen(true); // Open the modal if an error occurs
         } finally {
             setLoading(false);  // Reset loading state
