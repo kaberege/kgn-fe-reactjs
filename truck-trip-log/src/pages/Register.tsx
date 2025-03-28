@@ -20,7 +20,7 @@ function Register() {
     setError('');
     setLoading(true);
     try {
-      const response = await axios.post('http://localhost:8000/user/register/', {
+      const response = await axios.post('https://kaberege123.pythonanywhere.com/user/register/', {
         email: email,
         password: password,
         username: username,

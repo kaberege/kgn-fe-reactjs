@@ -183,7 +183,7 @@ const DriverForm = ({ handleSuccessMessage }: { handleSuccessMessage: () => void
         try {
             const token = localStorage.getItem("access_token");
             const response = await axios.post(
-                'http://localhost:8000/log/trips/',
+                'https://kaberege123.pythonanywhere.com/log/trips/',
                 data,
                 {
                     headers: {

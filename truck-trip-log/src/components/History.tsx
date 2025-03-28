@@ -30,7 +30,7 @@ const History = () => {
     setError(null);
     try {
       const token = localStorage.getItem("access_token");
-      const response = await axios.get<TripLogsResponse>('http://127.0.0.1:8000/log/trips/', {
+      const response = await axios.get<TripLogsResponse>('https://kaberege123.pythonanywhere.com/log/trips/', {
         headers: {
           Authorization: `Bearer ${token}`,
         },

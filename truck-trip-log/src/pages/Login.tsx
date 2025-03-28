@@ -19,7 +19,7 @@ function Login() {
     setError('');
     setLoading(true);
     try {
-      const response = await axios.post('http://localhost:8000/user/login/', {
+      const response = await axios.post('https://kaberege123.pythonanywhere.com/user/login/', {
         email: email,
         password: password,
       });
