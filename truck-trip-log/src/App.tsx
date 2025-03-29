@@ -26,7 +26,7 @@ function App() {
               className="h-7 w-7 sm:h-9 sm:w-9 rounded-full"
             />
             <h1 className="text-xl sm:text-2xl font-semibold text-white">
-              Truck Trip App
+            Trip Tracker App
             </h1>
           </div>
           <button
