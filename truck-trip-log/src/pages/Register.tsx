@@ -17,9 +17,43 @@ function Register() {
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
+
     setError('');
-    setLoading(true);
+
+    // Minimum length 8 characters, maximum length 30 characters
+    if (password.length < 8 || password.length > 30) {
+      setError('Password must be between 8 and 30 characters long.');
+      return;
+    }
+
+    // At least one lowercase letter
+    if (!/[a-z]/.test(password)) {
+      setError('Password must contain at least one lowercase letter.');
+      return;
+    }
+
+    // At least one uppercase letter
+    if (!/[A-Z]/.test(password)) {
+      setError('Password must contain at least one uppercase letter.');
+      return;
+    }
+
+    // At least one number
+    if (!/\d/.test(password)) {
+      setError('Password must contain at least one number.');
+      return;
+    }
+
+    // At least one special character (e.g., !@#$%^&*)
+    if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
+      setError('Password must contain at least one special character.');
+      return;
+    }
+
+    setLoading(true);  // Initiate loading
+
     try {
+      // https://kaberege123.pythonanywhere.com/ | http://127.0.0.1:8000/
       const response = await axios.post('https://kaberege123.pythonanywhere.com/user/register/', {
         email: email,
         password: password,
@@ -27,8 +61,14 @@ function Register() {
       });
       console.log(response);
       navigate('/login');
-    } catch (err) {
-      setError('Registration failed. Please try again.');
+    } catch (err: any) {
+      if (err?.message === 'Network Error') {
+        setError(err?.message);
+      } else if (err?.response?.data?.email[0] === 'user with this email already exists.') {
+        setError('A user with this email already exists!');
+      } else {
+        setError('Registration failed! Please try again.');
+      }
     } finally {
       setLoading(false);  // Reset loading state
     }
@@ -53,7 +93,7 @@ function Register() {
 
         <h2 className="text-2xl font-semibold text-center mb-4 text-gray-900 dark:text-white">Create an Account</h2>
 
-        {error && <p className="text-red-500 text-center">{error}</p>}
+        {error && <p className="text-red-500 text-center text-xs">{error}</p>}
 
         <form onSubmit={handleRegister}>
           <div className="mb-4">

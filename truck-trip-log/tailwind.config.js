@@ -1,5 +1,5 @@
 
-// This file is manually created!!!!!!
+// Added for auto-complete!!!
 
 module.exports = {
     purge: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],

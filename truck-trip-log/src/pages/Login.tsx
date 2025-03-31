@@ -19,6 +19,7 @@ function Login() {
     setError('');
     setLoading(true);
     try {
+      // https://kaberege123.pythonanywhere.com/ | http://127.0.0.1:8000/
       const response = await axios.post('https://kaberege123.pythonanywhere.com/user/login/', {
         email: email,
         password: password,
@@ -26,8 +27,12 @@ function Login() {
 
       localStorage.setItem('access_token', response.data.access);
       navigate('/truck');
-    } catch (err) {
-      setError('Invalid email or password. Please try again.');
+    } catch (err: any) {
+      if (err?.message === 'Network Error') {
+        setError(err?.message);
+      } else {
+        setError('Invalid email or password! Please try again.');
+      }
     } finally {
       setLoading(false);  // Reset loading state
     }
@@ -52,7 +57,7 @@ function Login() {
 
         <h2 className="text-2xl font-semibold text-center mb-4 text-gray-900 dark:text-white">Login to Your Account</h2>
 
-        {error && <p className="text-red-500 text-center">{error}</p>}
+        {error && <p className="text-red-500 text-center text-xs">{error}</p>}
 
         <form onSubmit={handleLogin}>
           <div className="mb-4">
