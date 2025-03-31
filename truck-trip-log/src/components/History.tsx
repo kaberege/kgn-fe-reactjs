@@ -49,8 +49,8 @@ const History = () => {
   return (
     <div className="container mx-auto">
       {
-        loading ? <div className="text-center text-red-600 font-semibold py-2">Loading...</div> : error ? (
-          <div className="text-center py-10">
+        loading ? <div className="text-center mt-10 text-red-600 font-semibold py-2">Loading...</div> : error ? (
+          <div className="text-center mt-10 py-10">
             <p className="text-red-500">{error}</p>
             <button
               onClick={fetchTripLogs}
@@ -61,7 +61,7 @@ const History = () => {
             </button>
           </div>
         ) : tripLogs.length === 0 ? (
-          <div className="text-center py-10 dark:text-slate-200 font-semibold">
+          <div className="text-center mt-10 py-10 dark:text-slate-200 font-semibold">
             <p>No trip records found.</p>
           </div>
         ) : <div>

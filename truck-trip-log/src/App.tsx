@@ -8,8 +8,8 @@ function App() {
   const [year, setYear] = useState<number | null>(null); // Setting current year
 
   useEffect(() => {
-    const date = new Date();
-    const yr = date.getFullYear();
+    const date:Date = new Date();
+    const yr:number = date.getFullYear();
     setYear(yr);
   }, []);
 
@@ -41,7 +41,7 @@ function App() {
       </header>
 
       {/* Main Content */}
-      <main className="grow flex justify-center items-center px-2 sm:px-6 bg-white dark:bg-gray-900 transition-all">
+      <main className="grow px-2 sm:px-6 bg-white dark:bg-gray-900 transition-all">
         <Outlet />
       </main>
 

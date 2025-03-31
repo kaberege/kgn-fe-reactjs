@@ -253,7 +253,7 @@ const MapView = () => {
   };
 
   return (
-    <div className="container relative">
+    <div className="container relative mt-3">
       {/* Back to Home Button */}
       <div className="flex justify-between items-center">
         <Link to="/truck" className=" bg-blue-500 text-xs text-amber-300 hover:bg-blue-600 transition-colors p-1 rounded-lg shadow-md">
@@ -264,7 +264,7 @@ const MapView = () => {
         </Link>
       </div>
       {/* Map container */}
-      <div id="map" style={{ height: "450px", width: "100%", marginTop: "10px", borderRadius: "10px" }} />
+      <div id="map" style={{ height: "450px", width: "100%", marginTop: "12px", borderRadius: "10px" }} />
 
       {/* Route details component*/}
       <RouteDetails

@@ -2,7 +2,7 @@
 
 // Modal Component for error handling
 const ErrorModal = ({ message, onRetry }: { message: string; onRetry: () => void }) => (
-    <div className="fixed inset-0 flex items-center justify-center bg-slate-950/65">
+    <div className="fixed inset-0 flex items-center justify-center bg-slate-950/65 dark:bg-slate-50/65">
         <div className="p-2 sm:p-6 rounded-lg shadow-lg max-w-sm w-full max-sm:w-[90%] bg-white">
             <h2 className="text-xl text-red-600 font-semibold">Error</h2>
             <p className="text-sm text-red-500 mb-4">{message}</p>
