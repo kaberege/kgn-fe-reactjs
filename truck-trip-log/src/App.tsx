@@ -41,7 +41,7 @@ function App() {
       </header>
 
       {/* Main Content */}
-      <main className="grow px-2 sm:px-6 bg-white dark:bg-gray-900 transition-all">
+      <main className="grow flex px-2 sm:px-6 bg-white dark:bg-gray-900 transition-all">
         <Outlet />
       </main>
 

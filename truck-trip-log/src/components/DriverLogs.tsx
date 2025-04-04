@@ -53,7 +53,7 @@ const DriverLogs = () => {
                                     {/* OFF DUTY ROW */}
                                     <tr>
                                         <td className="p-2 border whitespace-nowrap">OFF DUTY</td>
-                                        {['0-11', '12-17', '18-23'].map((period) => (
+                                        {['0:00-11:59', '12:00-17:59', '18:00-23:59'].map((period) => (
                                             <td className="p-2 border whitespace-nowrap" key={`offDuty-${period}`}>
                                                 {logs.offDutyHours[period]}
                                             </td>
@@ -67,7 +67,7 @@ const DriverLogs = () => {
                                     {/* DRIVING ROW */}
                                     <tr>
                                         <td className="p-2 border whitespace-nowrap">DRIVING</td>
-                                        {['0-11', '12-17', '18-23'].map((period) => (
+                                        {['0:00-11:59', '12:00-17:59', '18:00-23:59'].map((period) => (
                                             <td className="p-2 border whitespace-nowrap" key={`driving-${period}`}>
                                                 {logs.drivingHours[period]}
                                             </td>
@@ -81,7 +81,7 @@ const DriverLogs = () => {
                                     {/* SLEEPER BERTH ROW */}
                                     <tr>
                                         <td className="p-2 border whitespace-nowrap">SLEEPER BERTH</td>
-                                        {['0-11', '12-17', '18-23'].map((period) => (
+                                        {['0:00-11:59', '12:00-17:59', '18:00-23:59'].map((period) => (
                                             <td className="p-2 border whitespace-nowrap" key={`sleeperBerth-${period}`}>
                                                 {logs.sleeperBerthHours[period]}
                                             </td>
@@ -95,7 +95,7 @@ const DriverLogs = () => {
                                     {/* ON DUTY ROW */}
                                     <tr>
                                         <td className="p-2 border whitespace-nowrap">ON DUTY</td>
-                                        {['0-11', '12-17', '18-23'].map((period) => (
+                                        {['0:00-11:59', '12:00-17:59', '18:00-23:59'].map((period) => (
                                             <td className="p-2 border whitespace-nowrap" key={`onDuty-${period}`}>
                                                 {logs.onDutyHours[period]}
                                             </td>

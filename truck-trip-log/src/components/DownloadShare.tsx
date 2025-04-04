@@ -39,9 +39,9 @@ const DownloadShare = () => {
                 <!-- OFF DUTY ROW -->
                 <tr class="log-row">
                     <td class="log-cell">OFF DUTY</td>
-                    <td class="log-cell">${logs && logs.offDutyHours['0-11']}</td>
-                    <td class="log-cell">${logs && logs.offDutyHours['12-17']}</td>
-                    <td class="log-cell">${logs && logs.offDutyHours['18-23']}</td>
+                    <td class="log-cell">${logs && logs.offDutyHours['0:00-11:59']}</td>
+                    <td class="log-cell">${logs && logs.offDutyHours['12:00-17:59']}</td>
+                    <td class="log-cell">${logs && logs.offDutyHours['18:00-23:59']}</td>
                     <td class="log-cell">
                         ${logs && Object.values(logs.offDutyHours).reduce((sum, hours) => sum + hours, 0)}
                     </td>
@@ -50,9 +50,9 @@ const DownloadShare = () => {
                 <!-- DRIVING ROW -->
                 <tr class="log-row">
                     <td class="log-cell">DRIVING</td>
-                    <td class="log-cell">${logs && logs.drivingHours['0-11']}</td>
-                    <td class="log-cell">${logs && logs.drivingHours['12-17']}</td>
-                    <td class="log-cell">${logs && logs.drivingHours['18-23']}</td>
+                    <td class="log-cell">${logs && logs.drivingHours['0:00-11:59']}</td>
+                    <td class="log-cell">${logs && logs.drivingHours['12:00-17:59']}</td>
+                    <td class="log-cell">${logs && logs.drivingHours['18:00-23:59']}</td>
                     <td class="log-cell">
                         ${logs && Object.values(logs.drivingHours).reduce((sum, hours) => sum + hours, 0)}
                     </td>
@@ -61,9 +61,9 @@ const DownloadShare = () => {
                 <!-- SLEEPER BERTH ROW -->
                 <tr class="log-row">
                     <td class="log-cell">SLEEPER BERTH</td>
-                    <td class="log-cell">${logs && logs.sleeperBerthHours['0-11']}</td>
-                    <td class="log-cell">${logs && logs.sleeperBerthHours['12-17']}</td>
-                    <td class="log-cell">${logs && logs.sleeperBerthHours['18-23']}</td>
+                    <td class="log-cell">${logs && logs.sleeperBerthHours['0:00-11:59']}</td>
+                    <td class="log-cell">${logs && logs.sleeperBerthHours['12:00-17:59']}</td>
+                    <td class="log-cell">${logs && logs.sleeperBerthHours['18:00-23:59']}</td>
                     <td class="log-cell">
                         ${logs && Object.values(logs.sleeperBerthHours).reduce((sum, hours) => sum + hours, 0)}
                     </td>
@@ -72,9 +72,9 @@ const DownloadShare = () => {
                 <!-- ON DUTY ROW -->
                 <tr class="log-row">
                     <td class="log-cell">ON DUTY</td>
-                    <td class="log-cell">${logs && logs.onDutyHours['0-11']}</td>
-                    <td class="log-cell">${logs && logs.onDutyHours['12-17']}</td>
-                    <td class="log-cell">${logs && logs.onDutyHours['18-23']}</td>
+                    <td class="log-cell">${logs && logs.onDutyHours['0:00-11:59']}</td>
+                    <td class="log-cell">${logs && logs.onDutyHours['12:00-17:59']}</td>
+                    <td class="log-cell">${logs && logs.onDutyHours['18:00-23:59']}</td>
                     <td class="log-cell">
                         ${logs && Object.values(logs.onDutyHours).reduce((sum, hours) => sum + hours, 0)}
                     </td>

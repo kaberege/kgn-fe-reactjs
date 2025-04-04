@@ -45,9 +45,9 @@ export interface RouteDetailsProps {
 
 // Defines hours worked in different time periods of the day
 export interface DutyHours {
-  '0-11': number; // Hours worked from 0:00 to 11:59
-  '12-17': number; // Hours worked from 12:00 to 17:59
-  '18-23': number; // Hours worked from 18:00 to 23:59
+  '0:00-11:59': number; // Hours worked from 0:00 to 11:59
+  '12:00-17:59': number; // Hours worked from 12:00 to 17:59
+  '18:00-23:59': number; // Hours worked from 18:00 to 23:59
   [key: string]: number; // Allows additional time periods
 }
 

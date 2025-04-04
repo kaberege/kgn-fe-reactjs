@@ -19,10 +19,10 @@ const MapView = () => {
 
   // Check the liftime of access token and handle redirection
   useEffect(() => {
-      const token = localStorage.getItem("access_token") || '';
-      if (!token || checkTokenExpiration(token)) {
-          navigate("/"); // Redirect to the register/login page
-      }
+    const token = localStorage.getItem("access_token") || '';
+    if (!token || checkTokenExpiration(token)) {
+      navigate("/"); // Redirect to the register/login page
+    }
 
   }, []);
 
@@ -176,7 +176,7 @@ const MapView = () => {
         setRouteDuration(routeDurationInSeconds); // Updating routeDuration
         const storedData = localStorage.getItem("driverTripData");
         const driverTripData = storedData ? JSON.parse(storedData) : {}
-        const newData = {...driverTripData, estimatedRouteLength:routeLength, estimatedRouteDuration:routeDurationInSeconds};
+        const newData = { ...driverTripData, estimatedRouteLength: routeLength, estimatedRouteDuration: routeDurationInSeconds };
         localStorage.setItem("driverTripData", JSON.stringify(newData)); // Send updated trip details to the local storage
 
         // Clear previous route (if any)
@@ -253,7 +253,7 @@ const MapView = () => {
   };
 
   return (
-    <div className="container relative mt-3">
+    <div className="container grow flex flex-col relative mt-3 mx-auto">
       {/* Back to Home Button */}
       <div className="flex justify-between items-center">
         <Link to="/truck" className=" bg-blue-500 text-xs text-amber-300 hover:bg-blue-600 transition-colors p-1 rounded-lg shadow-md">
@@ -264,7 +264,9 @@ const MapView = () => {
         </Link>
       </div>
       {/* Map container */}
-      <div id="map" style={{ height: "450px", width: "100%", marginTop: "12px", borderRadius: "10px" }} />
+      <div className="my-3 grow flex flex-col items-center justify-center">
+        <div id="map" style={{ flexGrow: 1, width: "100%", borderRadius: "10px" }} />
+      </div>
 
       {/* Route details component*/}
       <RouteDetails

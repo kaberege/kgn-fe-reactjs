@@ -37,7 +37,7 @@ const History = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-      setDriverName(response.data.username);
+      setDriverName(response.data.name);
       setTripLogs(response.data.trip_logs);
     } catch (err: any) {
       setError('Failed to fetch trip data. Please try again.');
@@ -80,7 +80,7 @@ const History = () => {
           </div>
           <div>
             <div className="text-xl font-semibold mb-4 dark:text-slate-100">
-              <p>Driver: {driverName || 'Unknown'}</p>
+              <p>Driver: {driverName}</p>
             </div>
 
             {tripLogs.map((log, index) => (

@@ -6,10 +6,11 @@ import { GiTruck } from 'react-icons/gi';
 import logo from '../assets/favicon.jpg';
 
 function Register() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [username, setUsername] = useState('');
-  const [error, setError] = useState('');
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [firstName, setFirstName] = useState<string>('');
+  const [lastName, setLastName] = useState<string>('');
+  const [error, setError] = useState<string>('');
   const [isDarkMode, setIsDarkMode] = useState<boolean>(false); // Dark mode state
   const [loading, setLoading] = useState<boolean>(false);  //Loading state
   const navigate = useNavigate();
@@ -19,6 +20,14 @@ function Register() {
     e.preventDefault();
 
     setError('');
+
+    const emailRegex: RegExp = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/; // For email validation
+
+    // Check if email address is valid
+    if (!emailRegex.test(email)) {
+      setError("The email address is not valid.");
+      return;
+    }
 
     // Minimum length 8 characters, maximum length 30 characters
     if (password.length < 8 || password.length > 30) {
@@ -57,7 +66,8 @@ function Register() {
       const response = await axios.post('https://kaberege123.pythonanywhere.com/user/register/', {
         email: email,
         password: password,
-        username: username,
+        first_name: firstName,
+        last_name: lastName
       });
       console.log(response);
       navigate('/login');
@@ -75,12 +85,13 @@ function Register() {
   };
 
   return (
-    <div className={`flex items-center justify-center min-h-screen ${isDarkMode && "dark"} dark:bg-gray-900 bg-gray-100`}>
-      <div className='p-6 rounded-lg shadow-lg w-full max-w-xs dark:bg-gray-800 dark:text-white bg-white text-gray-900'>
+    <div className={`flex items-center justify-center min-h-screen p-2 ${isDarkMode && "dark"} dark:bg-gray-900 bg-gray-100`}>
+      <div className='p-3 rounded-lg shadow-lg w-full max-w-sm dark:bg-gray-800 dark:text-white bg-white text-gray-900'>
         <div className="flex justify-between items-center mb-4 p-2">
-          <img src={logo} alt="Logo" title='kgn log' className="w-11 h-11 rounded-full" />
+          <img src={logo} alt="Logo" title='kgn log' className="w-10 h-10 rounded-full" />
           <button
-            className="text-2xl text-gray-900 dark:text-white cursor-pointer"
+            title="Toggle light/dark mode"
+            className="text-xl text-gray-900 dark:text-white cursor-pointer"
             onClick={() => setIsDarkMode(prevMode => !prevMode)}
           >
             {isDarkMode ? <MdLightMode /> : <MdDarkMode />}
@@ -88,26 +99,38 @@ function Register() {
         </div>
         <div className="flex items-center justify-center mb-6">
           <GiTruck className="text-4xl text-blue-500 mr-2" />
-          <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Welcome to Your Trip Tracker!</h2>
+          <h2 className="text-sm font-semibold text-gray-900 dark:text-white">Welcome to Your Trip Tracker!</h2>
         </div>
 
-        <h2 className="text-2xl font-semibold text-center mb-4 text-gray-900 dark:text-white">Create an Account</h2>
+        <h2 className="text-xl font-semibold text-center mb-4 text-gray-900 dark:text-white">Create an Account</h2>
 
         {error && <p className="text-red-500 text-center text-xs">{error}</p>}
 
         <form onSubmit={handleRegister}>
           <div className="mb-4">
-            <label htmlFor="username" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Username</label>
+            <label htmlFor="first-name" className="block text-sm font-medium text-gray-700 dark:text-gray-300">First name</label>
             <input
               type="text"
-              id="username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              className="mt-1 p-2 w-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-md"
+              id="first-name"
+              value={firstName}
+              minLength={2}
+              onChange={(e) => setFirstName(e.target.value)}
+              className="mt-1 p-1 w-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-md"
               required
             />
           </div>
-
+          <div className="mb-4">
+            <label htmlFor="last-name" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Last name</label>
+            <input
+              type="text"
+              id="last-name"
+              value={lastName}
+              minLength={2}
+              onChange={(e) => setLastName(e.target.value)}
+              className="mt-1 p-1 w-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-md"
+              required
+            />
+          </div>
           <div className="mb-4">
             <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Email</label>
             <input
@@ -115,7 +138,7 @@ function Register() {
               id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="mt-1 p-2 w-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-md"
+              className="mt-1 p-1 w-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-md"
               required
             />
           </div>
@@ -128,14 +151,14 @@ function Register() {
               minLength={5}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="mt-1 p-2 w-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-md"
+              className="mt-1 p-1 w-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-md"
               required
             />
           </div>
           <button
             type="submit"
             disabled={loading}
-            className={`w-full cursor-pointer p-2 rounded-md text-white ${loading ? 'bg-gray-400' : 'bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 dark:hover:from-blue-700 dark:hover:to-blue-800'}
+            className={`w-full cursor-pointer p-1 rounded-md text-white ${loading ? 'bg-gray-400' : 'bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 dark:hover:from-blue-700 dark:hover:to-blue-800'}
              transition-colors duration-300 ease-in-out`}>
             {loading ? 'Submitting...' : 'Register'}
           </button>

@@ -6,9 +6,9 @@ import { GiTruck } from 'react-icons/gi';
 import logo from '../assets/favicon.jpg';
 
 function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [error, setError] = useState<string>('');
   const [isDarkMode, setIsDarkMode] = useState<boolean>(false); // Dark mode state
   const [loading, setLoading] = useState<boolean>(false);  //Loading state
   const navigate = useNavigate();
@@ -39,12 +39,13 @@ function Login() {
   };
 
   return (
-    <div className={`flex items-center justify-center min-h-screen ${isDarkMode && "dark"} dark:bg-gray-900 bg-gray-100`}>
-      <div className='p-6 rounded-lg shadow-lg w-full max-w-xs dark:bg-gray-800 dark:text-white bg-white text-gray-900'>
+    <div className={`flex items-center justify-center min-h-screen p-2 ${isDarkMode && "dark"} dark:bg-gray-900 bg-gray-100`}>
+      <div className='p-4 rounded-lg shadow-lg w-full max-w-sm dark:bg-gray-800 dark:text-white bg-white text-gray-900'>
         <div className="flex justify-between items-center mb-4 p-2">
-          <img src={logo} alt="Logo" title='kgn logo' className="w-11 h-11 rounded-full" />
+          <img src={logo} alt="Logo" title='kgn logo' className="w-10 h-10 rounded-full" />
           <button
-            className="text-2xl text-gray-900 dark:text-white cursor-pointer"
+            title="Toggle light/dark mode"
+            className="text-xl text-gray-900 dark:text-white cursor-pointer"
             onClick={() => setIsDarkMode(prevMode => !prevMode)}
           >
             {isDarkMode ? <MdLightMode /> : <MdDarkMode />}
@@ -52,10 +53,10 @@ function Login() {
         </div>
         <div className="flex items-center justify-center mb-6">
           <GiTruck className="text-4xl text-blue-500 mr-2" />
-          <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Welcome Back to Your Trip Tracker!</h2>
+          <h2 className="text-sm font-semibold text-gray-900 dark:text-white">Welcome Back to Your Trip Tracker!</h2>
         </div>
 
-        <h2 className="text-2xl font-semibold text-center mb-4 text-gray-900 dark:text-white">Login to Your Account</h2>
+        <h2 className="text-xl font-semibold text-center mb-4 text-gray-900 dark:text-white">Login to Your Account</h2>
 
         {error && <p className="text-red-500 text-center text-xs">{error}</p>}
 

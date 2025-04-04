@@ -108,7 +108,7 @@ const TripForm = () => {
 
 
   return (
-    <div className="container px-1 py-6 sm:p-6">
+    <div className="container m-auto px-1 py-6 sm:p-6">
       <h2 className="text-[19px] sm:text-2xl font-semibold text-center text-gray-800 dark:text-gray-100 mb-4">
         Fill out the driver details below:
       </h2>

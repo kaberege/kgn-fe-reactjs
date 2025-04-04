@@ -21,10 +21,10 @@ const DriverForm = ({ handleSuccessMessage }: { handleSuccessMessage: () => void
     });
 
     const [dutyTimes, setDutyTimes] = useState<DutyTimes>({
-        drivingHours: { '0-11': 0, '12-17': 0, '18-23': 0 },
-        offDutyHours: { '0-11': 0, '12-17': 0, '18-23': 0 },
-        onDutyHours: { '0-11': 0, '12-17': 0, '18-23': 0 },
-        sleeperBerthHours: { '0-11': 0, '12-17': 0, '18-23': 0 },
+        drivingHours: { '0:00-11:59': 0, '12:00-17:59': 0, '18:00-23:59': 0 },
+        offDutyHours: { '0:00-11:59': 0, '12:00-17:59': 0, '18:00-23:59': 0 },
+        onDutyHours: { '0:00-11:59': 0, '12:00-17:59': 0, '18:00-23:59': 0 },
+        sleeperBerthHours: { '0:00-11:59': 0, '12:00-17:59': 0, '18:00-23:59': 0 },
     });
 
     const navigate = useNavigate();
@@ -80,6 +80,11 @@ const DriverForm = ({ handleSuccessMessage }: { handleSuccessMessage: () => void
                 return acc;
             }, 0);
 
+            // Validate indiviual time period
+            const totalMorningHrs: number = updatedTimes.drivingHours['0:00-11:59'] + updatedTimes.offDutyHours['0:00-11:59'] + updatedTimes.onDutyHours['0:00-11:59'] + updatedTimes.sleeperBerthHours['0:00-11:59'];
+            const totalAfterNoonHrs: number = updatedTimes.drivingHours['12:00-17:59'] + updatedTimes.offDutyHours['12:00-17:59'] + updatedTimes.onDutyHours['12:00-17:59'] + updatedTimes.sleeperBerthHours['12:00-17:59'];
+            const totalNightHrs: number = updatedTimes.drivingHours['18:00-23:59'] + updatedTimes.offDutyHours['18:00-23:59'] + updatedTimes.onDutyHours['18:00-23:59'] + updatedTimes.sleeperBerthHours['18:00-23:59'];
+
             // Validate total driving hours do not exceed Current Cycle Used (hrs)
             const totalDrivingHours = Object.values(updatedTimes.drivingHours).reduce((acc, hours) => acc + hours, 0);
 
@@ -87,9 +92,21 @@ const DriverForm = ({ handleSuccessMessage }: { handleSuccessMessage: () => void
                 setError(`Driving hours cannot exceed the Current Cycle Used (hrs) of ${currentCycleUsed}.`);
                 return prev; // Prevent state update if the total driving hrs exceed Current Cycle Used (hrs)
             } else if (totalHours > 24) {
-                setError('Total hours (driving, off-duty, and on-duty, sleeper-berth) cannot exceed 24 hours for any period.');
+                setError('Total hours (driving, off-duty, on-duty, and sleeper-berth) cannot exceed 24 hours for any period.');
                 return prev; // Prevent state update if the total exceeds 24
-            } else {
+            } else if (totalMorningHrs > 12) {
+                setError('Total moring hours[0:00-11:59] (driving, off-duty, on-duty, and sleeper-berth) cannot exceed 12 hours.');
+                return prev; // Prevent state update if the total morning hours exceeds 12
+            }
+            else if (totalAfterNoonHrs > 6) {
+                setError('Total afternoon hours[12:00-17:59] (driving, off-duty, on-duty, and sleeper-berth) cannot exceed 6 hours.');
+                return prev; // Prevent state update if the total afternoon hours exceeds 6
+            }
+            else if (totalNightHrs > 6) {
+                setError('Total night hours[18:00-23:59] (driving, off-duty, on-duty, and sleeper-berth) cannot exceed 6 hours.');
+                return prev; // Prevent state update if the total night hours exceeds 6
+            }
+            else {
                 setError(null);
                 return updatedTimes;
             }
@@ -166,23 +183,23 @@ const DriverForm = ({ handleSuccessMessage }: { handleSuccessMessage: () => void
             carried_product_name: driverDetails.product,
             total_daily_miles: driverDetails.miles,
             duty_status: statusMessage,
-            driving_hours_0_11: dutyTimes.drivingHours['0-11'],
-            driving_hours_12_17: dutyTimes.drivingHours['12-17'],
-            driving_hours_18_23: dutyTimes.drivingHours['18-23'],
-            off_duty_hours_0_11: dutyTimes.offDutyHours['0-11'],
-            off_duty_hours_12_17: dutyTimes.offDutyHours['12-17'],
-            off_duty_hours_18_23: dutyTimes.offDutyHours['18-23'],
-            on_duty_hours_0_11: dutyTimes.onDutyHours['0-11'],
-            on_duty_hours_12_17: dutyTimes.onDutyHours['12-17'],
-            on_duty_hours_18_23: dutyTimes.onDutyHours['18-23'],
-            sleeper_berth_hours_0_11: dutyTimes.sleeperBerthHours['0-11'],
-            sleeper_berth_hours_12_17: dutyTimes.sleeperBerthHours['12-17'],
-            sleeper_berth_hours_18_23: dutyTimes.sleeperBerthHours['18-23'],
+            driving_hours_0_11: dutyTimes.drivingHours['0:00-11:59'],
+            driving_hours_12_17: dutyTimes.drivingHours['12:00-17:59'],
+            driving_hours_18_23: dutyTimes.drivingHours['18:00-23:59'],
+            off_duty_hours_0_11: dutyTimes.offDutyHours['0:00-11:59'],
+            off_duty_hours_12_17: dutyTimes.offDutyHours['12:00-17:59'],
+            off_duty_hours_18_23: dutyTimes.offDutyHours['18:00-23:59'],
+            on_duty_hours_0_11: dutyTimes.onDutyHours['0:00-11:59'],
+            on_duty_hours_12_17: dutyTimes.onDutyHours['12:00-17:59'],
+            on_duty_hours_18_23: dutyTimes.onDutyHours['18:00-23:59'],
+            sleeper_berth_hours_0_11: dutyTimes.sleeperBerthHours['0:00-11:59'],
+            sleeper_berth_hours_12_17: dutyTimes.sleeperBerthHours['12:00-17:59'],
+            sleeper_berth_hours_18_23: dutyTimes.sleeperBerthHours['18:00-23:59'],
         };
 
         try {
             const token = localStorage.getItem("access_token");
-            
+
             // https://kaberege123.pythonanywhere.com/ | http://127.0.0.1:8000/
             const response = await axios.post(
                 'https://kaberege123.pythonanywhere.com/log/trips/',
@@ -278,9 +295,9 @@ const DriverForm = ({ handleSuccessMessage }: { handleSuccessMessage: () => void
                     {/* Duty Hours */}
                     <div className="mb-4 mt-9">
                         <h2 className="text-lg font-bold text-gray-800 dark:text-gray-200 mb-4">Duty Hours</h2>
-                        {['0-11', '12-17', '18-23'].map((timePeriod) => (
+                        {['0:00-11:59', '12:00-17:59', '18:00-23:59'].map((timePeriod) => (
                             <div key={timePeriod} className="space-y-1 mt-4">
-                                <h3 className="text-md text-center font-semibold text-gray-800 dark:text-gray-300">{`Time Period: ${timePeriod}`}</h3>
+                                <h3 className="text-sm text-center font-semibold text-gray-800 dark:text-gray-300">{`Time Period: ${timePeriod}`}</h3>
 
                                 {/* Use flexbox for large screens, stack for small */}
                                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">

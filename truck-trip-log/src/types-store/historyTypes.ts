@@ -30,6 +30,6 @@ export interface TripLog {
 
   // Defines types for history logs and driver's name
 export interface TripLogsResponse {
-  username: string;
+  name: string;
   trip_logs: TripLog[];
 }
