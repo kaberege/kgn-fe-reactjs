@@ -5,7 +5,6 @@ import he from "he";
 import html2pdf from "html2pdf.js";
 import logoUrl from "../assets/logo-png1.png";
 
-
 export default function QuizDetails() {
     const { id } = useParams();
     const [details, setDetails] = useState({});
@@ -28,6 +27,7 @@ export default function QuizDetails() {
         wrapper.style.padding = "1px"
 
         wrapper.appendChild(print.current.cloneNode(true));  // Appending the current print ref content to the wrapper
+
         newDocument.appendChild(wrapper);                    // Appending the wrapper to the newDocument
         document.body.appendChild(newDocument);              // Appending the newDocument into the body
 
@@ -39,15 +39,19 @@ export default function QuizDetails() {
             html2canvas: { scale: 2 },
             jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' },
         };
+
         html2pdf()
             .from(newDocument)
             .set(options)
             .save()
             .then(() => {
                 document.body.removeChild(newDocument); // Clean up newDocument after saving
+            })
+            .catch(error => {
+                console.error("Error generating PDF", error);
             });
     }
- 
+
     return (
         <div className="max-w-4xl mx-auto my-2">
             <div className="flex items-center justify-between">
@@ -71,7 +75,11 @@ export default function QuizDetails() {
             </div>
             <div
                 ref={print}
-                className="mt-5 max-sm:p-2 p-4 border rounded shadow-md bg-gray-800 text-gray-200"
+                style={{
+                    backgroundColor: '#2d3748', // bg-gray-800
+                    color: '#e2e8f0', // text-gray-200
+                }}
+                className="mt-5 max-sm:p-2 p-4 border rounded shadow-md"
             >
                 {Object.keys(details).length === 0 ? (
                     <p className="text-center text-red-500">Sorry! No matching details</p>
@@ -87,21 +95,31 @@ export default function QuizDetails() {
                         <h3 className="mt-5 text-xl font-semibold">Questions:</h3>
                         <div className="mt-2">
                             {details.details.map((item, index) => (
-                                <div key={index} className="mb-4 max-sm:p-2 p-3 border rounded bg-gray-700">
-                                  {/*   {console.log(he.decode(item.question))}
-                                    {console.log(he.decode(item.choosed))} */}
-                                    <p className="font-medium">{index + 1}. { item.question && he.decode(item.question)}</p>
-                                    <p className="mt-1"><strong>Your Answer:</strong> { item.choosed && he.decode(item.choosed)}
+                                <div
+                                    key={index}
+                                    style={{ backgroundColor: '#4a5568' }} /* bg-gray-700 */
+                                    className="mb-4 max-sm:p-2 p-3 border rounded">
+                                    <p className="font-medium">{index + 1}. {item.question && he.decode(item.question)}</p>
+                                    <p className="mt-1"><strong>Your Answer:</strong> {item.choosed && he.decode(item.choosed)}
                                         {item.choosed === item.correct ? (
-                                            <span className="text-green-400"> (Correct)</span>
+                                            <span
+                                                style={{ color: '#48bb78' }} /* className="text-green-400" */
+                                            > (Correct)</span>
                                         ) : (
-                                            <span className="text-red-400"> (Incorrect)</span>
+                                            <span
+                                                style={{ color: '#f56565' }} /*  className="text-red-400" */
+                                            > (Incorrect)</span>
                                         )}
                                     </p>
                                     <p className="mt-2"><strong>Options:</strong></p>
                                     <ul className="list-disc list-inside">
                                         {item.options.map((option, idx) => (
-                                            <li key={idx} className={`p-1 ${option === item.correct ? 'text-green-300' : 'text-gray-300'}`}>
+                                            <li
+                                                key={idx}
+                                                style={{
+                                                    color: option === item.correct ? '#68d391' : '#e2e8f0' // text-green-300 or text-gray-300
+                                                }}
+                                                className="p-1">
                                                 {he.decode(option)}
                                             </li>
                                         ))}
