@@ -193,7 +193,7 @@ export default function QuestionCard() {
             {loadError && !Object.keys(currentQuestion).length > 0 && (
                 <div className="text-center">
                     <p className="text-red-500">{loadError}</p>
-                    <button onClick={handleFetch} className="flex items-center mx-auto underline mt-3 text-blue-500 transition hover:text-blue-300">
+                    <button onClick={handleFetch} className="flex items-center mx-auto cursor-pointer underline mt-3 text-blue-500 transition hover:text-blue-300">
                         <FaRedo className="text-sm mr-1" />
                         Retry
                     </button>
@@ -231,7 +231,7 @@ export default function QuestionCard() {
                                 </label>
                             </div>
                         ))}
-                        <button className="mt-4 w-28 bg-blue-500 text-white p-1 mx-auto rounded transition hover:bg-blue-600">Next</button>
+                        <button className="mt-4 w-28 cursor-pointer bg-blue-500 text-white p-1 mx-auto rounded transition hover:bg-blue-600">Next</button>
                     </form>
                 </div>
             )}

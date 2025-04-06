@@ -35,8 +35,8 @@ export default function ScoreSummary() {
                 <p className="mb-2">Your Score: <span className="font-bold">{quizScore.scored}%</span></p>
                 <p>Time Used: <span className="font-semibold">{quizScore.spent}</span></p>
             </div>
-            <div className="mt-4 flex items-center justify-between max-sm:flex-col max-sm:justify-center">
-                <div className="flex flex-row gap-2 justify-center items-center max-sm:mb-4">
+            <div className="mt-4 flex items-center justify-between gap-2 sm:gap-4 max-sm:flex-col max-sm:justify-center">
+                <div className="flex flex-row gap-1 justify-center items-center">
                     <button onClick={retakeQuiz} className="bg-blue-500 text-sm text-white p-1 rounded transition duration-300 hover:bg-blue-700">Retake Quiz</button>
                     <button onClick={() => setQuizState("start")} className="bg-gray-300 text-sm p-1 rounded transition duration-300 hover:bg-gray-400">New Quiz</button>
                 </div>

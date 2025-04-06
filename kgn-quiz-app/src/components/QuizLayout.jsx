@@ -9,7 +9,7 @@ const QuizLayout = () => {
     const currentState = useQuizStore(state => state.quizState);
 
     return (
-        <div className="max-w-2xl mx-auto max-sm:px-0 p-5 mt-13">
+        <div className="max-w-2xl m-auto flex justify-center items-center">
             {currentState === "start" && <QuizStart />}
             {currentState === "quiz" && <QuestionCard />}
             {currentState === "score" && <ScoreSummary />}

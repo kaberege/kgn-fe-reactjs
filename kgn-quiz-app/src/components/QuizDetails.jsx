@@ -14,7 +14,7 @@ export default function QuizDetails() {
     useEffect(() => {
         const historyDetails = JSON.parse(localStorage.getItem("history")) || [];           // Fetching quiz history from local storage
         const currentDetails = historyDetails.find(item => item.id === parseInt(id)) || {};  // Filtering the matching quiz
-        setDetails(currentDetails);                                                          // Updating displayable quiz
+        setDetails(currentDetails);                                                    // Updating displayable quiz
     }, [id]);
 
     // Function for printing quiz details
@@ -47,10 +47,9 @@ export default function QuizDetails() {
                 document.body.removeChild(newDocument); // Clean up newDocument after saving
             });
     }
-
-
+ 
     return (
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-4xl mx-auto my-2">
             <div className="flex items-center justify-between">
                 <Link
                     to="/history"
@@ -89,8 +88,10 @@ export default function QuizDetails() {
                         <div className="mt-2">
                             {details.details.map((item, index) => (
                                 <div key={index} className="mb-4 max-sm:p-2 p-3 border rounded bg-gray-700">
-                                    <p className="font-medium">{index + 1}. {he.decode(item.question)}</p>
-                                    <p className="mt-1"><strong>Your Answer:</strong> {he.decode(item.choosed)}
+                                  {/*   {console.log(he.decode(item.question))}
+                                    {console.log(he.decode(item.choosed))} */}
+                                    <p className="font-medium">{index + 1}. { item.question && he.decode(item.question)}</p>
+                                    <p className="mt-1"><strong>Your Answer:</strong> { item.choosed && he.decode(item.choosed)}
                                         {item.choosed === item.correct ? (
                                             <span className="text-green-400"> (Correct)</span>
                                         ) : (

@@ -24,17 +24,18 @@ export default function App() {
         <header className="sticky top-0 z-10 bg-blue-600 dark:bg-slate-600 shadow-2xl transition-colors duration-300">
           <div className='max-w-7xl mx-auto flex flex-row items-center text-white py-1 px-2 xl:px-1 text-center'>
             <div className='flex flex-row flex-grow items-center gap-2'>
-              <img src={logo} alt="logo" className="w-10 h-10 sm:w-12 sm:h-12 rounded-full animate-image cursor-pointer" title='kgn logo' />
-              <h1 className="max-md:text-2xl text-3xl font-bold">Quiz App</h1>
+              <img src={logo} alt="logo" className="w-7 h-7 sm:w-10 sm:h-10 rounded-full animate-image cursor-pointer" title='kgn logo' />
+              <h1 className="text-xl sm:text-2xl font-bold">Quiz App</h1>
             </div>
             <div
               onClick={() => setHideNav(false)}
-              className=' flex text-2xl items-center justify-center sm:hidden font-bold flex-row w-9 h-9 hover:bg-slate-400 rounded-full cursor-pointer' >
+              className=' flex text-2xl items-center justify-center sm:hidden font-bold flex-row w-7 h-7 sm:w-10 sm:h-10 hover:bg-slate-400 rounded-full cursor-pointer' >
               <FaBars />
             </div>
             <nav
-              style={{ transition: "right 0.3s linear" }}
-              className={`flex flex-row max-sm:flex-col ${hideNav ? "max-sm:-right-3/4 max-sm:overflow-hidden" : "max-sm:right-0 max-sm:w-1/2"} max-sm:h-full max-sm:fixed max-sm:top-0  max-sm:p-2 max-sm:bg-blue-600 max-sm:dark:bg-slate-600 transition-colors duration-300`}
+              className={`flex flex-row max-sm:flex-col ${hideNav ? "max-sm:-right-full max-sm:overflow-hidden" : "max-sm:right-0"} 
+              max-sm:h-full max-sm:fixed max-sm:top-0  max-sm:p-2 max-sm:bg-blue-600 max-sm:dark:bg-slate-600 transition-colors duration-300  
+              max-sm:w-1/2 max-sm:transition-[right] max-sm:duration-500`}
             >
               <div
                 onClick={() => setHideNav(true)}
@@ -113,16 +114,16 @@ export default function App() {
                 src={kgnProfile}
                 alt="kgn profile"
                 title="Kgn profile"
-                className="w-11 h-11 rounded-full cursor-pointer max-sm:mx-auto hover:scale-110 transition-transform duration-300"
+                className="w-7 h-7 sm:w-10 sm:h-10 rounded-full cursor-pointer max-sm:mx-auto hover:scale-110 transition-transform duration-300"
               />
             </nav>
           </div>
         </header>
-        <main className="flex-grow max-sm:p-3 p-5">
+        <main className="flex-grow flex max-sm:p-3">
           <Outlet />
         </main>
         <footer className="bg-gray-800 text-white p-4 text-center dark:text-slate-300 transition-colors duration-300">
-          <p className='text-sm'>Copyright &copy;{year} <a  href="https://www.linkedin.com/in/kaberege-godard-nestor-53a0b4215" target='_blank' className='text-blue-500 transition hover:text-blue-700' title='Visit kgn linkedin'>KGN</a>. All rights reserved.</p>
+          <p className='text-xs'>Copyright &copy;{year} <a href="https://www.linkedin.com/in/kaberege-godard-nestor-53a0b4215" target='_blank' className='text-blue-500 transition hover:text-blue-700' title='Visit kgn linkedin'>KGN</a>. All rights reserved.</p>
         </footer>
       </div >
     </div >

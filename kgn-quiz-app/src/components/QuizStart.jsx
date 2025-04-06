@@ -69,13 +69,13 @@ export default function QuizStart() {
     }
 
     return (
-        <div className="max-sm:p-0 p-5 text-center">
+        <div className="text-center">
             <h2 className="max-md:text-xl text-2xl font-semibold mb-4 dark:text-white">Start Your Quiz</h2>
             {loading && <p className="dark:text-slate-300">Loading categories<span className="animate-ping">...</span></p>}
             <div>
                 {loadError && <p className="text-red-500 mt-10">{loadError}</p>}
                 {loadError && (
-                    <button onClick={handleRequest} className="flex items-center mx-auto underline mt-3 text-blue-500 transition hover:text-blue-300">
+                    <button onClick={handleRequest} className="flex items-center cursor-pointer mx-auto underline mt-3 text-blue-500 transition hover:text-blue-300">
                         <FaRedo className="text-sm mr-1" />
                         Retry
                     </button>
@@ -130,7 +130,7 @@ export default function QuizStart() {
                             />
                             {error.number && <p className="text-red-600">{error.number}</p>}
                         </div>
-                        <button type="submit" className="mt-4 bg-blue-500 text-white p-1 w-28 rounded transition hover:bg-blue-600">Start Quiz</button>
+                        <button type="submit" className="mt-4 bg-blue-500 cursor-pointer text-white p-1 w-28 rounded transition hover:bg-blue-600">Start Quiz</button>
                     </form>
                 </div>
             )}

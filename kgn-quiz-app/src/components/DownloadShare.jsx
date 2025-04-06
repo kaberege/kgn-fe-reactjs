@@ -76,7 +76,7 @@ const DownloadShare = ({ shareable }) => {
     };
 
     return (
-        <div className="flex gap-2 items-center justify-end max-sm:justify-center text-sm">
+        <div className="flex gap-1 items-center justify-end max-sm:justify-center text-sm">
             <button
                 onClick={() => downloadIndividualResult(shareable)}
                 className="flex items-center gap-1 bg-indigo-600 hover:bg-indigo-800 text-white font-bold p-1 rounded transition"

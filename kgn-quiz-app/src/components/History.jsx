@@ -25,11 +25,11 @@ export default function History() {
     }, [quizHistory]);
 
     return (
-        <div className="max-sm:p-0 p-5 mt-13">
+        <div className="max-sm:p-0 p-5 mt-13 w-full">
             <h2 className="max-md:text-xl text-2xl text-center font-semibold mb-4 dark:text-white">Quiz History</h2>
             {displayHistory.length > 0 && displayHistory[0].topic === "No matches found" ? (
                 <button
-                    className="flex items-center max-sm:p-1 px-4 py-2 border border-gray-300 rounded-md shadow-md bg-white hover:bg-gray-100 text-gray-700 hover:text-gray-900 transition duration-200"
+                    className="flex items-center cursor-pointer max-sm:p-1 px-4 py-2 border border-gray-300 rounded-md shadow-md bg-white hover:bg-gray-100 text-gray-700 hover:text-gray-900 transition duration-200"
                     onClick={() => setDisplayHistory(quizHistory)}
                 >
                     <FaAngleDoubleLeft className="mr-2 max-sm:mr-1 text-xl" />
@@ -40,7 +40,7 @@ export default function History() {
                     <Link
                         to="/"
                     >
-                        <button className='flex items-center justify-center text-sm font-semibold text-cyan-600 hover:underline hover:text-cyan-300 transition duration-300 ease-in-out p-2 rounded hover:bg-cyan-800'>
+                        <button className='flex items-center justify-center cursor-pointer text-sm font-semibold text-cyan-600 hover:underline hover:text-cyan-300 transition duration-300 ease-in-out p-2 rounded hover:bg-cyan-800'>
 
                             <FaAngleDoubleLeft className='mr-1' />
                             Back
