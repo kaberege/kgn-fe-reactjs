@@ -6,6 +6,7 @@ import ErrorPage from './components/ErrorPage.jsx';
 import App from "./App.jsx";
 import History from './components/History.jsx';
 import QuizDetails from './components/QuizDetails.jsx';
+import "./index.css";
 
 const router = createBrowserRouter([
   {

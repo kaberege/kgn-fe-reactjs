@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import "./index.css";
 import { Outlet } from 'react-router-dom';
 import favicon from "./assets/favicon.jpg"
 import { MdLightMode } from "react-icons/md";
@@ -30,7 +29,7 @@ function App() {
           <button
             title='Toggle dark/light mode'
             onClick={() => setMode(!mode)}
-            className="flex items-center justify-center rounded-full bg-blue-600 w-6 h-6 sm:w-8 sm:h-8"
+            className="flex items-center justify-center rounded-full bg-blue-600 w-6 h-6 sm:w-8 sm:h-8 cursor-pointer"
           >
             {mode ? (
               <MdDarkMode className="text-white max-sm:text-xl text-2xl" />
@@ -45,7 +44,7 @@ function App() {
         <Outlet />
       </main>
       <footer className="bg-gray-800 dark:bg-gray-900 text-white text-center p-2">
-        <p className='text-sm font-semibold max-w-[95%] mx-auto'>Copyright &copy;{date} <a href="https://www.linkedin.com/in/kaberege-godard-nestor-53a0b4215" target='_blank' className='text-blue-500 transition hover:text-blue-700' title='Visit kgn linkedin'>KGN</a>. All rights reserved.</p>
+        <p className='text-xs font-semibold max-w-[95%] mx-auto'>Copyright &copy;{date} <a href="https://www.linkedin.com/in/kaberege-godard-nestor-53a0b4215" target='_blank' className='text-blue-500 transition hover:text-blue-700' title='Visit kgn linkedin'>KGN</a>. All rights reserved.</p>
       </footer>
     </div>
   );

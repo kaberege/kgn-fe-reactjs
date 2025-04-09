@@ -30,7 +30,7 @@ function SearchBar({ search, setSearch, handleSubmit }: SearchTypesProps) {
       {/* Submit Button */}
       <button
         type="submit"
-        className="text-blue-600 dark:text-blue-400 hover:text-blue-500 hover:scale-105 flex items-center justify-center transition-colors duration-300"
+        className="text-blue-600 cursor-pointer dark:text-blue-400 hover:text-blue-500 hover:scale-105 flex items-center justify-center transition-colors duration-300"
       >
         <BiSearch size={20} />
       </button>

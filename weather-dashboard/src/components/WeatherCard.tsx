@@ -306,7 +306,7 @@ export default function WeatherCard() {
         settings: {
           slidesToShow: 1,           // Show 1 slide
           slidesToScroll: 1,         // Scroll 1 slide at a time
-          centerPadding: '5px',      // Minimal padding on the sides
+          centerPadding: '3px',      // Minimal padding on the sides
         },
       },
     ],
@@ -350,7 +350,7 @@ export default function WeatherCard() {
                     <button
                       key={index}
                       onClick={() => weatherDetails(suggestion)}
-                      className={`${getBackground(weather?.weather[0].main || 'Clear').setSuggestColor} rounded-lg text-[12px] 
+                      className={`${getBackground(weather?.weather[0].main || 'Clear').setSuggestColor} rounded-lg text-[11px] 
                       font-semibold p-1 transition-all hover:scale-105 shadow-md hover:shadow-xl focus:outline-none focus:ring 
                       focus:ring-blue-500 active:scale-95
                      `}
@@ -398,7 +398,7 @@ export default function WeatherCard() {
               />
 
               <p
-                className={`text-center text-stone-700 text-sm font-semibold p-2 absolute top-[120%] w-36 bg-white rounded-lg shadow-lg transition-opacity duration-300 ${info && "hidden"}`}
+                className={`text-center text-stone-700 text-xs font-semibold p-2 absolute top-[120%] w-36 bg-white rounded-lg shadow-lg transition-opacity duration-300 ${info && "hidden"}`}
               >
                 <span>Auto-update in: </span>
                 <span>
