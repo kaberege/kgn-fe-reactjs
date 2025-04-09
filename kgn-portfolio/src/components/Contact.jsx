@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 import emailjs from "@emailjs/browser";
 import { FaLinkedin } from "react-icons/fa";
 import quiz from "../assets/quiz-project.jpg";
@@ -98,20 +98,45 @@ export default function Contact() {
                     <form onSubmit={handleSubmit} className='flex flex-col gap-6'>
                         <div className='flex flex-col gap-2'>
                             <label htmlFor="name" className="font-semibold dark:text-stone-100 transition-colors duration-300">Your Name</label>
-                            <input type="text" id="name" name="name" value={contact.name} placeholder="What's your good name?" className='border rounded-md p-2' onChange={handleChange} />
+                            <input
+                                type="text"
+                                id="name"
+                                name="name"
+                                value={contact.name}
+                                placeholder="What's your good name?"
+                                className='border rounded-md p-2 dark:bg-stone-100'
+                                onChange={handleChange} />
                             {error.nameError && <p className='text-red-500'>{error.nameError}</p>}
                         </div>
                         <div className='flex flex-col gap-2'>
                             <label htmlFor="email" className="font-semibold dark:text-stone-100 transition-colors duration-300">Your Email</label>
-                            <input type="email" id="email" name="email" value={contact.email} placeholder="What's your web address?" className='border rounded-md p-2' onChange={handleChange} />
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                value={contact.email}
+                                placeholder="What's your web address?"
+                                className='border rounded-md p-2 dark:bg-stone-100'
+                                onChange={handleChange} />
                             {error.emailError && <p className='text-red-500'>{error.emailError}</p>}
                         </div>
                         <div className='flex flex-col gap-2'>
                             <label htmlFor="message" className="font-semibold dark:text-stone-100 transition-colors duration-300">Your Message</label>
-                            <textarea id="message" name="message" value={contact.message} placeholder="Write your message here..." className='border rounded-md p-2' onChange={handleChange}></textarea>
+                            <textarea
+                                id="message"
+                                name="message"
+                                value={contact.message}
+                                placeholder="Write your message here..."
+                                className='border rounded-md p-2 dark:bg-stone-100'
+                                onChange={handleChange}></textarea>
                             {error.messageError && <p className='text-red-500'>{error.messageError}</p>}
                         </div>
-                        <button type="submit" className='bg-blue-500 font-semibold text-white py-2 rounded-md hover:bg-blue-600 transition duration-300' disabled={loading}>
+                        <button
+                            type="submit"
+                            className={`font-semibold text-white py-2 rounded-md transition duration-300  
+                                ${loading ? 'bg-gray-400 cursor-not-allowed' : 'cursor-pointer bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 dark:hover:from-blue-700 dark:hover:to-blue-800'}`}
+                            disabled={loading}
+                        >
                             {loading ? 'Sending...' : 'Send Message'}
                         </button>
                     </form>

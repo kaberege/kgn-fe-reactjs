@@ -1,5 +1,3 @@
-
-
 import React, { useState } from 'react';
 import favicon from "../assets/favicon.jpg";
 import { FaXTwitter } from "react-icons/fa6";
@@ -31,7 +29,7 @@ export default function Header({ mode, handleMode }) {
                     </div>
                     <div
                         style={{ transition: "right 0.3s linear" }}
-                        className={`flex flex-row max-sm:flex-col sm:gap-10 ${hideNav ? "max-sm:-right-3/4 max-sm:overflow-hidden" : "max-sm:right-0 max-sm:w-1/2"} max-sm:h-full max-sm:fixed max-sm:top-0  max-sm:p-3 max-sm:bg-slate-300 max-sm:dark:bg-slate-600 transition-colors duration-300`}
+                        className={`flex flex-row max-sm:flex-col sm:gap-10 ${hideNav ? "max-sm:-right-full max-sm:overflow-hidden" : "max-sm:right-0"} max-sm:h-full max-sm:w-1/2 max-sm:fixed max-sm:top-0  max-sm:p-3 max-sm:bg-slate-300 max-sm:dark:bg-slate-600 transition-colors duration-300`}
                     >
                         <div
                             onClick={() => setHideNav(true)}

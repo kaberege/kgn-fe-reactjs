@@ -158,7 +158,7 @@ function Register() {
           <button
             type="submit"
             disabled={loading}
-            className={`w-full cursor-pointer p-1 rounded-md text-white ${loading ? 'bg-gray-400' : 'bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 dark:hover:from-blue-700 dark:hover:to-blue-800'}
+            className={`w-full p-1 rounded-md text-white ${loading ? 'bg-gray-400 cursor-not-allowed' : 'cursor-pointer bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 dark:hover:from-blue-700 dark:hover:to-blue-800'}
              transition-colors duration-300 ease-in-out`}>
             {loading ? 'Submitting...' : 'Register'}
           </button>

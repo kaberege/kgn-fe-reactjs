@@ -160,8 +160,8 @@ const TripForm = () => {
 
         <button
           type="submit"
-          className={`w-full max-sm:w-[100px] p-1 sm:p-3 rounded-md text-white cursor-pointer
-             ${loading ? 'bg-gray-400' : 'bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 dark:hover:from-blue-700 dark:hover:to-blue-800'}`}
+          className={`w-full max-sm:w-[100px] p-1 sm:p-3 rounded-md text-white
+             ${loading ? 'bg-gray-400 cursor-not-allowed' : ' cursor-pointer bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 dark:hover:from-blue-700 dark:hover:to-blue-800'}`}
           disabled={loading}
         >
           {loading ? 'Submitting...' : 'Submit'}

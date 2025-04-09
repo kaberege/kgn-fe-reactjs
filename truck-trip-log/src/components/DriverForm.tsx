@@ -374,8 +374,8 @@ const DriverForm = ({ handleSuccessMessage }: { handleSuccessMessage: () => void
                             type="submit"
                             disabled={loading}
                             className={`w-full text-white py-3 rounded-md font-semibold
-                             ${loading ? 'bg-gray-400' : 'bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 dark:hover:from-blue-700 dark:hover:to-blue-800'} 
-                            text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all" cursor-pointer`}
+                             ${loading ? 'bg-gray-400 cursor-not-allowed' : 'cursor-pointer bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 dark:hover:from-blue-700 dark:hover:to-blue-800'} 
+                            text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all`}
                         >
                             {loading ? "Sending..." : "Submit Driver Info"}
                         </button>
