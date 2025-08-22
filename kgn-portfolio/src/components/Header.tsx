@@ -28,7 +28,7 @@ const Header: React.FC<HeaderProps> = ({ mode, handleMode }) => {
       <nav
         className={`${
           mode ? "dark-nav" : "light-nav"
-        } shadow-xl transition-colors duration-300`}
+        } shadow-md shadow-zinc-400 transition-colors duration-300 dark:shadow-zinc-700`}
       >
         <div className="mx-auto flex max-w-7xl flex-row px-3 py-1">
           <div className="flex flex-grow flex-row items-center">
@@ -38,14 +38,14 @@ const Header: React.FC<HeaderProps> = ({ mode, handleMode }) => {
               title="kgn logo"
               className="h-7 w-7 cursor-pointer rounded-full sm:h-11 sm:w-11"
             />
-            <p className="hidden text-base font-bold text-zinc-900 transition-colors duration-300 lg:block dark:text-white">
+            <p className="hidden text-base font-bold text-zinc-950 transition-colors duration-300 lg:block dark:text-white">
               <span className="mx-3">|</span>
               Software developer
             </p>
           </div>
           <div
             onClick={() => setHideNav(false)}
-            className="flex cursor-pointer items-center justify-center rounded-full p-1 text-xl font-bold hover:bg-slate-200 sm:hidden dark:hover:bg-slate-500"
+            className="flex cursor-pointer items-center justify-center rounded-full p-1 text-xl font-bold transition-colors hover:bg-slate-200 sm:hidden dark:hover:bg-slate-500"
           >
             <FaBars size={20} className="text-zinc-900 dark:text-white" />
           </div>
@@ -59,7 +59,7 @@ const Header: React.FC<HeaderProps> = ({ mode, handleMode }) => {
           >
             <div
               onClick={() => setHideNav(true)}
-              className="ml-auto flex cursor-pointer items-center justify-center rounded-full p-1 text-xl font-bold hover:bg-slate-200 sm:hidden dark:hover:bg-slate-500"
+              className="ml-auto flex cursor-pointer items-center justify-center rounded-full p-1 text-xl font-bold transition-colors hover:bg-slate-200 sm:hidden dark:hover:bg-slate-500"
             >
               <FaWindowClose
                 size={20}
@@ -71,7 +71,7 @@ const Header: React.FC<HeaderProps> = ({ mode, handleMode }) => {
                 {navigationLinks.map((nav, index) => (
                   <li
                     key={index}
-                    className="flex items-center border-b-2 border-b-zinc-900/0 font-bold transition-colors duration-300 hover:border-b-zinc-900 dark:text-white dark:hover:border-b-white"
+                    className="flex items-center border-b-2 border-b-zinc-900/0 font-bold text-zinc-950 transition-colors duration-300 hover:border-b-zinc-900 dark:text-white dark:hover:border-b-white"
                   >
                     <a
                       href={nav.link}
@@ -95,15 +95,12 @@ const Header: React.FC<HeaderProps> = ({ mode, handleMode }) => {
             </div>
             <ul className="hidden flex-row items-center justify-center gap-2 md:flex">
               {socials.map((social, index) => (
-                <li
-                  key={index}
-                  className="flex h-7 w-7 cursor-pointer items-center justify-center rounded-full transition-colors duration-300 hover:bg-red-400"
-                >
+                <li key={index} className="flex items-center justify-center">
                   <a
                     href={social.link}
                     title={social.title}
                     target="_blank"
-                    className="text-white transition-colors duration-300 hover:text-cyan-300"
+                    className="flex h-7 w-7 items-center justify-center rounded-full text-amber-600 transition-colors duration-300 hover:bg-red-400 hover:text-cyan-300"
                   >
                     {socialIcons[social.title]}
                   </a>

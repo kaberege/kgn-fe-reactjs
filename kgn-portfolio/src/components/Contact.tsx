@@ -96,7 +96,7 @@ export default function Contact() {
   }
   return (
     <>
-      <section id="contact">
+      <section className="flex flex-col xl:flex-row-reverse">
         <div className="cube">
           <div className="face front">
             <img src={tenzy} alt="Front" />
@@ -120,23 +120,26 @@ export default function Contact() {
             <img src={profile} alt="Bottom" />
           </div>
         </div>
-        <div className="relative w-full rounded-3xl bg-gray-50 p-6 transition-colors duration-300 max-xl:mt-20 max-sm:mt-10 xl:max-w-md dark:bg-gray-800">
-          <h2 className="mb-5 text-4xl font-bold max-sm:text-2xl dark:text-stone-100">
+        <div className="relative mt-10 w-full rounded-3xl bg-gray-50 p-6 transition-colors duration-300 sm:mt-20 xl:mt-0 xl:max-w-md dark:bg-gray-800">
+          <h2 className="mb-5 text-2xl font-bold text-zinc-950 sm:text-4xl dark:text-stone-100">
             Contact Me
           </h2>
           <a
             href="https://www.linkedin.com/in/kaberege-godard-nestor-53a0b4215"
             title="kgn LinkedIn"
             target="_blank"
-            className="absolute top-1 right-1 flex h-8 w-8 items-center justify-center rounded-full bg-red-400 text-white transition-colors duration-300 hover:bg-red-600 hover:text-cyan-300"
+            className="absolute top-1 right-1 flex h-8 w-8 items-center justify-center rounded-full bg-amber-600 text-white transition-colors duration-300 hover:bg-red-600 hover:text-cyan-300"
           >
             <FaLinkedin className="text-xl font-bold" />
           </a>
-          <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+          <form
+            onSubmit={handleSubmit}
+            className="flex flex-col gap-6 text-sm sm:text-base"
+          >
             <div className="flex flex-col gap-2">
               <label
                 htmlFor="name"
-                className="font-semibold transition-colors duration-300 dark:text-stone-100"
+                className="font-semibold text-zinc-900 transition-colors duration-300 dark:text-stone-100"
               >
                 Your Name
               </label>
@@ -157,7 +160,7 @@ export default function Contact() {
             <div className="flex flex-col gap-2">
               <label
                 htmlFor="email"
-                className="font-semibold transition-colors duration-300 dark:text-stone-100"
+                className="font-semibold text-zinc-900 transition-colors duration-300 dark:text-stone-100"
               >
                 Your Email
               </label>
@@ -178,7 +181,7 @@ export default function Contact() {
             <div className="flex flex-col gap-2">
               <label
                 htmlFor="message"
-                className="font-semibold transition-colors duration-300 dark:text-stone-100"
+                className="font-semibold text-zinc-900 transition-colors duration-300 dark:text-stone-100"
               >
                 Your Message
               </label>

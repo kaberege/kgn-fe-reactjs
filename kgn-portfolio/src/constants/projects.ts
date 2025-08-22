@@ -4,136 +4,159 @@ import vanilla from "../assets/web-project.jpg";
 import social from "../assets/social.jpg";
 import weather from "../assets/weather.jpg";
 import tripLog from "../assets/tripLog.jpg";
+import type { ProjectProps, ProjectSkillStylesProps } from "../types";
 
-export const projects = [
-    {
-        link: {
-            href: "https://kaberege-quiz-app.vercel.app/",
-            background: quiz
-        },
-        heading: "Quiz App",
-        description: "Transforming the learning experience with an interactive quiz app that offers personalized assessments and progress tracking. Built on a user-friendly platform using React, JavaScript, and Tailwind CSS, it provides a seamless gateway to engaging and effective learning.",
-        skills: [
-            {
-                class: "text-sm bg-blue-100 dark:bg-blue-800 text-blue-800 dark:text-blue-200 p-1  rounded-full transition-colors duration-300",
-                content: "#React JS"
-            },
-            {
-                class: "text-sm bg-green-100 dark:bg-green-800 text-green-800 dark:text-green-200 p-1  rounded-full transition-colors duration-300",
-                content: "#Tailwind CSS"
-            }
-        ]
-    },
-    {
-        link: {
-            href: "https://kaberege.pythonanywhere.com/",
-            background: social
-        },
-        heading: "Social Media API",
-        description: "A comprehensive API, built with Django and Django REST Framework, simulates the functionalities of a social media platform, including post management, user interactions, notifications, JWT-based authentication...",
-        skills: [
-            {
-                class: "text-sm bg-blue-100 dark:bg-blue-800 text-blue-800 dark:text-blue-200 p-1  rounded-full transition-colors duration-300",
-                content: "#Django"
-            },
-            {
-                class: "text-sm bg-green-100 dark:bg-green-800 text-green-800 dark:text-green-200 p-1  rounded-full transition-colors duration-300",
-                content: "#REST API"
-            },
-            {
-                class: "text-sm bg-yellow-100 dark:bg-yellow-800 text-yellow-800 dark:text-yellow-200 p-1 rounded-full transition-colors duration-300",
-                content: "#JWT Authentication"
-            }
-        ]
-    },
-    {
-        link: {
-            href: "https://kgn-truck-trip-tracker.vercel.app/",
-            background: tripLog
-        },
-        heading: "Trip Tracker Application",
-        description: "A comprehensive full-stack application built with Django, Django REST Framework, and React for the frontend interface with TypeScript ensuring type safety. The app tracks trip details like stops...",
-        skills: [
-            {
-                class: "text-sm bg-blue-100 dark:bg-blue-800 text-blue-800 dark:text-blue-200 p-1 rounded-full transition-colors duration-300",
-                content: "#Django"
-            },
-            {
-                class: "text-sm bg-yellow-100 dark:bg-yellow-800 text-yellow-800 dark:text-yellow-200 p-1 rounded-full transition-colors duration-300",
-                content: "#Django REST Framework"
-            }
-            ,
-            {
-                class: "text-sm bg-green-100 dark:bg-green-800 text-green-800 dark:text-green-200 p-1 rounded-full transition-colors duration-300",
-                content: "#React TS"
-            },
+export const skillStyles: ProjectSkillStylesProps = {
+  class1:
+    "text-xs sm:text-sm bg-blue-100 dark:bg-blue-800 text-blue-800 dark:text-blue-200 p-1 rounded-full transition-colors duration-300",
 
-            {
-                class: "text-sm bg-teal-100 dark:bg-teal-800 text-teal-800 dark:text-teal-200 p-1 rounded-full transition-colors duration-300",
-                content: "#TypeScript"
-            },
-            {
-                class: "text-sm bg-purple-100 dark:bg-purple-800 text-purple-800 dark:text-purple-200 p-1 rounded-full transition-colors duration-300",
-                content: "#Tailwind CSS"
-            }
-        ]
+  class2:
+    "text-xs sm:text-sm bg-yellow-100 dark:bg-yellow-800 text-yellow-800 dark:text-yellow-200 p-1 rounded-full transition-colors duration-300",
+
+  class3:
+    "text-xs sm:text-sm bg-rose-100 dark:bg-rose-800 text-rose-800 dark:text-rose-200 p-1 rounded-full transition-colors duration-300",
+
+  class4:
+    "text-xs sm:text-sm bg-teal-100 dark:bg-teal-800 text-teal-800 dark:text-teal-200 p-1 rounded-full transition-colors duration-300",
+
+  class5:
+    "text-xs sm:text-sm bg-purple-100 dark:bg-purple-800 text-purple-800 dark:text-purple-200 p-1 rounded-full transition-colors duration-300",
+};
+
+export const projects: ProjectProps[] = [
+  {
+    link: {
+      href: "https://kaberege-quiz-app.vercel.app/",
+      background: quiz,
     },
-    {
-        link: {
-            href: "https://kgn-weather-dashboard.vercel.app/",
-            background: weather
-        },
-        heading: "Weather Dashboard",
-        description: "A weather dashboard built with React, TypeScript, and Tailwind CSS, offering real-time forecasts, temperature, and humidity. Its sleek, responsive design ensures a seamless experience on both desktop and mobile devices for accurate weather updates.",
-        skills: [
-            {
-                class: "text-sm bg-blue-100 dark:bg-blue-800 text-blue-800 dark:text-blue-200 p-1 rounded-full transition-colors duration-300",
-                content: "#React TS"
-            },
-            {
-                class: "text-sm bg-green-100 dark:bg-green-800 text-green-800 dark:text-green-200 p-1 rounded-full transition-colors duration-300",
-                content: "#TypeScript"
-            },
-            {
-                class: "text-sm bg-purple-100 dark:bg-purple-800 text-purple-800 dark:text-purple-200 p-1 rounded-full transition-colors duration-300",
-                content: "#Tailwind CSS"
-            }
-        ]
+    heading: "Quiz App",
+    description:
+      "Transforming the learning experience with an interactive quiz app that offers personalized assessments and progress tracking. Built on a user-friendly platform using React, JavaScript, and Tailwind CSS, it provides a seamless gateway to engaging and effective learning.",
+    skills: [
+      {
+        class: "class1",
+        content: "#React JS",
+      },
+      {
+        class: "class2",
+        content: "#Tailwind CSS",
+      },
+    ],
+  },
+  {
+    link: {
+      href: "https://kaberege.pythonanywhere.com/",
+      background: social,
     },
-    {
-        link: {
-            href: "https://kaberege-tenzies-game.vercel.app/",
-            background: tenzy
-        },
-        heading: "Tenzies Game App",
-        description: "Revolutionizing casual gaming with a fun and interactive Tenzies game app. Developed using React and CSS, this user-friendly platform offers an engaging experience while tracking player progress and providing hours of entertainment.",
-        skills: [
-            {
-                class: "text-sm bg-blue-100 dark:bg-blue-800 text-blue-800 dark:text-blue-200 p-1  rounded-full transition-colors duration-300",
-                content: "#React JS"
-            },
-            {
-                class: "text-sm bg-green-100 dark:bg-green-800 text-green-800 dark:text-green-200 p-1  rounded-full transition-colors duration-300",
-                content: "#CSS"
-            }
-        ]
+    heading: "Social Media API",
+    description:
+      "A comprehensive API, built with Django and Django REST Framework, simulates the functionalities of a social media platform, including post management, user interactions, notifications, JWT-based authentication...",
+    skills: [
+      {
+        class: "class1",
+        content: "#Django",
+      },
+      {
+        class: "class2",
+        content: "#REST API",
+      },
+      {
+        class: "class3",
+        content: "#JWT Authentication",
+      },
+    ],
+  },
+  {
+    link: {
+      href: "https://kgn-truck-trip-tracker.vercel.app/",
+      background: tripLog,
     },
-    {
-        link: {
-            href: "https://kaberege.github.io/kgn.github.io/",
-            background: vanilla
-        },
-        heading: "Vanilla JS Website",
-        description: "Showcasing the power of simplicity, this website is built using vanilla JavaScript and CSS. It provides an intuitive and responsive user experience, serving as a digital gateway to information and features without the complexity of frameworks.",
-        skills: [
-            {
-                class: "text-sm bg-blue-100 dark:bg-blue-800 text-blue-800 dark:text-blue-200 p-1  rounded-full transition-colors duration-300",
-                content: "#Vanilla JS"
-            },
-            {
-                class: "text-sm bg-green-100 dark:bg-green-800 text-green-800 dark:text-green-200 p-1  rounded-full transition-colors duration-300",
-                content: "#CSS"
-            }
-        ]
+    heading: "Trip Tracker Application",
+    description:
+      "A comprehensive full-stack application built with Django, Django REST Framework, and React for the frontend interface with TypeScript ensuring type safety. The app tracks trip details like stops...",
+    skills: [
+      {
+        class: "class1",
+        content: "#Django",
+      },
+      {
+        class: "class2",
+        content: "#Django REST Framework",
+      },
+      {
+        class: "class3",
+        content: "#React TS",
+      },
+
+      {
+        class: "class4",
+        content: "#TypeScript",
+      },
+      {
+        class: "class5",
+        content: "#Tailwind CSS",
+      },
+    ],
+  },
+  {
+    link: {
+      href: "https://kgn-weather-dashboard.vercel.app/",
+      background: weather,
     },
+    heading: "Weather Dashboard",
+    description:
+      "A weather dashboard built with React, TypeScript, and Tailwind CSS, offering real-time forecasts, temperature, and humidity. Its sleek, responsive design ensures a seamless experience on both desktop and mobile devices for accurate weather updates.",
+    skills: [
+      {
+        class: "class1",
+        content: "#React TS",
+      },
+      {
+        class: "class2",
+        content: "#TypeScript",
+      },
+      {
+        class: "class3",
+        content: "#Tailwind CSS",
+      },
+    ],
+  },
+  {
+    link: {
+      href: "https://kaberege-tenzies-game.vercel.app/",
+      background: tenzy,
+    },
+    heading: "Tenzies Game App",
+    description:
+      "Revolutionizing casual gaming with a fun and interactive Tenzies game app. Developed using React and CSS, this user-friendly platform offers an engaging experience while tracking player progress and providing hours of entertainment.",
+    skills: [
+      {
+        class: "class1",
+        content: "#React JS",
+      },
+      {
+        class: "class2",
+        content: "#CSS",
+      },
+    ],
+  },
+  {
+    link: {
+      href: "https://kaberege.github.io/kgn.github.io/",
+      background: vanilla,
+    },
+    heading: "Vanilla JS Website",
+    description:
+      "Showcasing the power of simplicity, this website is built using vanilla JavaScript and CSS. It provides an intuitive and responsive user experience, serving as a digital gateway to information and features without the complexity of frameworks.",
+    skills: [
+      {
+        class: "class1",
+        content: "#Vanilla JS",
+      },
+      {
+        class: "class2",
+        content: "#CSS",
+      },
+    ],
+  },
 ];

@@ -1,14 +1,14 @@
 import { FiPlay } from "react-icons/fi";
-import { projects } from "../constants/projects.ts";
+import { projects, skillStyles } from "../constants/projects.ts";
 
 function Project() {
   return (
     <>
       <section id="projects">
-        <h2 className="mb-5 text-4xl font-bold transition-colors duration-300 max-sm:text-2xl dark:text-stone-100">
+        <h2 className="mb-5 text-2xl font-bold text-zinc-950 transition-colors duration-300 sm:text-4xl dark:text-stone-100">
           Projects
         </h2>
-        <p className="mb-10 max-w-4xl text-lg transition-colors duration-300 dark:text-stone-100">
+        <p className="mb-10 w-full max-w-5xl text-sm text-zinc-900 transition-colors duration-300 sm:text-lg dark:text-stone-100">
           The following projects showcase my skills and experience through
           real-world examples of my work. They reflect my ability to solve
           complex problems, work with various technologies, and manage projects
@@ -31,15 +31,15 @@ function Project() {
                   <FiPlay className="text-red-500 transition-colors duration-300 hover:text-red-700" />
                 </div>
               </a>
-              <h3 className="text-xl font-semibold transition-colors duration-300 dark:text-stone-100">
+              <h3 className="text-lg font-semibold text-zinc-900 transition-colors duration-300 sm:text-xl dark:text-stone-100">
                 {value.heading}
               </h3>
-              <p className="transition-colors duration-300 dark:text-stone-100">
+              <p className="text-sm transition-colors duration-300 sm:text-base dark:text-stone-100">
                 {value.description}
               </p>
               <p className="flex flex-wrap gap-1 text-gray-800">
                 {value.skills.map((skill, idx) => (
-                  <span key={idx} className={skill.class}>
+                  <span key={idx} className={skillStyles[skill.class]}>
                     {skill.content}
                   </span>
                 ))}

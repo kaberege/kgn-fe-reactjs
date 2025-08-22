@@ -2,7 +2,7 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 body {
-  font-family: "Poppins", sans-serif;
+  font-family: Georgia, "Times New Roman", Times, serif;
 }
 
 /* Styling 3-d rotating images */
@@ -118,7 +118,7 @@ body {
   }
 }
 
-@media (min-width: 1280px) {
+/* @media (min-width: 1280px) {
   #contact {
     display: grid;
     grid-template-columns: auto auto;
@@ -127,7 +127,7 @@ body {
   .cube {
     grid-area: 1/2/2/3;
   }
-}
+} */
 
 /* Light mode background for nav-bar */
 .light-nav {

@@ -12,7 +12,7 @@ const Main: React.FC<Partial<HeaderProps>> = ({ mode }) => {
       <div
         className={`${mode ? "bg-slate-900" : "light"} pt-6 transition-colors duration-300`}
       >
-        <div className="mx-auto flex max-w-7xl flex-col gap-20 pb-10 max-sm:px-3 sm:px-14">
+        <div className="container mx-auto flex flex-col gap-20 px-3 pb-10 sm:px-14">
           <About />
           <Project />
           <Contact />
@@ -21,7 +21,7 @@ const Main: React.FC<Partial<HeaderProps>> = ({ mode }) => {
               <div className="absolute flex h-full w-full animate-spin items-center justify-center rounded-full border-t-4 border-blue-500"></div>
               <a
                 href="mailto:kabgnestor@gmail.com"
-                className="absolute top-4 left-4 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-b from-slate-400 via-orange-500 to-green-800 text-sm font-semibold"
+                className="absolute top-4 left-4 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-b from-slate-400 via-orange-500 to-green-800 text-xs font-semibold text-zinc-950"
               >
                 Hire Me
               </a>
