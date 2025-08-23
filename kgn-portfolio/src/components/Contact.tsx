@@ -96,7 +96,10 @@ export default function Contact() {
   }
   return (
     <>
-      <section id="contact" className="flex flex-col xl:flex-row-reverse">
+      <section
+        id="contact"
+        className="flex flex-col xl:flex-row-reverse xl:justify-between"
+      >
         <div className="cube">
           <div className="face front">
             <img src={tenzy} alt="Front" />
