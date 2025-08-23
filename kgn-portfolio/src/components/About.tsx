@@ -7,6 +7,7 @@ import {
   FaNodeJs,
   FaGitAlt,
   FaDocker,
+  FaSass,
 } from "react-icons/fa";
 import {
   TbBrandJavascript,
@@ -16,6 +17,7 @@ import {
   TbBrandTailwind,
 } from "react-icons/tb";
 import {
+  SiExpo,
   SiExpress,
   SiGraphql,
   SiDjango,
@@ -43,6 +45,7 @@ const skillsSummary: SkillsProps[] = [
 const skillsDetails: SkillsProps[] = [
   { icon: <FaHtml5 className={styleDetails} />, skill: "HTML5" },
   { icon: <FaCss3Alt className={styleDetails} />, skill: "CSS3" },
+  { icon: <FaSass className={styleDetails} />, skill: "Sass" },
   { icon: <TbBrandTailwind className={styleDetails} />, skill: "TailwindCSS" },
   { icon: <TbBrandJavascript className={styleDetails} />, skill: "JavaScript" },
   { icon: <TbBrandTypescript className={styleDetails} />, skill: "TypeScript" },
@@ -51,6 +54,10 @@ const skillsDetails: SkillsProps[] = [
   {
     icon: <TbBrandReactNative className={styleDetails} />,
     skill: "React Native",
+  },
+  {
+    icon: <SiExpo className={styleDetails} />,
+    skill: "Expo",
   },
   { icon: <FaNodeJs className={styleDetails} />, skill: "Node.js" },
   { icon: <SiExpress className={styleDetails} />, skill: "Express.js" },
@@ -74,7 +81,7 @@ export default function About() {
           I&apos;m a versatile software developer with strong expertise in
           <span className="font-semibold">
             {" "}
-            HTML, CSS, Tailwind, JavaScript, TypeScript, and React.js &nbsp;
+            HTML5, CSS3, JavaScript, TypeScript, and React.js &nbsp;
           </span>
           for building dynamic front-end applications. I also work extensively
           with

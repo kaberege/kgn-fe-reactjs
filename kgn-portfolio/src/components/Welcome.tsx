@@ -13,8 +13,9 @@ const Welcome: React.FC<Partial<HeaderProps>> = ({ mode }) => {
           <h1 className="mt-9 text-2xl font-bold text-zinc-950 transition-colors duration-300 sm:text-3xl md:text-4xl dark:text-white">
             Hello, I'm{" "}
             <span className="text-yellow-600 dark:text-yellow-300">
-              Kaberege Godard Nestor,
+              Kaberege Godard Nestor
             </span>
+            ,
           </h1>
           <p className="mt-5 text-xl font-semibold text-zinc-900 transition-colors duration-300 sm:text-2xl dark:text-white">
             A creative software developer dedicated to crafting dynamic web
