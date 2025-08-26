@@ -1,25 +1,8 @@
 import React, { useState } from "react";
 import emailjs from "@emailjs/browser";
 import { FaLinkedin } from "react-icons/fa";
-import quiz from "../assets/quiz-project.jpg";
-import tenzy from "../assets/tenzy-project.jpg";
-import vanilla from "../assets/web-project.jpg";
-import profile from "../assets/kgn-g1.jpg";
-import fire from "../assets/fire.jpg";
-import space from "../assets/space.jpg";
-import spaceThree from "../assets/space-3.jpg";
-
-interface ErrorProps {
-  nameError: string;
-  emailError: string;
-  messageError: string;
-}
-
-interface ContactProps {
-  name: string;
-  email: string;
-  message: string;
-}
+import { rotateImages } from "../constants/contact";
+import type { ErrorProps, ContactProps, RotateImageProps } from "../types";
 
 export default function Contact() {
   const [loading, setLoading] = useState<boolean>(false);
@@ -47,15 +30,18 @@ export default function Contact() {
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setError({ nameError: "", emailError: "", messageError: "" });
+
     const errors: ErrorProps = {
       nameError: "",
       emailError: "",
       messageError: "",
     };
 
-    if (!contact.name.trim()) errors.nameError = "Name can not be empty!";
-    if (!contact.email.trim()) errors.emailError = "Email can not be empty!";
-    if (!contact.message.trim())
+    if (contact.name.trim().length < 1)
+      errors.nameError = "Name can not be empty!";
+    if (contact.email.trim().length < 1)
+      errors.emailError = "Email can not be empty!";
+    if (contact.message.trim().length < 1)
       errors.messageError = "Message can not be empty!";
 
     const isError = Object.values(errors).filter((err) => err !== "");
@@ -100,28 +86,19 @@ export default function Contact() {
         id="contact"
         className="flex flex-col xl:flex-row-reverse xl:justify-between"
       >
-        <div className="cube">
-          <div className="face front">
-            <img src={tenzy} alt="Front" />
-          </div>
-          <div className="face back">
-            <img src={fire} alt="Back" />
-          </div>
-          <div className="face left">
-            <img src={vanilla} alt="Left" />
-          </div>
-          <div className="face right">
-            <img src={space} alt="Right" />
-          </div>
-          <div className="face top">
-            <img src={quiz} alt="Top" />
-          </div>
-          <div className="face bottom">
-            <img src={spaceThree} alt="Bottom" />
-          </div>
-          <div className="face behind">
-            <img src={profile} alt="Bottom" />
-          </div>
+        <div className="animate-rotate-cube relative m-auto h-[100px] w-[100px] perspective-[1000px] transform-3d sm:h-[300px] sm:w-[300px]">
+          {rotateImages.map((item: RotateImageProps, index: number) => (
+            <div
+              key={index}
+              className={`absolute flex h-[100px] w-[100px] items-center justify-center rounded-lg sm:h-[300px] sm:w-[300px] ${item.class}`}
+            >
+              <img
+                src={item.image}
+                alt={item.title}
+                className="h-full w-full cursor-pointer rounded-lg object-cover transition-[translate,brightness] duration-500 ease-linear hover:-translate-y-2.5 hover:brightness-75"
+              />
+            </div>
+          ))}
         </div>
         <div className="relative mt-10 w-full rounded-3xl bg-gray-50 p-6 transition-colors duration-300 sm:mt-20 xl:mt-0 xl:max-w-md dark:bg-gray-800">
           <h2 className="mb-5 text-2xl font-bold text-zinc-950 sm:text-4xl dark:text-stone-100">

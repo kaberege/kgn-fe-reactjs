@@ -45,25 +45,27 @@ const Header: React.FC<HeaderProps> = ({ mode, handleMode }) => {
           </div>
           <div
             onClick={() => setHideNav(false)}
-            className="flex cursor-pointer items-center justify-center rounded-full p-1 text-xl font-bold transition-colors hover:bg-slate-200 sm:hidden dark:hover:bg-slate-500"
+            className="flex cursor-pointer items-center justify-center rounded-full p-1 text-xl font-bold transition-colors duration-300 hover:bg-slate-200 sm:hidden dark:hover:bg-slate-500"
           >
-            <FaBars size={20} className="text-zinc-900 dark:text-white" />
+            <FaBars
+              size={20}
+              className="text-zinc-900 transition-colors duration-300 dark:text-white"
+            />
           </div>
           <div
-            style={{ transition: "right 0.3s linear" }}
             className={`flex flex-col sm:flex-row sm:gap-10 ${
               hideNav
                 ? "max-sm:-right-full max-sm:overflow-hidden"
                 : "max-sm:right-0"
-            } transition-colors duration-300 max-sm:fixed max-sm:top-0 max-sm:h-full max-sm:w-1/2 max-sm:bg-slate-300 max-sm:p-3 max-sm:dark:bg-slate-600`}
+            } transition-[right,background-color] duration-300 ease-[linear,ease-in] max-sm:fixed max-sm:top-0 max-sm:h-full max-sm:w-1/2 max-sm:bg-slate-300 max-sm:p-3 max-sm:dark:bg-slate-600`}
           >
             <div
               onClick={() => setHideNav(true)}
-              className="ml-auto flex cursor-pointer items-center justify-center rounded-full p-1 text-xl font-bold transition-colors hover:bg-slate-200 sm:hidden dark:hover:bg-slate-500"
+              className="ml-auto flex cursor-pointer items-center justify-center rounded-full p-1 text-xl font-bold transition-colors duration-300 hover:bg-slate-200 sm:hidden dark:hover:bg-slate-500"
             >
               <FaWindowClose
                 size={20}
-                className="text-zinc-900 dark:text-white"
+                className="text-zinc-900 transition-colors duration-300 dark:text-white"
               />
             </div>
             <div className="mt-8 flex flex-col items-center gap-5 sm:mt-0 sm:flex-row sm:gap-3">

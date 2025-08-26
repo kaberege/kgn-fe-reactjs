@@ -11,7 +11,7 @@ export interface NavigationLinks {
 }
 
 export type ProjectSkillStylesProps = Record<
-  "class1" | "class2" | "class3" | "class4" | "class5",
+  "blue" | "yellow" | "rose" | "teal" | "purple",
   string
 >;
 
@@ -30,4 +30,22 @@ export interface ProjectProps {
   heading: string;
   description: string;
   skills: ProjectSkillProps[];
+}
+
+export interface ErrorProps {
+  nameError: string;
+  emailError: string;
+  messageError: string;
+}
+
+export interface ContactProps {
+  name: string;
+  email: string;
+  message: string;
+}
+
+export interface RotateImageProps {
+  class: string;
+  image: string;
+  title: string;
 }
