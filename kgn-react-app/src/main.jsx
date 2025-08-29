@@ -12,16 +12,16 @@ import "./index.css";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    Component: App,
     children: [
-      { path: "", element: <Home /> },
-      { path: "", element: <ToDo /> },
-      { path: "", element: <AppDie /> },
+      { index: true, Component: Home },
+      { path: "todo", Component: ToDo },
+      { path: "die", Component: AppDie },
     ],
   },
   {
     path: "*",
-    element: <ErrorPage />,
+    Component: ErrorPage,
   },
 ]);
 

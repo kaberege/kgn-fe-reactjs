@@ -10,19 +10,20 @@ import WeatherCard from "./components/WeatherCard.tsx";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    Component: App,
     children: [
       {
-        path: "",
-        element: <WeatherCard />,
+        index: true,
+        Component: WeatherCard,
       },
     ],
   },
   {
     path: "*",
-    element: <ErrorMessage />,
+    Component: ErrorMessage,
   },
 ]);
+
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <RouterProvider router={router} />

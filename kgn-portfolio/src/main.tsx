@@ -9,11 +9,11 @@ import NotFound from "./pages/NotFound.tsx";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    Component: App,
   },
   {
     path: "*",
-    element: <NotFound />,
+    Component: NotFound,
   },
 ]);
 

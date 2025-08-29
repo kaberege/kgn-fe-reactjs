@@ -12,25 +12,25 @@ import "./index.css";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    Component: App,
     children: [
       {
-        path: "",
-        element: <QuizLayout />,
+        index: true,
+        Component: QuizLayout,
       },
       {
         path: "history",
-        element: <History />,
+        Component: History,
       },
       {
         path: "details/:id",
-        element: <QuizDetails />,
+        Component: QuizDetails,
       },
     ],
   },
   {
     path: "*",
-    element: <ErrorPage />, // Error page component
+    Component: ErrorPage, // Error page component
   },
 ]);
 

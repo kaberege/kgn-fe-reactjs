@@ -15,37 +15,37 @@ import History from "./components/History.tsx";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Register />, // Register page component
+    Component: Register, // Register page component
   },
   {
     path: "/login",
-    element: <Login />, // Login page component
+    Component: Login, // Login page component
   },
   {
     path: "/truck/",
-    element: <App />, // Main app component
+    Component: App, // Main app component
     children: [
       {
-        path: "",
-        element: <TripForm />, //  component TripForm
+        index: true,
+        Component: TripForm, //  component TripForm
       },
       {
         path: "map",
-        element: <MapView />, // component MapView
+        Component: MapView, // component MapView
       },
       {
         path: "eld-log/:cycleId",
-        element: <ELDLogView />, // component ELDLogView
+        Component: ELDLogView, // component ELDLogView
       },
       {
         path: "history",
-        element: <History />, // component History
+        Component: History, // component History
       },
     ],
   },
   {
     path: "*",
-    element: <ErrorPage />, // Error page component
+    Component: ErrorPage, // Error page component
   },
 ]);
 
