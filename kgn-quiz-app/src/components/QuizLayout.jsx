@@ -6,15 +6,15 @@ import useQuizStore from "../stateStore/QuizStore";
 
 // Main layout component that renders different quiz states
 const QuizLayout = () => {
-    const currentState = useQuizStore(state => state.quizState);
+  const currentState = useQuizStore((state) => state.quizState);
 
-    return (
-        <div className="max-w-2xl m-auto flex justify-center items-center">
-            {currentState === "start" && <QuizStart />}
-            {currentState === "quiz" && <QuestionCard />}
-            {currentState === "score" && <ScoreSummary />}
-        </div>
-    );
-}
+  return (
+    <div className="max-w-2xl m-auto flex justify-center items-center">
+      {currentState === "start" && <QuizStart />}
+      {currentState === "quiz" && <QuestionCard />}
+      {currentState === "score" && <ScoreSummary />}
+    </div>
+  );
+};
 
 export default QuizLayout;
