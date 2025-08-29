@@ -1,20 +1,24 @@
-import { Outlet } from "react-router-dom";
+import { Outlet } from "react-router";
 import logo from "./assets/favicon.jpg";
 import { useEffect, useState } from "react";
 import { MdDarkMode, MdLightMode } from "react-icons/md";
 
 function App() {
-  const [mode, setMode] = useState<boolean>(false);  // Toggle light/dark mode state
+  const [mode, setMode] = useState<boolean>(false); // Toggle light/dark mode state
   const [year, setYear] = useState<number | null>(null); // Setting current year
 
   useEffect(() => {
-    const date:Date = new Date();
-    const yr:number = date.getFullYear();
+    const date: Date = new Date();
+    const yr: number = date.getFullYear();
     setYear(yr);
   }, []);
 
   return (
-    <div className={`flex flex-col min-h-screen transition-colors duration-300 ${mode && "dark"}`}>
+    <div
+      className={`flex flex-col min-h-screen transition-colors duration-300 ${
+        mode && "dark"
+      }`}
+    >
       {/* Header */}
       <header className="bg-gradient-to-r from-sky-800 to-sky-900 dark:bg-gradient-to-r dark:from-slate-700 dark:to-slate-800 shadow-md">
         <nav className="flex items-center justify-between py-1 sm:py-2 px-2 sm:px-4 max-w-7xl mx-auto">
@@ -26,12 +30,12 @@ function App() {
               className="h-7 w-7 sm:h-9 sm:w-9 rounded-full"
             />
             <h1 className="text-xl sm:text-2xl font-semibold text-white">
-            Trip Tracker App
+              Trip Tracker App
             </h1>
           </div>
           <button
             title="Toggle Dark/Light Mode"
-            onClick={() => setMode(prev => !prev)}
+            onClick={() => setMode((prev) => !prev)}
             className="flex items-center justify-center rounded-full bg-white text-black dark:bg-gray-950
              dark:text-white p-1 sm:p-2 hover:bg-blue-600 transition-colors duration-300 cursor-pointer"
           >

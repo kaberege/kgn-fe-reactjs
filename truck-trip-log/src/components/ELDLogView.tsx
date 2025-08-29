@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import DriverForm from './DriverForm';
-import DriverLogs from './DriverLogs';
-import { useDriverStore } from '../state-store/useDriverStore';
+import { useEffect, useState } from "react";
+import { useParams } from "react-router";
+import DriverForm from "./DriverForm";
+import DriverLogs from "./DriverLogs";
+import { useDriverStore } from "../state-store/useDriverStore";
 
 const ELDLogView = () => {
   const { cycleId } = useParams<{ cycleId: string }>();
