@@ -1,9 +1,7 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import kgnImage from '../../assets/kgn-g1.jpg'
+import { Link } from "react-router";
+import kgnImage from "../../assets/kgn-g1.jpg";
 function Home() {
   return (
-
     <div className="home-container">
       <img
         src={kgnImage} // Replace with your image path
