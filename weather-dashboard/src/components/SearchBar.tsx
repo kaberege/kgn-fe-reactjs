@@ -1,5 +1,5 @@
-import React from 'react';
-import { BiSearch } from 'react-icons/bi';
+import React from "react";
+import { BiSearch } from "react-icons/bi";
 
 // Defining the types for the props that will be passed to the SearchBar component
 interface SearchTypesProps {

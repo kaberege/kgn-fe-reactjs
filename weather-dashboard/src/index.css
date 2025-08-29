@@ -1,21 +1,14 @@
 @import "tailwindcss";
 @custom-variant dark (&:where(.dark, .dark *));
 
-
-/* * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-} */
-
 body {
-    font-family: Georgia, 'Times New Roman', Times, serif;
+  font-family: Georgia, "Times New Roman", Times, serif;
 }
 
 .slick-track {
-    overflow-y: hidden;
+  overflow-y: hidden;
 }
 
 .slick-slide {
-    margin: 0 2px;
+  margin: 0 2px;
 }
