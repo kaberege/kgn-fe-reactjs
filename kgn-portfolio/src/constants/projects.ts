@@ -1,7 +1,7 @@
 import quiz from "../assets/quiz-project.jpg";
 import tenzy from "../assets/tenzy-project.jpg";
 import vanilla from "../assets/web-project.jpg";
-import social from "../assets/social.jpg";
+import travel from "../assets/travel.jpg";
 import weather from "../assets/weather.jpg";
 import tripLog from "../assets/tripLog.jpg";
 import type { ProjectProps, ProjectSkillStylesProps } from "../types";
@@ -43,11 +43,11 @@ export const projects: ProjectProps[] = [
   {
     link: {
       href: "https://kaberege.pythonanywhere.com/",
-      background: social,
+      background: travel,
     },
     heading: "Travel App API",
     description:
-      "A robust travel booking and trip management API built with Django and Django REST Framework. It supports features like user authentication with JWT, trip listings, booking management, and payment integration. Designed with scalability in mind, the app powers both web and mobile travel platforms",
+      "A robust travel booking and trip management API built with Django and Django REST Framework. It supports features like user authentication with JWT, trip listings, booking management, and payment integration...",
     skills: [
       {
         class: "blue",
