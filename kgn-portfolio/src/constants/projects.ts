@@ -45,9 +45,9 @@ export const projects: ProjectProps[] = [
       href: "https://kaberege.pythonanywhere.com/",
       background: social,
     },
-    heading: "Social Media API",
+    heading: "Travel App API",
     description:
-      "A comprehensive API, built with Django and Django REST Framework, simulates the functionalities of a social media platform, including post management, user interactions, notifications, JWT-based authentication...",
+      "A robust travel booking and trip management API built with Django and Django REST Framework. It supports features like user authentication with JWT, trip listings, booking management, and payment integration. Designed with scalability in mind, the app powers both web and mobile travel platforms",
     skills: [
       {
         class: "blue",
@@ -55,11 +55,15 @@ export const projects: ProjectProps[] = [
       },
       {
         class: "yellow",
-        content: "#REST API",
+        content: "##Django REST Framework",
       },
       {
         class: "rose",
         content: "#JWT Authentication",
+      },
+      {
+        class: "teal",
+        content: "MySQL",
       },
     ],
   },
