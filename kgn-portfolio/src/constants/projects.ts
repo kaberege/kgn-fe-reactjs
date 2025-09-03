@@ -32,11 +32,11 @@ export const projects: ProjectProps[] = [
     skills: [
       {
         class: "blue",
-        content: "#React JS",
+        content: "React JS",
       },
       {
         class: "yellow",
-        content: "#Tailwind CSS",
+        content: "Tailwind CSS",
       },
     ],
   },
@@ -51,15 +51,15 @@ export const projects: ProjectProps[] = [
     skills: [
       {
         class: "blue",
-        content: "#Django",
+        content: "Django",
       },
       {
         class: "yellow",
-        content: "##Django REST Framework",
+        content: "Django REST Framework",
       },
       {
         class: "rose",
-        content: "#JWT Authentication",
+        content: "JWT Authentication",
       },
       {
         class: "teal",
@@ -78,24 +78,24 @@ export const projects: ProjectProps[] = [
     skills: [
       {
         class: "blue",
-        content: "#Django",
+        content: "Django",
       },
       {
         class: "yellow",
-        content: "#Django REST Framework",
+        content: "Django REST Framework",
       },
       {
         class: "rose",
-        content: "#React TS",
+        content: "React TS",
       },
 
       {
         class: "teal",
-        content: "#TypeScript",
+        content: "TypeScript",
       },
       {
         class: "purple",
-        content: "#Tailwind CSS",
+        content: "Tailwind CSS",
       },
     ],
   },
@@ -110,15 +110,15 @@ export const projects: ProjectProps[] = [
     skills: [
       {
         class: "blue",
-        content: "#React TS",
+        content: "React TS",
       },
       {
         class: "yellow",
-        content: "#TypeScript",
+        content: "TypeScript",
       },
       {
         class: "rose",
-        content: "#Tailwind CSS",
+        content: "Tailwind CSS",
       },
     ],
   },
@@ -133,11 +133,11 @@ export const projects: ProjectProps[] = [
     skills: [
       {
         class: "blue",
-        content: "#React JS",
+        content: "React JS",
       },
       {
         class: "yellow",
-        content: "#CSS",
+        content: "CSS",
       },
     ],
   },
@@ -152,11 +152,11 @@ export const projects: ProjectProps[] = [
     skills: [
       {
         class: "blue",
-        content: "#Vanilla JS",
+        content: "Vanilla JS",
       },
       {
         class: "yellow",
-        content: "#CSS",
+        content: "CSS",
       },
     ],
   },

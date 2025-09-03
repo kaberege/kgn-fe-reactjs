@@ -40,7 +40,7 @@ function Project() {
               <p className="flex flex-wrap gap-1 text-gray-800">
                 {value.skills.map((skill, idx) => (
                   <span key={idx} className={skillStyles[skill.class]}>
-                    {skill.content}
+                    #{skill.content}
                   </span>
                 ))}
               </p>
