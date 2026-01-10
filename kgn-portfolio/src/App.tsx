@@ -15,7 +15,7 @@ function App() {
         <div className="relative h-24 w-24">
           <div className="absolute flex h-full w-full animate-spin items-center justify-center rounded-full border-t-4 border-blue-500"></div>
           <a
-            href="mailto:kabgnestor@gmail.com"
+            href="mailto:nestor.godard.kaberege@gmail.com"
             className="absolute top-4 left-4 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-b from-slate-400 via-orange-500 to-green-800 text-xs font-semibold text-zinc-950"
           >
             Hire Me

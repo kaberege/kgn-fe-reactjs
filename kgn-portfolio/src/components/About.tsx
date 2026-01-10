@@ -16,6 +16,9 @@ import {
   TbBrandReactNative,
   TbBrandTailwind,
 } from "react-icons/tb";
+import { AiOutlineConsoleSql } from "react-icons/ai";
+import { GrMysql } from "react-icons/gr";
+import { DiMongodb } from "react-icons/di";
 import {
   SiExpo,
   SiExpress,
@@ -23,6 +26,7 @@ import {
   SiDjango,
   SiGithub,
   SiKubernetes,
+  SiPostgresql,
 } from "react-icons/si";
 
 interface SkillsProps {
@@ -64,6 +68,10 @@ const skillsDetails: SkillsProps[] = [
   { icon: <FaPython className={styleDetails} />, skill: "Python" },
   { icon: <SiDjango className={styleDetails} />, skill: "Django" },
   { icon: <SiGraphql className={styleDetails} />, skill: "GraphQL" },
+  { icon: <AiOutlineConsoleSql className={styleDetails} />, skill: "SQL" },
+  { icon: <GrMysql className={styleDetails} />, skill: "MySQL" },
+  { icon: <SiPostgresql className={styleDetails} />, skill: "PostgreSQL" },
+  { icon: <DiMongodb className={styleDetails} />, skill: "MongoDB" },
   { icon: <FaDocker className={styleDetails} />, skill: "Docker" },
   { icon: <SiKubernetes className={styleDetails} />, skill: "Kubernetes" },
   { icon: <FaGitAlt className={styleDetails} />, skill: "Git" },
