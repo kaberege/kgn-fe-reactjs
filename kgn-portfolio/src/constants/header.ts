@@ -34,6 +34,6 @@ export const socials: NavigationLinks[] = [
   },
   {
     title: "instagram",
-    link: "https://www.instagram.com/kgn_ke_hong/",
+    link: "https://www.instagram.com/kaberege.g.n",
   },
 ];
