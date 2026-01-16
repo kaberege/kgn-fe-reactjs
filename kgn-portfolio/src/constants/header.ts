@@ -14,7 +14,7 @@ export const navigationLinks: NavigationLinks[] = [
     title: "Contact",
   },
   {
-    link: "https://drive.google.com/file/d/12WQ5TPt2cWmbjOWi7mwic2aEgTXEDK74/view?usp=drive_link",
+    link: "https://drive.google.com/file/d/10Ekcz0yz_l560eJi8Z4W8w0j3ibWmVl7/view?usp=sharing",
     title: "Resume",
   },
 ];
