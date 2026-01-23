@@ -5,7 +5,7 @@ import {
   FaBars,
   FaWindowClose,
   FaLinkedin,
-  FaDiscord,
+  FaGithub,
   FaInstagram,
 } from "react-icons/fa";
 import type { HeaderProps } from "../types";
@@ -15,7 +15,7 @@ type SocialIconsProps = Record<string, React.JSX.Element>;
 
 const socialIcons: SocialIconsProps = {
   linkedin: <FaLinkedin className="text-xl font-bold" />,
-  discord: <FaDiscord className="text-xl font-bold" />,
+  github: <FaGithub className="text-xl font-bold" />,
   x: <FaXTwitter className="text-xl font-bold" />,
   instagram: <FaInstagram className="text-xl font-bold" />,
 };

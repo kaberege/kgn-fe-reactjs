@@ -25,8 +25,8 @@ export const socials: NavigationLinks[] = [
     link: "https://www.linkedin.com/in/kaberege-godard-nestor-53a0b4215",
   },
   {
-    title: "discord",
-    link: "https://discord.com/invite/Yx5CjAFM",
+    title: "github",
+    link: "https://github.com/kaberege",
   },
   {
     title: "x",
