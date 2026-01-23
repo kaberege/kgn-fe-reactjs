@@ -1,6 +1,6 @@
 import React from "react";
 import devLaptop from "../assets/devLaptop.jpg";
-import profile from "../assets/kgn-g1.jpg";
+import profile from "../assets/profile-colorless.png";
 import type { HeaderProps } from "../types";
 
 const Welcome: React.FC<Partial<HeaderProps>> = ({ mode }) => {
