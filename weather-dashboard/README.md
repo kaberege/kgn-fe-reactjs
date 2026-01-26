@@ -1,54 +1,58 @@
-# React + TypeScript + Vite
+# Weather Dashboard - React & TypeScript
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a real-time **Weather Dashboard** built as part of the ALX Frontend Development journey. It provides users with live weather updates using geolocation or city searches, featuring a dynamic UI that adapts to current weather conditions.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+- **Real-time Data:** Fetches live weather information (temperature, humidity, wind speed) via the OpenWeatherMap API.
+- **Geolocation Support:** Automatically detects user location on startup to show local weather.
+- **Dynamic UI:** Background colors and weather icons change dynamically based on the weather (e.g., Clear, Rain, Snow, Thunderstorm).
+- **Search History:** Uses `localStorage` to save and display a carousel of recently searched cities.
+- **Auto-Refresh:** Features a built-in timer that automatically updates weather data every 10 minutes.
+- **Responsive Design:** Optimized for mobile, tablet, and desktop views using Tailwind CSS.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Tech Stack
+
+- **Core:** React 19, TypeScript
+- **Styling:** Tailwind CSS 4
+- **Icons:** React Icons
+- **Carousel:** React Slick & Slick Carousel
+- **Build Tool:** Vite
+
+---
+
+## Installation & Setup
+
+1. **Clone the repository:**
+
+```bash
+git clone https://github.com/kaberege/kgn-fe-reactjs.git
+cd kgn-fe-reactjs/weather-dashboard
+
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+2. **Install dependencies:**
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```bash
+npm install
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+```
+
+3. **Environment Variables:**
+   Create a `.env` file in the root and add your OpenWeatherMap API key:
+
+```env
+VITE_API_KEY=your_api_key_here
+
+```
+
+4. **Run the development server:**
+
+```bash
+npm run dev
+
 ```
