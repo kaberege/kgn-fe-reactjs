@@ -1,54 +1,82 @@
-# React + TypeScript + Vite
+# Truck Trip Log - ReactJS
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This repository contains the **Truck Trip Log** application, a sophisticated logistics tracking tool developed as part of the **ALX Frontend ReactJS Journey**. The app enables drivers and dispatchers to manage trip data, visualize routes on an interactive map, and monitor compliance with driving cycles.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+- **User Authentication:** Secure Login and Registration with JWT-based session management and automatic token expiration checks.
+- **Interactive Mapping:** Real-time route visualization using **Leaflet** and **OSRM API**.
+- **Logistics Logic:** \* Automatic calculation of route distance and duration.
+- Smart fueling station placement (every 1,000 miles).
+- Pick-up and drop-off location tracking with break-time logic.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Data Management:** Persistent state using **Zustand** and `localStorage` for trip history.
+- **Modern UI:** Responsive design with **Tailwind CSS 4**, featuring a seamless Dark/Light mode toggle.
+- **Reporting:** Ability to export trip details using `html2canvas` and `html2pdf.js`.
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+---
+
+## Tech Stack
+
+### Frontend Core
+
+- **React 19** & **TypeScript**
+- **Vite** (Build Tool)
+- **React Router 7** (Navigation)
+
+### State & APIs
+
+- **Zustand:** Lightweight state management.
+- **Axios:** Backend communication.
+- **Leaflet & @react-google-maps/api:** Map rendering and geospatial data.
+
+### Styling
+
+- **Tailwind CSS 4:** Utility-first styling.
+- **React Icons:** Material Design, GiTruck, and more.
+
+---
+
+## Installation & Setup
+
+1. **Clone the repository:**
+
+```bash
+git clone https://github.com/kaberege/kgn-fe-reactjs.git
+cd kgn-fe-reactjs/truck-trip-log
+
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+2. **Install dependencies:**
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```bash
+npm install
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
 ```
+
+3. **Environment Variables:**
+   Create a `.env` file in the root and add your backend URL:
+
+```env
+VITE_OPEN_CAGE_API_KEY=your_api_key
+VITE_BACKEND_BASE_URL=your_backend_api_url
+
+```
+
+4. **Run Development Server:**
+
+```bash
+npm run dev
+
+```
+
+---
+
+## Authentication Flow
+
+The application implements a strict security layer. Before accessing the `MapView`, the system checks for a valid `access_token`.
+
+- **Registration:** Validates email format and password complexity (8-30 chars, uppercase, lowercase, numbers, and symbols).
+- **Session Guard:** The `checkTokenExpiration` utility decodes the JWT and redirects the user to login if the `exp` timestamp has passed.
