@@ -3,14 +3,8 @@ import "./index.css";
 import { Outlet, NavLink } from "react-router";
 import logo from "./assets/main-logo-white.jpeg";
 import kgnProfile from "./assets/green.jpg";
-import { FaXTwitter } from "react-icons/fa6";
-import {
-  FaBars,
-  FaWindowClose,
-  FaLinkedin,
-  FaDiscord,
-  FaInstagram,
-} from "react-icons/fa";
+import { FaXTwitter, FaGithub } from "react-icons/fa6";
+import { FaBars, FaWindowClose, FaLinkedin, FaInstagram } from "react-icons/fa";
 
 export default function App() {
   const [year, setYear] = useState(0); // Set current year
@@ -123,13 +117,13 @@ export default function App() {
                 </li>
                 <li>
                   <a
-                    href="https://discord.com/invite/Yx5CjAFM"
+                    href="https://github.com/kaberege"
                     target="_blank"
-                    alt="Discord kgn"
-                    title="kgn Discord"
+                    alt="github kgn"
+                    title="kgn GitHub"
                     className="text-white hover:text-cyan-300 transition-colors duration-300"
                   >
-                    <FaDiscord className="font-bold text-xl" />
+                    <FaGithub className="font-bold text-xl" />
                   </a>
                 </li>
                 <li>
@@ -145,7 +139,7 @@ export default function App() {
                 </li>
                 <li>
                   <a
-                    href="https://www.instagram.com/kgn_ke_hong/"
+                    href="https://www.instagram.com/kaberege.g.n"
                     target="_blank"
                     alt="Instagram kgn"
                     title="kgn Instagram"
