@@ -3,7 +3,7 @@ import tenzy from "../assets/tenzy-project.jpg";
 import vanilla from "../assets/web-project.jpg";
 import profile from "../assets/kgn-profile.jpg";
 import fire from "../assets/fire.jpg";
-import space from "../assets/space.jpg";
+import trip from "../assets/tripLog.jpg";
 import spaceThree from "../assets/space-3.jpg";
 import type { RotateImageProps } from "../types";
 
@@ -25,7 +25,7 @@ export const rotateImages: RotateImageProps[] = [
   },
   {
     class: "right",
-    image: space,
+    image: spaceThree,
     title: "Right image",
   },
   {
@@ -35,7 +35,7 @@ export const rotateImages: RotateImageProps[] = [
   },
   {
     class: "bottom",
-    image: spaceThree,
+    image: trip,
     title: "Bottom image",
   },
   {
