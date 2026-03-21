@@ -1,7 +1,7 @@
 import React from "react";
-import devLaptop from "../assets/devLaptop.jpg";
 import profile from "../assets/profile-colorless.png";
 import type { HeaderProps } from "../types";
+import ComputerSetup from "./vectors/ComputerSetup";
 
 const Welcome: React.FC<Partial<HeaderProps>> = ({ mode }) => {
   return (
@@ -22,20 +22,13 @@ const Welcome: React.FC<Partial<HeaderProps>> = ({ mode }) => {
             applications.
           </p>
         </div>
-        <div className="flex flex-grow items-center justify-center">
-          <div className="relative h-52 w-11/12 max-w-96 sm:h-80 sm:w-full sm:max-w-xl">
-            <img
-              src={devLaptop}
-              alt="Developer machine"
-              className="h-full w-full rounded-lg"
+        <div className="flex grow items-center justify-center [perspective:1000px]">
+          <div className="group relative w-11/12 max-w-[1000px] transition-transform duration-500 hover:scale-105 hover:[transform:rotateX(10deg)_rotateY(10deg)]">
+            <ComputerSetup
+              mode={mode}
+              profileImg={profile}
+              accentColor="#00D1FF"
             />
-            <div className="absolute top-4 left-1/3 flex h-20 w-20 items-center justify-center sm:top-5 sm:left-1/3 sm:h-40 sm:w-40">
-              <img
-                src={profile}
-                alt="kgn picture"
-                className="h-full w-full rounded-full transition-transform duration-300 hover:scale-105 hover:brightness-90"
-              />
-            </div>
           </div>
         </div>
       </section>
