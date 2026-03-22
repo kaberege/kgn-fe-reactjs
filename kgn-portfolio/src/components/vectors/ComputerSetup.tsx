@@ -9,21 +9,29 @@ const ComputerSetup: React.FC<ComputerSetupProps> = ({
   profileImg,
   accentColor = "#00D1FF",
 }) => {
-  const isDark = mode;
+  const isDark: boolean | undefined = mode;
 
-  const chassisColor = isDark ? "#2C3036" : "#F1F5F9";
-  const chassisDark = isDark ? "#121418" : "#94A3B8";
-  const screenBg = isDark ? "#1e1e1e" : "#FFFFFF";
-  const terminalBg = isDark ? "#1a1c21" : "#F8FAFC";
-  const mugFill = isDark ? "#2A2A2A" : "#FFFFFF";
-  const mugStroke = isDark ? "#444" : "#E2E8F0";
+  const chassisColor: string = isDark ? "#F1F5F9" : "#2C3036";
+  const chassisDark: string = isDark ? "#94A3B8" : "#121418";
+  const screenBg: string = isDark ? "#1e1e1e" : "#FFFFFF";
+  const terminalBg: string = isDark ? "#1a1c21" : "#F8FAFC";
+  const mugFill: string = isDark ? "#FFFFFF" : "#2A2A2A";
+  const mugStroke: string = isDark ? "#E2E8F0" : "#444";
+  const coffeeFill: string = isDark ? "#2A1B12" : "#4E342E";
+  const speakerFill: string = isDark ? "#F8FAFC" : "#0F0F0F";
+  const speakerInner: string = isDark ? "#94A3B8" : "#1A1A1A";
+  const speakerInnerStroke = isDark ? "#333" : "#94A3B8";
+  const speakerBounce: string = isDark ? "#007BFF" : accentColor;
+  const steamColor: string = isDark
+    ? "rgba(255, 255, 255, 0.6)"
+    : "rgba(100, 100, 100, 0.4)";
 
   return (
     <svg
       viewBox="0 0 1200 500"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="h-full w-full drop-shadow-2xl"
+      className="h-auto w-full drop-shadow-2xl"
     >
       <defs>
         <clipPath id="avatarClip">
@@ -49,13 +57,92 @@ const ComputerSetup: React.FC<ComputerSetupProps> = ({
               60%, 80% { transform: translateY(-120px); }
               100% { transform: translateY(0); }
             }
+            @keyframes steamrise {
+              0% { transform: translateY(0) scale(1); opacity: 0; }
+              15% { opacity: 1; }
+              80% { opacity: 0.8; }
+              100% { transform: translateY(-60px) scale(1.5); opacity: 0; }
+            }
+            @keyframes tilt {
+             0%, 100% { transform: perspective(500px) rotateY(0deg); }
+             25% { transform: perspective(500px) rotateY(-25deg); }
+             75% { transform: perspective(500px) rotateY(25deg); }
+            }
+            @keyframes profile-composite {
+              0% { transform: rotate(0deg); opacity: 0.4; stroke-width: 4; }
+              50% { opacity: 1; stroke-width: 6; }
+              100% { transform: rotate(360deg); opacity: 0.4; stroke-width: 4; }
+            }
+            @keyframes wheel-glow {
+              0%, 100% { 
+                filter: drop-shadow(0 0 2px ${accentColor}); 
+                opacity: 0.8; 
+              }
+              50% { 
+                filter: drop-shadow(0 0 6px ${accentColor}) drop-shadow(0 0 2px ${isDark ? "#000" : accentColor}); 
+                opacity: 1; 
+              }
+            }
+            @keyframes mouse-click {
+              0%, 90%, 100% { transform: scaleY(1); }
+              95% { transform: scaleY(0.98); transform-origin: bottom; }
+            }
+
+            .mouse-body { animation: mouse-click 4s ease-in-out infinite; }
+            .mouse-wheel { animation: wheel-glow 2s ease-in-out infinite; }
+            .steam {
+              animation: steamrise 3s ease-out infinite;
+              opacity: 0;
+            }
+            .steam-1 { animation-delay: 0s; }
+            .steam-2 { animation-delay: 0.8s; }
+            .steam-3 { animation-delay: 1.6s; }
+
+            .mug-tilt {
+              transform-origin: 127.5px 355px; 
+              animation: tilt 6s ease-in-out infinite;
+              transform-style: preserve-3d;
+            }
             .cursor { animation: blink 1s infinite; }
-            .floating { animation: float 5s ease-in-out infinite; will-change: transform; }
+            .floating { 
+              animation: float 5s ease-in-out infinite; 
+              will-change: transform; 
+            }
             .scrolling-code { animation: terminalScroll 10s cubic-bezier(0.65, 0, 0.35, 1) infinite; }
+            .profile-glow { 
+              animation: profile-composite 10s linear infinite; 
+              transform-origin: 180px 150px;
+            }
           `}
         </style>
       </defs>
-      <g className="floating" style={{ animationDelay: "0.5s" }}>
+      <g className="mug-tilt" transform-origin="127.5px 355px">
+        <g transform="translate(100, 280)">
+          <path
+            d="M 20 0 Q 25 -10, 20 -20 Q 15 -30, 20 -40"
+            stroke={steamColor}
+            strokeWidth="3"
+            fill="none"
+            className="steam steam-1"
+            strokeLinecap="round"
+          />
+          <path
+            d="M 30 0 Q 35 -15, 30 -30 Q 25 -45, 30 -60"
+            stroke={steamColor}
+            strokeWidth="2.5"
+            fill="none"
+            className="steam steam-2"
+            strokeLinecap="round"
+          />
+          <path
+            d="M 40 0 Q 35 -10, 40 -20 Q 45 -30, 40 -40"
+            stroke={steamColor}
+            strokeWidth="3"
+            fill="none"
+            className="steam steam-3"
+            strokeLinecap="round"
+          />
+        </g>
         <rect
           x="100"
           y="280"
@@ -68,20 +155,33 @@ const ComputerSetup: React.FC<ComputerSetupProps> = ({
         />
         <path
           d="M155 300 Q180 320 155 340"
-          stroke={isDark ? "#333" : "#CBD5E1"}
+          stroke={isDark ? "#CBD5E1" : "#333"}
           strokeWidth="5"
           fill="none"
         />
-        <ellipse cx="127.5" cy="290" rx="22" ry="8" fill="#3d2b1f" />
+        <ellipse cx="127.5" cy="290" rx="22" ry="8" fill={coffeeFill} />
       </g>
       <g className="floating">
-        <rect x="15" y="120" width="70" height="240" rx="15" fill="#111" />
-        <circle cx="50" cy="180" r="22" fill="#000" stroke="#222" />
+        <rect
+          x="15"
+          y="120"
+          width="70"
+          height="240"
+          rx="15"
+          fill={speakerFill}
+        />
+        <circle
+          cx="50"
+          cy="180"
+          r="22"
+          fill={speakerInner}
+          stroke={speakerInnerStroke}
+        />
         <circle
           cx="50"
           cy="330"
           r="4"
-          fill={accentColor}
+          fill={speakerBounce}
           className="animate-pulse"
         />
       </g>
@@ -90,9 +190,16 @@ const ComputerSetup: React.FC<ComputerSetupProps> = ({
           width="760"
           height="320"
           rx="18"
-          fill={isDark ? "#0F172A" : "#1E293B"}
+          fill={isDark ? "#eee" : "#1E293B"}
         />
-        <rect x="12" y="12" width="736" height="296" rx="10" fill="#000" />
+        <rect
+          x="12"
+          y="12"
+          width="736"
+          height="296"
+          rx="10"
+          fill={isDark ? "#aaa" : "#555"}
+        />
         <rect x="20" y="20" width="720" height="280" rx="4" fill={screenBg} />
         <g transform="translate(10, 10)">
           <g clipPath="url(#avatarClip)">
@@ -105,6 +212,7 @@ const ComputerSetup: React.FC<ComputerSetupProps> = ({
               preserveAspectRatio="xMidYMid slice"
             />
           </g>
+
           <circle
             cx="180"
             cy="150"
@@ -112,8 +220,9 @@ const ComputerSetup: React.FC<ComputerSetupProps> = ({
             stroke={accentColor}
             strokeWidth="4"
             fill="none"
-            className="animate-pulse"
-            opacity="0.6"
+            strokeDasharray="20 15"
+            strokeLinecap="round"
+            className="profile-glow"
           />
         </g>
         <g transform="translate(385, 45)">
@@ -201,8 +310,8 @@ const ComputerSetup: React.FC<ComputerSetupProps> = ({
                 width="42"
                 height="22"
                 rx="4"
-                fill={isDark ? "#3a3f44" : "#FFFFFF"}
-                stroke={isDark ? "#1a1c21" : "#CBD5E1"}
+                fill={isDark ? "#FFFFFF" : "#3a3f44"}
+                stroke={isDark ? "#3a3f44" : "#1a1c21"}
               />
             )),
           )}
@@ -212,38 +321,70 @@ const ComputerSetup: React.FC<ComputerSetupProps> = ({
             width="300"
             height="22"
             rx="4"
-            fill={isDark ? "#4b5563" : "#F1F5F9"}
-            stroke={isDark ? "#1a1c21" : "#CBD5E1"}
+            fill={isDark ? "#F1F5F9" : "#4b5563"}
+            stroke={isDark ? "#CBD5E1" : "#1a1c21"}
           />
         </g>
       </g>
       <g className="floating">
-        <rect x="1115" y="120" width="70" height="240" rx="15" fill="#111" />
-        <circle cx="1150" cy="180" r="22" fill="#000" stroke="#222" />
+        <rect
+          x="1115"
+          y="120"
+          width="70"
+          height="240"
+          rx="15"
+          fill={speakerFill}
+        />
+        <circle
+          cx="1150"
+          cy="180"
+          r="22"
+          fill={speakerInner}
+          stroke={speakerInnerStroke}
+        />
         <circle
           cx="1150"
           cy="330"
           r="4"
-          fill={accentColor}
+          fill={speakerBounce}
           className="animate-pulse"
         />
       </g>
-      <g className="floating" style={{ animationDelay: "0.2s" }}>
-        <rect
-          x="1025"
-          y="320"
-          width="55"
-          height="95"
-          rx="27"
-          fill={isDark ? "#333" : "#FFFFFF"}
-          stroke={isDark ? "#444" : "#CBD5E1"}
-        />
-        <path
-          d="M1052 320 V200 H980"
-          stroke={isDark ? "#555" : "#CBD5E1"}
-          strokeWidth="2"
-          fill="none"
-        />
+      <g transform="translate(1035, 330)">
+        <g className="mouse-body">
+          <path
+            d="M15 0 C 45 0, 75 15, 75 50 C 75 85, 45 95, 15 95 C -10 95, -5 70, -5 45 C -5 15, -10 0, 15 0 Z"
+            fill={isDark ? "#FFFFFF" : "#2D2D2D"}
+            stroke={isDark ? "#94A3B8" : "#1A1A1A"}
+            strokeWidth="1.5"
+          />
+          <rect
+            className="mouse-wheel"
+            x="14"
+            y="12"
+            width="10"
+            height="22"
+            rx="5"
+            fill={accentColor}
+            stroke={isDark ? "#1E293B" : accentColor}
+            strokeWidth="1"
+          />
+          <rect
+            x="-3"
+            y="40"
+            width="3"
+            height="18"
+            rx="1.5"
+            fill={accentColor}
+            opacity={isDark ? "1" : "0.7"}
+          />
+          <path
+            d="M19 2 V 35"
+            stroke={isDark ? "#CBD5E1" : "#444"}
+            strokeWidth="1"
+            opacity={isDark ? "0.8" : "0.5"}
+          />
+        </g>
       </g>
     </svg>
   );
