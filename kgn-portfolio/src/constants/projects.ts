@@ -1,9 +1,9 @@
 import quiz from "../assets/quiz-project.jpg";
 import tenzy from "../assets/tenzy-project.jpg";
 import vanilla from "../assets/web-project.jpg";
-import travel from "../assets/travel.jpg";
 import weather from "../assets/weather.jpg";
 import tripLog from "../assets/tripLog.jpg";
+import travelDashboard from "../assets/travel-dashboard.jpg";
 import type { ProjectProps, ProjectSkillStylesProps } from "../types";
 
 export const skillStyles: ProjectSkillStylesProps = {
@@ -42,20 +42,20 @@ export const projects: ProjectProps[] = [
   },
   {
     link: {
-      href: "https://kaberege.pythonanywhere.com/",
-      background: travel,
+      href: "https://alx-travel-app-frontend.vercel.app/",
+      background: travelDashboard,
     },
-    heading: "Travel App API",
+    heading: "Travel App (Full-Stack)",
     description:
-      "A robust travel booking and trip management API built with Django and Django REST Framework. It supports features like user authentication with JWT, trip listings, booking management, and payment integration...",
+      "A comprehensive full-stack travel booking app featuring a responsive React frontend seamlessly integrated with a robust Django API, secure JWT authentication, dynamic listings, and integrated payment processing…",
     skills: [
       {
         class: "blue",
-        content: "Django",
+        content: "Django REST Framework",
       },
       {
         class: "yellow",
-        content: "Django REST Framework",
+        content: "React TS",
       },
       {
         class: "rose",
@@ -64,6 +64,10 @@ export const projects: ProjectProps[] = [
       {
         class: "teal",
         content: "MySQL",
+      },
+      {
+        class: "purple",
+        content: "Tailwind CSS",
       },
     ],
   },
@@ -101,7 +105,7 @@ export const projects: ProjectProps[] = [
   },
   {
     link: {
-      href: "https://kgn-weather-dashboard.vercel.app/",
+      href: "https://kgn-weather-dashboard.vercel.app",
       background: weather,
     },
     heading: "Weather Dashboard",
